@@ -54,6 +54,8 @@ map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
+nmap <Leader>nw :new<CR>
+nmap <Leader>nv :vnew<CR>
 nmap <Leader>1 1gt
 nmap <Leader>2 2gt
 nmap <Leader>3 3gt
@@ -64,7 +66,10 @@ nmap <Leader>7 7gt
 nmap <Leader>8 8gt
 nmap <Leader>9 9gt
 nmap <Leader>0 :tablast<CR>
-nmap <Leader>n :tabnew<CR>
+nmap <Leader>nt :tabnew<CR>
+nmap <Leader>/ :nohl<CR>
+nmap <Leader>m :w<CR>:make<CR>
+nmap <Leader>mc :make clean<CR>
 
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
