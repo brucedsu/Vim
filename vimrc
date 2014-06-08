@@ -10,7 +10,8 @@ silent function! WINDOWS()
     return (has('win16') || has('win32') || has('win64'))
 endfunction
 
-filetype on
+filetype plugin indent on
+syntax on
 set number
 set listchars=tab:▸\ ,trail:▫,eol:¬
 set tabstop=4
@@ -20,56 +21,77 @@ set expandtab
 if has("autocmd")
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
 endif
-
 set autoindent
 set smartindent
+set smarttab
 set hidden
+set showcmd
+colorscheme desert
+autocmd BufWritePost ~/.vimrc source $MYVIMRC
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd Filetype markdown setlocal wrap linebreak nolist spell
 
 let mapleader = ","
-nmap <Leader>l :set list!<CR>
+nmap <leader>l :set list!<CR>
 nnoremap <Space> za
 nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
-nmap <Leader>q :q<CR>
-nmap <Leader>q1 :q!<CR>
-nmap <Leader>v :vi ~/.vimrc<CR>
-nmap <Leader>s :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nmap <leader>q :q<CR>
+nmap <leader>q1 :q!<CR>
+nmap <leader>v :vi $MYVIMRC<CR>
+nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 if OSX()
     nmap <D-[> <<
     nmap <D-]> >>
     vmap <D-[> <gv
     vmap <D-]> >gv
-else
-    nmap <A-[> <<
-    nmap <A-]> >>
-    vmap <A-[> <gv
-    vmap <A-]> >gv
 endif
-nmap <Leader>' :bn<CR>
-nmap <Leader>; :bp<CR>
-nmap <Leader>d :bd<CR>
-nmap <Leader>d1 :bd!<CR>
-nmap <Leader>e :e#<CR>
+nmap <leader>' :bn<CR>
+nmap <leader>; :bp<CR>
+nmap <leader>d :bd<CR>
+nmap <leader>d1 :bd!<CR>
+nmap <leader>e :e#<CR>
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-nmap <Leader>nw :new<CR>
-nmap <Leader>nv :vnew<CR>
-nmap <Leader>1 1gt
-nmap <Leader>2 2gt
-nmap <Leader>3 3gt
-nmap <Leader>4 4gt
-nmap <Leader>5 5gt
-nmap <Leader>6 6gt
-nmap <Leader>7 7gt
-nmap <Leader>8 8gt
-nmap <Leader>9 9gt
-nmap <Leader>0 :tablast<CR>
-nmap <Leader>nt :tabnew<CR>
-nmap <Leader>/ :nohl<CR>
-nmap <Leader>m :w<CR>:make<CR>
-nmap <Leader>mc :make clean<CR>
+nmap <leader>nw :new<CR>
+nmap <leader>nv :vnew<CR>
+nmap <leader>1 1gt
+nmap <leader>2 2gt
+nmap <leader>3 3gt
+nmap <leader>4 4gt
+nmap <leader>5 5gt
+nmap <leader>6 6gt
+nmap <leader>7 7gt
+nmap <leader>8 8gt
+nmap <leader>9 9gt
+nmap <leader>0 :tablast<CR>
+nmap <leader>nt :tabnew<CR>
+nmap <leader>/ :nohl<CR>
+nmap <leader>m :w<CR>:make<CR>
+nmap <leader>mc :make clean<CR>
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+nmap <leader>ew :e %%
+nmap <leader>es :sp %%
+nmap <leader>ev :vsp %%
+nmap <leader>et :tabe %%
+command! -nargs=* Wrap setlocal wrap linebreak nolist
+if OSX()
+    nmap <D-h> gh
+    nmap <D-j> gj
+    nmap <D-k> gk
+    nmap <D-l> gl
+    nmap <D-4> g$
+    nmap <D-6> g^
+    vmap <D-h> gh
+    vmap <D-j> gj
+    vmap <D-k> gk
+    vmap <D-l> gl
+    vmap <D-4> g$
+    vmap <D-6> g^
+endif
+nmap <silent> <leader>sp :set spell!<CR>
 
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
@@ -84,3 +106,9 @@ function! Preserve(command)
     let @/=_s
     call cursor(l, c)
 endfunction
+
+" unimpaired.vim
+nmap <C-Up> [e
+nmap <C-Down> ]e
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
