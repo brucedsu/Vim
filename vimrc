@@ -30,10 +30,18 @@ colorscheme desert
 autocmd BufWritePost ~/.vimrc source $MYVIMRC
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd Filetype markdown setlocal wrap linebreak nolist spell
+set ignorecase
+set hlsearch
+set incsearch
+set smartcase
+set foldmethod=syntax
+set foldlevelstart=99
+set encoding=utf-8
 
 let mapleader = ","
 nmap <leader>l :set list!<CR>
 nnoremap <Space> za
+vnoremap <Space> za
 nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
 nmap <leader>q :q<CR>
