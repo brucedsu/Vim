@@ -1,18 +1,23 @@
 set nocompatible
 
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
+
 silent function! OSX()
-    return has('macunix')
+return has('macunix')
 endfunction
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-    return (has('win16') || has('win32') || has('win64'))
+return (has('win16') || has('win32') || has('win64'))
 endfunction
 
 filetype plugin indent on
 syntax on
 set number
+set ruler
 set listchars=tab:▸\ ,trail:▫,eol:¬
 set tabstop=4
 set softtabstop=4
@@ -27,6 +32,7 @@ set smarttab
 set hidden
 set showcmd
 colorscheme desert
+set nowrap
 autocmd BufWritePost ~/.vimrc source $MYVIMRC
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd Filetype markdown setlocal wrap linebreak nolist spell
@@ -37,6 +43,10 @@ set smartcase
 set foldmethod=syntax
 set foldlevelstart=99
 set encoding=utf-8
+if v:version >= 703
+    set colorcolumn=72
+endif
+set autoread
 
 let mapleader = ","
 nmap <leader>l :set list!<CR>
@@ -46,7 +56,8 @@ nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
 nmap <leader>q :q<CR>
 nmap <leader>q1 :q!<CR>
-nmap <leader>v :vi $MYVIMRC<CR>
+nmap <leader>vv :vi $MYVIMRC<CR>
+nmap <leader>vb :vi ~/.vimrc.bundles<CR>
 nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 if OSX()
     nmap <D-[> <<
@@ -115,8 +126,47 @@ function! Preserve(command)
     call cursor(l, c)
 endfunction
 
-" unimpaired.vim
 nmap <C-Up> [e
 nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+map <leader>w <leader><leader>w
+map <leader>W <leader><leader>W
+let NERDSpaceDelims=1
+let NERDCompactSexyComs=1
+nmap /// <leader>c<Space>
+vmap /// <leader>c<Space>
+nmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a: :Tabularize /:\zs<CR>
+vmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a/ :Tabularize ////<CR>
+vmap <leader>a/ :Tabularize ////<CR>
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+let g:indentLine_char = "│"
+nmap <leader>cp :RainbowParenthesesToggle<CR>
+let NERDTreeIgnore=['\.class$']
+nmap <leader>[ :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
+let g:tagbar_sort = 0
+nmap <leader>] :TagbarToggle<CR>
+set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+nmap <leader>p :CtrlP<CR>
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>r :SCCompileRun<CR>
+nmap <leader>t :ConqueTermVSplit bash<CR>
+
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif

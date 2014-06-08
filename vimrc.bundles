@@ -1,0 +1,92 @@
+"-----------------
+" Setup vundle
+"-----------------
+let has_vundle = 1
+let vundle_readme = expand("~/.vim/bundle/vundle/README.md")
+if !filereadable(vundle_readme)
+    let has_vundle = 0
+    echo "Installing vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+endif
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+"-----------------
+" Completion
+"-----------------
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'garbas/vim-snipmate'
+" ------ snipmate dependencies ------
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+
+"-----------------
+" Navigation
+"-----------------
+Bundle 'joequery/Stupid-EasyMotion'
+if v:version >= 703
+    Bundle 'myusuf3/numbers.vim'
+endif
+Bundle 'nelstrom/vim-visual-star-search'
+
+"-----------------
+" Editing
+"-----------------
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'godlygeek/tabular'
+Bundle 'Yggdroot/indentLine'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-surround'
+Bundle 'kien/rainbow_parentheses.vim'
+
+"-----------------
+" IDE
+"-----------------
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
+if executable('ctags')
+    Bundle 'majutsushi/tagbar'
+endif
+Bundle 'scrooloose/syntastic'
+Bundle 'xuhdev/SingleCompile'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
+
+"-----------------
+" Utilities
+"-----------------
+Bundle 'chilicuil/conque'
+
+"-----------------
+" Colors
+"-----------------
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'nelstrom/vim-mac-classic-theme'
+Bundle 'noahfrederick/vim-hemisu'
+Bundle 'rickharris/vim-blackboard'
+
+"-----------------
+" Local
+"-----------------
+if filereadable(expand("~/.vimrc.bundles.local"))
+    source ~/.vimrc.bundles.local
+endif
+
+"-----------------
+" Install
+"-----------------
+if has_vundle == 0
+    echo "Installing bundles..."
+    echo ""
+    :BundleInstall
+endif
+
+"-----------------
+" Cleanup
+"-----------------
+filetype plugin indent on
