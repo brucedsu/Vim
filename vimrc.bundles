@@ -16,6 +16,17 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "-----------------
+" UnBundle
+"-----------------
+function! UnBundle(arg, ...)
+    let bundle = vundle#config#init_bundle(a:arg, a:000)
+    call filter(g:bundles, 'v:val["name_spec"] != "' . a:arg. '"')
+endfunction
+
+com! -nargs=+       UnBundle
+\ call UnBundle(<args>)
+
+"-----------------
 " Completion
 "-----------------
 Bundle 'jiangmiao/auto-pairs'
@@ -32,6 +43,8 @@ if v:version >= 703
     Bundle 'myusuf3/numbers.vim'
 endif
 Bundle 'nelstrom/vim-visual-star-search'
+Bundle 'edsono/vim-matchit'
+Bundle 'vim-scripts/a.vim'
 
 "-----------------
 " Editing
@@ -42,6 +55,8 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-ragtag'
 Bundle 'kien/rainbow_parentheses.vim'
 
 "-----------------
@@ -56,6 +71,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'xuhdev/SingleCompile'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-powerline'
 
 "-----------------
 " Utilities

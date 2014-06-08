@@ -31,9 +31,11 @@ set smartindent
 set smarttab
 set hidden
 set showcmd
-colorscheme desert
+set background=dark
+colorscheme solarized
 set nowrap
 autocmd BufWritePost ~/.vimrc source $MYVIMRC
+autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd Filetype markdown setlocal wrap linebreak nolist spell
 set ignorecase
@@ -47,6 +49,15 @@ if v:version >= 703
     set colorcolumn=72
 endif
 set autoread
+set autowrite
+set history=1000
+set laststatus=2
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+set clipboard=unnamed
+" disable automatically inserting comment at the beginning of next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 let mapleader = ","
 nmap <leader>l :set list!<CR>
@@ -54,10 +65,10 @@ nnoremap <Space> za
 vnoremap <Space> za
 nmap <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>a
-nmap <leader>q :q<CR>
+nmap <leader>qq :q<CR>
 nmap <leader>q1 :q!<CR>
-nmap <leader>vv :vi $MYVIMRC<CR>
-nmap <leader>vb :vi ~/.vimrc.bundles<CR>
+nmap <leader>vv :tabedit $MYVIMRC<CR>
+nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
 nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 if OSX()
     nmap <D-[> <<
@@ -166,6 +177,9 @@ nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>r :SCCompileRun<CR>
 nmap <leader>t :ConqueTermVSplit bash<CR>
+nmap <leader>aa :A<CR>
+nmap <leader>as :AS<CR>
+nmap <leader>av :AV<CR>
 
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
