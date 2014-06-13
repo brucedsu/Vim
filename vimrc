@@ -24,46 +24,82 @@ endif
 " General
 "-----------------
 syntax on
+set autoread
+set autowrite
+set clipboard=unnamed
+set hidden
+set history=1000
+set showcmd
+autocmd BufWritePost ~/.vimrc source $MYVIMRC
+autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
+
+"-----------------
+" Text Editing
+"-----------------
+" show
 set number
 set ruler
-set listchars=tab:▸\ ,trail:▫,eol:¬
+if v:version >= 703
+    set colorcolumn=72
+endif
+
+" folding
+set foldmethod=syntax
+set foldlevelstart=99
+
+" encoding
+set encoding=utf-8
+
+" indentation
+set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
-if has("autocmd")
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-endif
 set autoindent
 set smartindent
 set smarttab
-set hidden
-set showcmd
-set background=dark
-colorscheme solarized
+
+if has("autocmd")
+    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd Filetype markdown setlocal wrap linebreak nolist spell
+endif
+
+" wrapping
 set nowrap
-autocmd BufWritePost ~/.vimrc source $MYVIMRC
-autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd Filetype markdown setlocal wrap linebreak nolist spell
+
+" invisibles
+set listchars=tab:▸\ ,trail:▫,eol:¬
+
+" searching
 set ignorecase
 set hlsearch
 set incsearch
 set smartcase
-set foldmethod=syntax
-set foldlevelstart=99
-set encoding=utf-8
-if v:version >= 703
-    set colorcolumn=72
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif"`'")"'")
+
+"-----------------
+" Interface
+"-----------------
+" colors
+if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    set background=dark
+    colorscheme solarized
 endif
-set autoread
-set autowrite
-set history=1000
-set laststatus=2
+
+" hightlight current position
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
-set clipboard=unnamed
+
+" status line
+set laststatus=2
+
 " disable automatically inserting comment at the beginning of next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -80,6 +116,7 @@ nmap <leader>qq :q<CR>
 nmap <leader>q1 :q!<CR>
 nmap <leader>vv :tabedit $MYVIMRC<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
+nmap <leader>vg :tabedit ~/.gvimrc<CR>
 nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 if OSX()
     nmap <D-[> <<
@@ -151,16 +188,23 @@ endfunction
 "-----------------
 " Plugin
 "-----------------
+" text bubbling with unimpaired
 nmap <C-Up> [e
 nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+
+" Stupid EasyMotion
 map <leader>w <leader><leader>w
 map <leader>W <leader><leader>W
+
+" nerdcomenter
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
 nmap /// <leader>c<Space>
 vmap /// <leader>c<Space>
+
+" tabular
 nmap <leader>a= :Tabularize /=<CR>
 vmap <leader>a= :Tabularize /=<CR>
 nmap <leader>a: :Tabularize /:\zs<CR>
@@ -178,19 +222,33 @@ function! s:align()
         call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
     endif
 endfunction
+
+" indentLine
 let g:indentLine_char = "│"
+
+"rainbow_parentheses
 nmap <leader>cp :RainbowParenthesesToggle<CR>
+
+" NERDTree
 let NERDTreeIgnore=['\.class$']
 nmap <leader>[ :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
+
+" tagbar
 let g:tagbar_sort = 0
 nmap <leader>] :TagbarToggle<CR>
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
+
+" Ctrp
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
+
+" SingleRun
 nmap <leader>r :SCCompileRun<CR>
 nmap <leader>t :ConqueTermVSplit bash<CR>
+
+" a.vim
 nmap <leader>aa :A<CR>
 nmap <leader>as :AS<CR>
 nmap <leader>av :AV<CR>
