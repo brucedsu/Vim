@@ -6,3 +6,4 @@ Create symlinks:
 
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/vimrc.bundles ~/.vimrc.bundles
+    ln -s ~/.vim/gvimrc ~/.gvimrc
