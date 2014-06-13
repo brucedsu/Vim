@@ -71,7 +71,11 @@ Bundle 'scrooloose/syntastic'
 Bundle 'xuhdev/SingleCompile'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
+if has('gui_running') || $TERM_PROGRAM == 'iTerm.app'
+    Bundle 'bling/vim-airline'
+else
+    Bundle 'Lokaltog/vim-powerline'
+endif
 
 "-----------------
 " Utilities
