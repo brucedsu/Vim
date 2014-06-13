@@ -29,7 +29,10 @@ set autowrite
 set clipboard=unnamed
 set hidden
 set history=1000
+set scrolloff=3
 set showcmd
+set showmode
+set visualbell
 autocmd BufWritePost ~/.vimrc source $MYVIMRC
 autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
 
@@ -79,9 +82,9 @@ set smartcase
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif"`'")"'")
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif"`'")"'")
 
 "-----------------
 " Interface
@@ -90,6 +93,11 @@ autocmd BufReadPost *
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
     set background=dark
     colorscheme solarized
+endif
+
+" font
+if ($TERM_PROGRAM == 'iTerm.app')
+    highlight Comment cterm=italic
 endif
 
 " hightlight current position
@@ -243,6 +251,17 @@ set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_S
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme                      = 'powerlineish'
+let g:airline_enable_branch              = 1
+let g:airline_enable_syntastic           = 1
+let g:airline_powerline_fonts            = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 
 " SingleRun
 nmap <leader>r :SCCompileRun<CR>
