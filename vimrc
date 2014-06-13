@@ -1,20 +1,28 @@
+"-----------------
+" Environment
+"-----------------
 set nocompatible
 
+silent function! OSX()
+    return has('macunix')
+endfunction
+silent function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+silent function! WINDOWS()
+    return (has('win16') || has('win32') || has('win64'))
+endfunction
+
+"-----------------
+" Bundles
+"-----------------
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
 
-silent function! OSX()
-return has('macunix')
-endfunction
-silent function! LINUX()
-return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-silent function! WINDOWS()
-return (has('win16') || has('win32') || has('win64'))
-endfunction
-
-filetype plugin indent on
+"-----------------
+" General
+"-----------------
 syntax on
 set number
 set ruler
@@ -59,6 +67,9 @@ set clipboard=unnamed
 " disable automatically inserting comment at the beginning of next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+"-----------------
+" Mapping
+"-----------------
 let mapleader = ","
 nmap <leader>l :set list!<CR>
 nnoremap <Space> za
@@ -137,6 +148,9 @@ function! Preserve(command)
     call cursor(l, c)
 endfunction
 
+"-----------------
+" Plugin
+"-----------------
 nmap <C-Up> [e
 nmap <C-Down> ]e
 vmap <C-Up> [egv
@@ -181,6 +195,9 @@ nmap <leader>aa :A<CR>
 nmap <leader>as :AS<CR>
 nmap <leader>av :AV<CR>
 
+"-----------------
+" Local
+"-----------------
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
