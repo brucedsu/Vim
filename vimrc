@@ -154,7 +154,9 @@ nmap <leader>8 8gt
 nmap <leader>9 9gt
 nmap <leader>0 :tablast<CR>
 nmap <leader>nt :tabnew<CR>
-nmap <leader>/ :nohl<CR>
+nmap <leader>. :tabprev<CR>
+nmap <leader>/ :tabnext<CR>
+nnoremap <CR> :nohl<CR>
 nmap <leader>m :w<CR>:make<CR>
 nmap <leader>mc :make clean<CR>
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
@@ -206,7 +208,7 @@ vmap <C-Down> ]egv
 map <leader>w <leader><leader>w
 map <leader>W <leader><leader>W
 
-" nerdcomenter
+" nerdcommenter
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
 nmap /// <leader>c<Space>
