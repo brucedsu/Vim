@@ -33,8 +33,11 @@ set scrolloff=3
 set showcmd
 set showmode
 set visualbell
-autocmd BufWritePost ~/.vimrc source $MYVIMRC
-autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
+if has("autocmd")
+    autocmd BufWritePost ~/.vimrc source $MYVIMRC
+    autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
+    autocmd BufWritePost ~/.gvimrc source ~/.gvimrc
+endif
 
 "-----------------
 " Text Editing
