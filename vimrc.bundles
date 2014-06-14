@@ -58,6 +58,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-ragtag'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'nelstrom/vim-markdown-folding'
 
 "-----------------
 " IDE
