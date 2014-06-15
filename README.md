@@ -10,7 +10,12 @@
 
 ## iTerm2 italics:
 
-    cd ~/.vim/iterm2-italic 
+    cd ~/.vim/iterm2-italic
     tic xterm-256color-italic.terminfo
     Set "Terminal Type" to xterm-256color-italic
     Check "Italic text allowed" in iTerm's preference
+
+## To-do list:
+
+    1. Code templates
+    2. iTerm cursor: NORMAL = block, INSERT = vertical bar

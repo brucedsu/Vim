@@ -84,7 +84,12 @@ set hlsearch
 set incsearch
 set smartcase
 
-" Return to last edit position when opening files
+" template
+if has("autocmd")
+    autocmd BufNewFile *.java 0r ~/.vim/skeleton/Java
+end
+
+" return to last edit position when opening files
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal! g`\"" |
