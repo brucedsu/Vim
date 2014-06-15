@@ -1,0 +1,33 @@
+## Header Files
+snippet inc
+	#include ${1:/* header */}
+snippet stdio
+	#include <stdio.h>
+snippet stdlib
+	#include <stdlib.h>
+snippet assert
+	#include <assert.h>
+snippet libgen
+	#include <libgen.h>
+##
+## Def
+snippet def
+	#define ${1:/* macro */}
+##
+## Main Method
+snippet main
+	int main(int argc, char* argv[])
+	{
+		${1:/* insert code here... */}
+		return 0;
+	}
+##
+## stdio
+snippet pf
+	printf(${1:/* const char* restrict, ... */});
+snippet sf
+	scanf(${1:/* const char* restrict, ... */});
+##
+## libgen
+snippet base
+	basename(${1:/* char* */})
