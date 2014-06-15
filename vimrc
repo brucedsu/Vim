@@ -26,6 +26,7 @@ endif
 syntax on
 set autoread
 set autowrite
+set backspace=2
 set clipboard=unnamed
 set hidden
 set history=1000
