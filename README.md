@@ -19,3 +19,5 @@
 
     1. Code templates
     2. iTerm cursor: NORMAL = block, INSERT = vertical bar
+    3. Code auto completion based on not only context but also programming language, still neocomplcache? I'd rather learn vim script the hard way and write one plugin myself.
+    4. Reformat code (not only reindent)
