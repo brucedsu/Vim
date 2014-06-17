@@ -207,6 +207,9 @@ endfunction
 "-----------------
 " Plugin
 "-----------------
+" snipmate
+let g:snips_author = "DeiSu <deisu@brucedsu.com>"
+
 " text bubbling with unimpaired
 nmap <C-Up> [e
 nmap <C-Down> ]e
