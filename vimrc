@@ -86,7 +86,7 @@ set smartcase
 
 " template
 if has("autocmd")
-    autocmd BufNewFile *.java 0r ~/.vim/skeleton/Java
+    " autocmd BufNewFile *.java 0r ~/.vim/skeleton/Java
 end
 
 " return to last edit position when opening files
