@@ -1,4 +1,6 @@
 ## Header Files
+
+## Unicode Names
 snippet inc
 	#include <${0:/* header */}.h>
 snippet Inc
@@ -28,6 +30,16 @@ snippet mainv
 	int main(void)
 	{
 		${0:/* insert code here... */}
+
+		return 0;
+	}
+##
+## Hello, world!
+snippet hello
+	int main(int argc, char* argv[])
+	{
+		${0:/* insert code here... */}
+		printf("Hello, world!\n");
 
 		return 0;
 	}

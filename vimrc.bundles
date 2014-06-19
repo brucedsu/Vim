@@ -30,10 +30,13 @@ com! -nargs=+       UnBundle
 " Completion
 "-----------------
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'garbas/vim-snipmate'
-" ------ snipmate dependencies ------
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
+if has("lua")
+    Bundle 'Shougo/neocomplete.vim'
+else
+    Bundle 'Shougo/neocomplcache.vim'
+endif
+Bundle 'SirVer/ultisnips'
+Bundle 'Shougo/neosnippet.vim'
 
 "-----------------
 " Navigation

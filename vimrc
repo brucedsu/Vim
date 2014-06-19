@@ -34,6 +34,7 @@ set scrolloff=3
 set showcmd
 set showmode
 set visualbell
+set wildmenu
 if has("autocmd")
     autocmd BufWritePost ~/.vimrc source $MYVIMRC
     autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
@@ -87,7 +88,7 @@ set smartcase
 " template
 if has("autocmd")
     " autocmd BufNewFile *.java 0r ~/.vim/skeleton/Java
-end
+endif
 
 " return to last edit position when opening files
 autocmd BufReadPost *
@@ -208,7 +209,43 @@ endfunction
 " Plugin
 "-----------------
 " snipmate
-let g:snips_author = "DeiSu <deisu@brucedsu.com>"
+" let g:snips_author = "DeiSu <deisu@brucedsu.com>"
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger       = ";"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
+
+" neocomplete / neocomlcache
+if has("lua")
+    " neocomplete
+    let g:acp_enableAtStartup                      = 0
+    let g:neocomplete#enable_at_startup            = 1
+    let g:neocomplete#enable_smart_case            = 1
+    let g:neocomplete#enable_auto_delimiter        = 1
+    let g:neocomplete#max_list                     = 15
+    let g:neocomplete#enable_auto_select           = 1
+
+    " ------ dictionary ------
+    let g:neocomplete#sources#dictionary#dictionaries = {
+                \ 'default' : '',
+                \ 'vimshell' : $HOME.'/.vimshell_hist',
+                \ 'scheme' : $HOME.'/.gosh_completions'
+                \ }
+
+    " ------ keyword ------
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+    " ------ mappings ------
+    inoremap <expr><C-y> neocomplete#close_popup()
+    inoremap <expr><C-e> neocomplete#cancel_popup()
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endif
 
 " text bubbling with unimpaired
 nmap <C-Up> [e
