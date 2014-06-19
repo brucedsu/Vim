@@ -71,6 +71,7 @@ if has("autocmd")
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     autocmd Filetype markdown setlocal wrap linebreak nolist spell
+    autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
 endif
 
 " wrapping
@@ -212,7 +213,7 @@ endfunction
 " let g:snips_author = "DeiSu <deisu@brucedsu.com>"
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger       = ";"
+let g:UltiSnipsExpandTrigger       = "<F4>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
