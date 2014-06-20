@@ -213,19 +213,19 @@ endfunction
 " let g:snips_author = "DeiSu <deisu@brucedsu.com>"
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger       = "<F4>"
+let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
 " neocomplete / neocomlcache
 if has("lua")
     " neocomplete
-    let g:acp_enableAtStartup                      = 0
-    let g:neocomplete#enable_at_startup            = 1
-    let g:neocomplete#enable_smart_case            = 1
-    let g:neocomplete#enable_auto_delimiter        = 1
-    let g:neocomplete#max_list                     = 15
-    let g:neocomplete#enable_auto_select           = 1
+    let g:acp_enableAtStartup            = 0
+    let g:neocomplete#enable_at_startup  = 1
+    let g:neocomplete#enable_smart_case  = 1
+    let g:neocomplete#enable_camel_case  = 1
+    let g:neocomplete#max_list           = 15
+    let g:neocomplete#enable_auto_select = 1
 
     " ------ dictionary ------
     let g:neocomplete#sources#dictionary#dictionaries = {
@@ -243,8 +243,8 @@ if has("lua")
     " ------ mappings ------
     inoremap <expr><C-y> neocomplete#close_popup()
     inoremap <expr><C-e> neocomplete#cancel_popup()
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    " inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+    " inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
     inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endif
 
