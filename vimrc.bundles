@@ -36,7 +36,6 @@ else
     Bundle 'Shougo/neocomplcache.vim'
 endif
 Bundle 'SirVer/ultisnips'
-Bundle 'Shougo/neosnippet.vim'
 
 "-----------------
 " Navigation
