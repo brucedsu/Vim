@@ -184,6 +184,7 @@ nmap <leader>8 8gt
 nmap <leader>9 9gt
 nmap <leader>0 :tablast<CR>
 nmap <leader>nt :tabnew<CR>
+nmap <leader>tt :tabedit<Space>
 nmap <leader>; :tabprev<CR>
 nmap <leader>' :tabnext<CR>
 
@@ -322,7 +323,10 @@ nmap <leader>[ :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 
 " tagbar
+let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_iconchars = ['▸', '▾']
 nmap <leader>] :TagbarToggle<CR>
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
 
@@ -344,7 +348,10 @@ let g:airline_symbols.space = "\ua0"
 
 " SingleRun
 nmap <leader>r :SCCompileRun<CR>
-nmap <leader>t :ConqueTermVSplit bash<CR>
+
+" ConqureTerm
+nmap <leader>tb :ConqueTermVSplit bash<CR>
+nmap <leader>tz :ConqueTermVSplit zsh<CR>
 
 " a.vim
 nmap <leader>aa :A<CR>
