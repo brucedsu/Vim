@@ -76,6 +76,7 @@ endif
 
 " wrapping
 set nowrap
+command! -nargs=* Wrap setlocal wrap linebreak nolist
 
 " invisibles
 set listchars=tab:▸\ ,trail:▫,eol:¬
@@ -126,34 +127,52 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Mapping
 "-----------------
 let mapleader = ","
+
+" list
 nmap <leader>l :set list!<CR>
-nnoremap <Space> za
-vnoremap <Space> za
-nmap <C-s> :w<CR>
-imap <C-s> <Esc>:w<CR>a
+
+" quiting
 nmap <leader>qq :q<CR>
 nmap <leader>q1 :q!<CR>
+
+" saving
+nmap <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>a
+
+" folding
+nnoremap <Space> za
+vnoremap <Space> za
+
+" config
 nmap <leader>vv :tabedit $MYVIMRC<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
 nmap <leader>vg :tabedit ~/.gvimrc<CR>
 nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" indentation
 if OSX()
     nmap <D-[> <<
     nmap <D-]> >>
     vmap <D-[> <gv
     vmap <D-]> >gv
 endif
-nmap <leader>' :bn<CR>
-nmap <leader>; :bp<CR>
+
+" buffer
+nmap <leader>. :bp<CR>
+nmap <leader>/ :bn<CR>
 nmap <leader>d :bd<CR>
 nmap <leader>d1 :bd!<CR>
 nmap <leader>e :e#<CR>
+
+" window
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 nmap <leader>nw :new<CR>
 nmap <leader>nv :vnew<CR>
+
+" tab
 nmap <leader>1 1gt
 nmap <leader>2 2gt
 nmap <leader>3 3gt
@@ -165,17 +184,24 @@ nmap <leader>8 8gt
 nmap <leader>9 9gt
 nmap <leader>0 :tablast<CR>
 nmap <leader>nt :tabnew<CR>
-nmap <leader>. :tabprev<CR>
-nmap <leader>/ :tabnext<CR>
+nmap <leader>; :tabprev<CR>
+nmap <leader>' :tabnext<CR>
+
+" search
 nnoremap <CR> :nohl<CR>
+
+" make
 nmap <leader>m :w<CR>:make<CR>
 nmap <leader>mc :make clean<CR>
+
+" editing
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 nmap <leader>ew :e %%
 nmap <leader>es :sp %%
 nmap <leader>ev :vsp %%
 nmap <leader>et :tabe %%
-command! -nargs=* Wrap setlocal wrap linebreak nolist
+
+" navigation
 if OSX()
     nmap <D-h> gh
     nmap <D-j> gj
@@ -192,6 +218,7 @@ if OSX()
 endif
 nmap <silent> <leader>sp :set spell!<CR>
 
+" formatting
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 function! Preserve(command)
