@@ -1,0 +1,70 @@
+#-------------------
+# Strong & Emphasize
+#-------------------
+snippet _ "_emphasize_ (_)"
+_${0:emphasize}_
+endsnippet
+
+snippet __ "__strong__ (__)"
+__${0:strong}__
+endsnippet
+
+snippet * "*emphasize* (*)"
+*${0:emphasize}*
+endsnippet
+
+snippet ** "**strong** (**)"
+**${0:strong}**
+endsnippet
+
+#-------------------
+# Link & Email
+#-------------------
+snippet a "[link](url title) (a)"
+[${1:link text}](${2:url} "${3:title}")
+endsnippet
+
+snippet e "<username@domain> (e)"
+<${1:/* username */}@${2:/* domain */}>
+endsnippet
+
+#-------------------
+# Image
+#-------------------
+snippet ! "![alt](url title) (!)"
+![${1:alt text}](${2:url} "${3:title}")
+endsnippet
+
+#-------------------
+# Header
+#-------------------
+snippet h1 "# h1 (h1)"
+# ${0:header 1}
+endsnippet
+
+snippet h2 "## h2 (h1)"
+## ${0:header 2}
+endsnippet
+
+snippet h3 "### h3 (h3)"
+### ${0:header 3}
+endsnippet
+
+snippet h4 "#### h4 (h4)"
+#### ${0:header 4}
+endsnippet
+
+snippet h5 "##### h5 (h5)"
+##### ${0:header 5}
+endsnippet
+
+snippet h6 "###### h6 (h6)"
+###### ${0:header 6}
+endsnippet
+
+#-------------------
+# Strikethrough
+#-------------------
+snippet ~~ "~~Strikethrough~~ (~~)"
+~~${1:text}~~
+endsnippet

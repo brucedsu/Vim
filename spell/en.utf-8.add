@@ -12,3 +12,9 @@ plugin
 vim
 reindent
 someString
+UITextView
+Lifecycle
+NSNotification
+etc
+UILabel
+NSMutableAttributedString
