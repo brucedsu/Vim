@@ -1,0 +1,77 @@
+###################
+# Control Statement
+###################
+snippet if "if (...) {...} (if)"
+if (${1:/* condition */}) {
+	${2:/* statement */}
+}$0
+endsnippet
+
+snippet ifi "if (...) ... (ifi)"
+if (${1:/* condition */}) ${0:/* statement */}
+endsnippet
+
+snippet el "else {...} (else)"
+else {
+	${1:/* statement */}
+}$0
+endsnippet
+
+snippet eli "else ... (else)"
+else ${0:/* statement */}
+endsnippet
+
+snippet ifel "if (...) {...} else {...} (ifelse)"
+if (${1:/* condition */}) {
+	${2:/* statement */}
+} else {
+	${3:/* statement */}
+}$0
+endsnippet
+
+snippet ifelif "if () {} else if () {} else {} (ifelseif)"
+if (${1:/* condition */}) {
+	${2:/* statement */}
+} else if (${3:/* condition */}) {
+	${4:/* statement */}
+} else {
+	${5:/* statement */}
+}$0
+endsnippet
+
+snippet elif "else if (...) {...} (elseif)"
+else if (${1:/* condition */}) {
+	${2:/* statement */}
+}$0
+endsnippet
+
+snippet t "condition ? state1 : state2 (t)"
+${1:/* condition */} ? ${2:/* statement1 */} : ${3:/* statement3 */}
+endsnippet
+
+snippet sw "switch (sw)"
+switch (${1:/* expression */}) {
+	case ${2:/* constant */}:
+		${3:/* statement */}
+		break;${4}
+	default:
+		${5:/* default */}
+		break;
+}
+$0
+endsnippet
+
+snippet swndef "switch without default (swndef)"
+switch (${1:/* expression */}) {
+	case ${2:/* constant */}:
+		${3:/* statement */}
+		break;${4}
+}
+$0
+endsnippet
+
+snippet case "case ... (case)"
+case ${1:/* constant */}:
+	${2:/* statement */}
+	break;$0
+endsnippet
