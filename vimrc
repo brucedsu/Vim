@@ -245,7 +245,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
-" neocomplete / neocomlcache
+" neocomplete / neocomplcache
 if has("lua")
     " neocomplete
     let g:acp_enableAtStartup            = 0
