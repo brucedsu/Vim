@@ -68,10 +68,11 @@ set smartindent
 set smarttab
 
 if has("autocmd")
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     autocmd Filetype markdown setlocal wrap linebreak nolist spell
     autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
+    autocmd FileType html setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 endif
 
 " wrapping
