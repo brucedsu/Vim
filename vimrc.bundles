@@ -36,6 +36,7 @@ else
     Bundle 'Shougo/neocomplcache.vim'
 endif
 Bundle 'SirVer/ultisnips'
+" Bundle 'Valloric/YouCompleteMe'
 
 "-----------------
 " Navigation
