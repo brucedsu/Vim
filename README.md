@@ -1,3 +1,11 @@
+## Homebrew & Vim [OS X]
+
+    brew install python
+    brew install lua
+    brew install ruby
+    brew install vim --with-python --with-ruby --with-perl --with-lua
+    brew install macvim --env-std --override-system-vim --with-cscope --with-lua --HEAD
+
 ## Installation
 
     git clone https://github.com/brucedsu/dotvim.git ~/.vim
