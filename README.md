@@ -1,5 +1,6 @@
 ## Homebrew & Vim [OS X]
 
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install python
     brew install lua
     brew install ruby
@@ -26,6 +27,6 @@
 ## To-do list:
 
     1. Code templates (✓ UltiSnips)
-    2. iTerm cursor: NORMAL = block, INSERT = vertical bar
-    3. Code auto completion based on not only context but also programming language, still neocomplcache? I'd rather learn vim script the hard way and write one plugin myself.
+    2. Replace neocomplete with __YouCompleteMe__
+    3. iTerm cursor: NORMAL = block, INSERT = vertical bar
     4. Reformat code (not only reindent)
