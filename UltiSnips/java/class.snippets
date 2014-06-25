@@ -1,0 +1,17 @@
+#-------------------
+# Class
+#-------------------
+snippet cl "class ... {...} (cl)"
+class ${1:`!v Filename('', 'untitled')`} {
+	${0:/* insert code here... */}
+}
+endsnippet
+
+snippet clmain "class ... {main ...} (clmain)"
+class ${1:`!v Filename('', 'untitled')`} {
+	public static void main(String[] args)
+	{
+		${0:/* insert code here... */}
+	}
+}
+endsnippet
