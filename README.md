@@ -1,4 +1,4 @@
-## Homebrew & Vim & MacVim & Seil
+## Homebrew & Vim & MacVim
 
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install python
@@ -6,7 +6,10 @@
     brew install ruby
     brew install vim --with-python --with-ruby --with-perl --with-lua
     brew install macvim --env-std --override-system-vim --with-cscope --with-lua --HEAD
-    ![Sel](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
+
+## Components
+
+* ![Sel](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
 
 ## Installation
 
