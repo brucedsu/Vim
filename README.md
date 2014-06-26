@@ -9,7 +9,7 @@
 
 ## Components
 
-* ![Sel](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
+* [Sel](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
 
 ## Installation
 
