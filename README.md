@@ -1,4 +1,4 @@
-## Homebrew & Vim [OS X]
+## Homebrew & Vim & MacVim & Seil
 
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install python
@@ -6,6 +6,7 @@
     brew install ruby
     brew install vim --with-python --with-ruby --with-perl --with-lua
     brew install macvim --env-std --override-system-vim --with-cscope --with-lua --HEAD
+    ![Sel](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
 
 ## Installation
 
@@ -27,6 +28,5 @@
 ## To-do list:
 
     1. Code templates (✓ UltiSnips)
-    2. Replace neocomplete with __YouCompleteMe__
-    3. iTerm cursor: NORMAL = block, INSERT = vertical bar
-    4. Reformat code (not only reindent)
+    2. iTerm cursor: NORMAL = block, INSERT = vertical bar
+    3. Reformat code (not only reindent)
