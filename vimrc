@@ -247,9 +247,9 @@ let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
 " neocomplete / neocomplcache
+let g:acp_enableAtStartup = 0
 if has("lua")
     " neocomplete
-    let g:acp_enableAtStartup            = 0
     let g:neocomplete#enable_at_startup  = 1
     let g:neocomplete#enable_smart_case  = 1
     let g:neocomplete#enable_camel_case  = 1
@@ -272,9 +272,33 @@ if has("lua")
     " ------ mappings ------
     inoremap <expr><C-y> neocomplete#close_popup()
     inoremap <expr><C-e> neocomplete#cancel_popup()
-    " inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-    " inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
     inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+else
+    " neocomplecache
+    let g:neocomplcache_enable_at_startup            = 1
+    let g:neocomplcache_enable_smart_case            = 1
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion   = 1
+    let g:neocomplcache_max_list                     = 15
+    let g:neocomplcache_enable_auto_select           = 1
+
+    " ------ dictionary ------
+    let g:neocomplcache_dictionary_filetype_lists = {
+                \ 'default' : '',
+                \ 'vimshell' : $HOME.'/.vimshell_hist',
+                \ 'scheme' : $HOME.'/.gosh_completions'
+                \ }
+
+    " ------ keyword ------
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+
+    " ------ mappings ------
+    inoremap <expr><C-y> neocomplcache#close_popup()
+    inoremap <expr><C-e> neocomplcache#cancel_popup()
+    inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endif
 
 " text bubbling with unimpaired
@@ -332,6 +356,7 @@ nmap <leader>] :TagbarToggle<CR>
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
 
 " Ctrp
+let g:ctrlp_open_multiple_files = 'v'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
