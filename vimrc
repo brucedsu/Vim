@@ -4,20 +4,20 @@
 set nocompatible
 
 silent function! OSX()
-    return has('macunix')
+  return has('macunix')
 endfunction
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+  return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-    return (has('win16') || has('win32') || has('win64'))
+  return (has('win16') || has('win32') || has('win64'))
 endfunction
 
 "-----------------
 " Bundles
 "-----------------
 if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
+  source ~/.vimrc.bundles
 endif
 
 "-----------------
@@ -35,20 +35,22 @@ set showcmd
 set showmode
 set visualbell
 set wildmenu
-if has("autocmd")
-    autocmd BufWritePost ~/.vimrc source $MYVIMRC
-    autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
-    autocmd BufWritePost ~/.gvimrc source ~/.gvimrc
-endif
+autocmd BufWritePost ~/.vimrc source $MYVIMRC
+autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
+autocmd BufWritePost ~/.gvimrc source ~/.gvimrc
 
 "-----------------
 " Text Editing
 "-----------------
+" filetype
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
+
 " show
 set number
 set ruler
 if v:version >= 703
-    set colorcolumn=72
+  set colorcolumn=72
 endif
 
 " folding
@@ -66,18 +68,14 @@ set shiftwidth=4
 set autoindent
 set smartindent
 set smarttab
-
-if has("autocmd")
-    autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    autocmd Filetype markdown setlocal wrap linebreak nolist spell
-    autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
-    autocmd FileType html setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
-endif
+autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
+autocmd FileType vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType css setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 
 " wrapping
 set nowrap
 command! -nargs=* Wrap setlocal wrap linebreak nolist
+autocmd Filetype markdown setlocal wrap linebreak nolist spell
 
 " invisibles
 set listchars=tab:▸\ ,trail:▫,eol:¬
@@ -88,29 +86,24 @@ set hlsearch
 set incsearch
 set smartcase
 
-" template
-if has("autocmd")
-    " autocmd BufNewFile *.java 0r ~/.vim/skeleton/Java
-endif
-
 " return to last edit position when opening files
 autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif"`'")"'")
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif"`'")"'")
 
 "-----------------
 " Interface
 "-----------------
 " colors
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-    set background=dark
-    colorscheme solarized
+  set background=dark
+  colorscheme solarized
 endif
 
 " font
 if ($TERM_PROGRAM == 'iTerm.app')
-    highlight Comment cterm=italic
+  highlight Comment cterm=italic
 endif
 
 " hightlight current position
@@ -152,10 +145,10 @@ nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 
 " indentation
 if OSX()
-    nmap <D-[> <<
-    nmap <D-]> >>
-    vmap <D-[> <gv
-    vmap <D-]> >gv
+  nmap <D-[> <<
+  nmap <D-]> >>
+  vmap <D-[> <gv
+  vmap <D-]> >gv
 endif
 
 " buffer
@@ -205,18 +198,18 @@ nmap <leader>et :tabe %%
 
 " navigation
 if OSX()
-    nmap <D-h> gh
-    nmap <D-j> gj
-    nmap <D-k> gk
-    nmap <D-l> gl
-    nmap <D-4> g$
-    nmap <D-6> g^
-    vmap <D-h> gh
-    vmap <D-j> gj
-    vmap <D-k> gk
-    vmap <D-l> gl
-    vmap <D-4> g$
-    vmap <D-6> g^
+  nmap <D-h> gh
+  nmap <D-j> gj
+  nmap <D-k> gk
+  nmap <D-l> gl
+  nmap <D-4> g$
+  nmap <D-6> g^
+  vmap <D-h> gh
+  vmap <D-j> gj
+  vmap <D-k> gk
+  vmap <D-l> gl
+  vmap <D-4> g$
+  vmap <D-6> g^
 endif
 nmap <silent> <leader>sp :set spell!<CR>
 
@@ -224,23 +217,20 @@ nmap <silent> <leader>sp :set spell!<CR>
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 function! Preserve(command)
-    " Preparation: save the last search, and cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    execute a:command
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+  " Preparation: save the last search, and cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
 
 "-----------------
 " Plugin
 "-----------------
-" snipmate
-" let g:snips_author = "DeiSu <deisu@brucedsu.com>"
-
 " Ultisnips
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
@@ -249,56 +239,56 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 " neocomplete / neocomplcache
 let g:acp_enableAtStartup = 0
 if has("lua")
-    " neocomplete
-    let g:neocomplete#enable_at_startup  = 1
-    let g:neocomplete#enable_smart_case  = 1
-    let g:neocomplete#enable_camel_case  = 1
-    let g:neocomplete#max_list           = 15
-    let g:neocomplete#enable_auto_select = 1
+  " neocomplete
+  let g:neocomplete#enable_at_startup  = 1
+  let g:neocomplete#enable_smart_case  = 1
+  let g:neocomplete#enable_camel_case  = 1
+  let g:neocomplete#max_list           = 15
+  let g:neocomplete#enable_auto_select = 1
 
-    " ------ dictionary ------
-    let g:neocomplete#sources#dictionary#dictionaries = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
+  " ------ dictionary ------
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
-    " ------ keyword ------
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+  " ------ keyword ------
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " ------ mappings ------
-    inoremap <expr><C-y> neocomplete#close_popup()
-    inoremap <expr><C-e> neocomplete#cancel_popup()
-    inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  " ------ mappings ------
+  inoremap <expr><C-y> neocomplete#close_popup()
+  inoremap <expr><C-e> neocomplete#cancel_popup()
+  inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
 else
-    " neocomplecache
-    let g:neocomplcache_enable_at_startup            = 1
-    let g:neocomplcache_enable_smart_case            = 1
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_underbar_completion   = 1
-    let g:neocomplcache_max_list                     = 15
-    let g:neocomplcache_enable_auto_select           = 1
+  " neocomplecache
+  let g:neocomplcache_enable_at_startup            = 1
+  let g:neocomplcache_enable_smart_case            = 1
+  let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_underbar_completion   = 1
+  let g:neocomplcache_max_list                     = 15
+  let g:neocomplcache_enable_auto_select           = 1
 
-    " ------ dictionary ------
-    let g:neocomplcache_dictionary_filetype_lists = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
+  " ------ dictionary ------
+  let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
-    " ------ keyword ------
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+  " ------ keyword ------
+  if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns._ = '\h\w*'
 
-    " ------ mappings ------
-    inoremap <expr><C-y> neocomplcache#close_popup()
-    inoremap <expr><C-e> neocomplcache#cancel_popup()
-    inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+  " ------ mappings ------
+  inoremap <expr><C-y> neocomplcache#close_popup()
+  inoremap <expr><C-e> neocomplcache#cancel_popup()
+  inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endif
 
 " text bubbling with unimpaired
@@ -326,14 +316,14 @@ nmap <leader>a/ :Tabularize ////<CR>
 vmap <leader>a/ :Tabularize ////<CR>
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 function! s:align()
-    let p = '^\s*|\s.*\s|\s*$'
-    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-        Tabularize/|/l1
-        normal! 0
-        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-    endif
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
 endfunction
 
 " indentLine
@@ -368,7 +358,7 @@ let g:airline_enable_branch              = 1
 let g:airline_enable_syntastic           = 1
 let g:airline_powerline_fonts            = 1
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 
@@ -388,5 +378,5 @@ nmap <leader>av :AV<CR>
 " Local
 "-----------------
 if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
