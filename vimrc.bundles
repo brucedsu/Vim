@@ -64,6 +64,12 @@ Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'terryma/vim-multiple-cursors'
 
 "-----------------
+" Web
+"-----------------
+Bundle 'ap/vim-css-color'
+Bundle 'hail2u/vim-css3-syntax'
+
+"-----------------
 " IDE
 "-----------------
 Bundle 'scrooloose/nerdtree'
@@ -90,6 +96,8 @@ Bundle 'chilicuil/conque'
 " Colors
 "-----------------
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'sickill/vim-monokai'
+Bundle 'tomasr/molokai'
 Bundle 'nelstrom/vim-mac-classic-theme'
 Bundle 'noahfrederick/vim-hemisu'
 Bundle 'rickharris/vim-blackboard'
