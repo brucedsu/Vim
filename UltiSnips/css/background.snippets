@@ -1,0 +1,68 @@
+#-------------------
+# Background
+#-------------------
+# image
+snippet bgi "background-image: ...; (bgi)"
+background-image: url('${0:<##>}');
+endsnippet
+
+snippet bgin "background-image: none; (bgin)"
+background-image: none;
+endsnippet
+
+# color
+snippet bgc "background-color: ...; (bgc)"
+background-color: ${0:<##>};
+endsnippet
+
+snippet bgct "background-color: transparent; (bgct)"
+background-color: transparent;
+endsnippet
+
+# repeat
+snippet bgr "background-repeat: ...; (bgr)"
+background-repeat: ${0:<##>};
+endsnippet
+
+snippet bgrr "background-repeat: repeat; (bgrr)"
+background-repeat: repeat;
+endsnippet
+
+snippet bgrx "background-repeat: repeat-x; (bgrx)"
+background-repeat: repeat-x;
+endsnippet
+
+snippet bgry "background-repeat: repeat-y; (bgry)"
+background-repeat: repeat-y;
+endsnippet
+
+snippet bgrn "background-repeat: none; (bgrn)"
+background-repeat: no-repeat;
+endsnippet
+
+# attachment
+snippet bga "background-attachment: ...; (bga)"
+background-attachment: ${0:<##>};
+endsnippet
+
+snippet bgas "background-attachment: scroll; (bgas)"
+background-attachment: scroll;
+endsnippet
+
+snippet bgaf "background-attachment: fixed; (bgaf)"
+background-attachment: fixed;
+endsnippet
+
+# position
+snippet bgp "background-position: x y; (bgp)"
+background-position: ${1:0} ${0:0};
+endsnippet
+
+# background
+snippet bg "background: ...;"
+background: ${0:<##>};
+endsnippet
+
+snippet bg+ "background: #FFF url no-reapt scroll 0 0; (bg+)"
+background: ${1:#FFF} url('${2:<##>}') ${3:no-repeat} ${4:scroll} ${5:0} ${0:0};
+endsnippet

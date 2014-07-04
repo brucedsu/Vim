@@ -1,0 +1,49 @@
+#-------------------
+# Layout
+#-------------------
+# float
+snippet fl "float: ...; (fl)"
+float: ${0:<##>};
+endsnippet
+
+snippet fll "float: left; (fll)"
+float: left;
+endsnippet
+
+snippet flr "float: right; (flr)"
+float: right;
+endsnippet
+
+snippet fln "float: none; (fln)"
+float: none;
+endsnippet
+
+# clear
+snippet cl "clear: ...; (cl)"
+clear: ${0:<##>};
+endsnippet
+
+snippet cll "clear: left; (cll)"
+clear: left;
+endsnippet
+
+snippet clr "clear: right; (clr)"
+clear: right;
+endsnippet
+
+# clearfix
+snippet cf "clearfix (cf)"
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+endsnippet

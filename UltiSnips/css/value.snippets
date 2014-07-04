@@ -1,0 +1,19 @@
+#-------------------
+# Value
+#-------------------
+# color
+snippet rgb "rgb(r, g, b) (rgb)"
+rgb(${1:red}, ${2:green}, ${0:blue})
+endsnippet
+
+snippet rgba "rgba(r, g, b, a) (rgba)"
+rgba(${1:red}, ${2:green}, ${3:blue}, .${0:alpha})
+endsnippet
+
+snippet hsl "hsl(h, s, l) (hsl)"
+hsl(${1}, $2%, $0%)
+endsnippet
+
+snippet hsla "hsla(h, s, l, a) (hsla)"
+hsl($1, $2%, $3%, .$0)
+endsnippet

@@ -1,0 +1,68 @@
+#-------------------
+# Selector
+#-------------------
+# universal
+snippet * "* { ... } (*)"
+* {
+	$0
+}
+endsnippet
+
+snippet . ".X { ... } (.)"
+.${1:X} {
+	$0
+}
+endsnippet
+
+snippet # "#X { ... } (#)"
+#${1:X} {
+	$0
+}
+endsnippet
+
+# child selector
+snippet > "X > Y { ... } (>)"
+${1:X} > ${2:Y} {
+	$0
+}
+endsnippet
+
+# adjacent selector
+snippet + "X + Y { ... } (+)"
+${1:X} + ${2:Y} {
+	$0
+}
+endsnippet
+
+# general sibling selector
+snippet ~ "X ~ Y { ... } (~)"
+${1:X} ~ ${2:Y} {
+	$0
+}
+endsnippet
+
+snippet = "X[...=...] { ... } (=)"
+${1:X}[${2:href}="${3:foo}"] {
+	$0
+}
+endsnippet
+
+snippet *= "X[...*=...] { ... } (=)"
+${1:X}[${2:href}*="${3:foo}"] {
+	$0
+}
+endsnippet
+
+snippet ^= "X[...^=...] { ... } (=)"
+${1:X}[${2:href}^="${3:http://}"] {
+	$0
+}
+endsnippet
+
+snippet $= "X[...$=...] { ... } (=)"
+${1:X}[${2:href}$="${3:.png}"] {
+	$0
+}
+endsnippet
+
+# pseudo-class
