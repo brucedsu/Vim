@@ -96,6 +96,7 @@ autocmd BufReadPost *
 " Interface
 "-----------------
 " colors
+" ------ solarized as default ------
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
   set background=dark
   colorscheme solarized
@@ -123,11 +124,11 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 let mapleader = ","
 
 " list
-nmap <leader>l :set list!<CR>
+nmap <Leader>l :set list!<CR>
 
 " quiting
-nmap <leader>qq :q<CR>
-nmap <leader>q1 :q!<CR>
+nmap <Leader>qq :q<CR>
+nmap <Leader>q1 :q!<CR>
 
 " saving
 nmap <C-s> :w<CR>
@@ -138,10 +139,10 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " config
-nmap <leader>vv :tabedit $MYVIMRC<CR>
-nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
-nmap <leader>vg :tabedit ~/.gvimrc<CR>
-nmap <leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nmap <Leader>vv :tabedit $MYVIMRC<CR>
+nmap <Leader>vb :tabedit ~/.vimrc.bundles<CR>
+nmap <Leader>vg :tabedit ~/.gvimrc<CR>
+nmap <Leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " indentation
 if OSX()
@@ -152,49 +153,49 @@ if OSX()
 endif
 
 " buffer
-nmap <leader>. :bp<CR>
-nmap <leader>/ :bn<CR>
-nmap <leader>d :bd<CR>
-nmap <leader>d1 :bd!<CR>
-nmap <leader>e :e#<CR>
+nmap <Leader>. :bp<CR>
+nmap <Leader>/ :bn<CR>
+nmap <Leader>dd :bd<CR>
+nmap <Leader>d1 :bd!<CR>
+nmap <Leader>e :e#<CR>
 
 " window
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-nmap <leader>nw :new<CR>
-nmap <leader>nv :vnew<CR>
+nmap <Leader>nw :new<CR>
+nmap <Leader>nv :vnew<CR>
 
 " tab
-nmap <leader>1 1gt
-nmap <leader>2 2gt
-nmap <leader>3 3gt
-nmap <leader>4 4gt
-nmap <leader>5 5gt
-nmap <leader>6 6gt
-nmap <leader>7 7gt
-nmap <leader>8 8gt
-nmap <leader>9 9gt
-nmap <leader>0 :tablast<CR>
-nmap <leader>nt :tabnew<CR>
-nmap <leader>tt :tabedit<Space>
-nmap <leader>; :tabprev<CR>
-nmap <leader>' :tabnext<CR>
+nmap <Leader>1 1gt
+nmap <Leader>2 2gt
+nmap <Leader>3 3gt
+nmap <Leader>4 4gt
+nmap <Leader>5 5gt
+nmap <Leader>6 6gt
+nmap <Leader>7 7gt
+nmap <Leader>8 8gt
+nmap <Leader>9 9gt
+nmap <Leader>0 :tablast<CR>
+nmap <Leader>nt :tabnew<CR>
+nmap <Leader>tt :tabedit<Space>
+nmap <Leader>; :tabprev<CR>
+nmap <Leader>' :tabnext<CR>
 
 " search
 nnoremap <CR> :nohl<CR>
 
 " make
-nmap <leader>m :w<CR>:make<CR>
-nmap <leader>mc :make clean<CR>
+nmap <Leader>m :w<CR>:make<CR>
+nmap <Leader>mc :make clean<CR>
 
 " editing
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-nmap <leader>ew :e %%
-nmap <leader>es :sp %%
-nmap <leader>ev :vsp %%
-nmap <leader>et :tabe %%
+nmap <Leader>ew :e %%
+nmap <Leader>es :sp %%
+nmap <Leader>ev :vsp %%
+nmap <Leader>et :tabe %%
 
 " navigation
 if OSX()
@@ -211,7 +212,7 @@ if OSX()
   vmap <D-4> g$
   vmap <D-6> g^
 endif
-nmap <silent> <leader>sp :set spell!<CR>
+nmap <silent> <Leader>sp :set spell!<CR>
 
 " formatting
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
@@ -240,11 +241,11 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 let g:acp_enableAtStartup = 0
 if has("lua")
   " neocomplete
-  let g:neocomplete#enable_at_startup  = 1
-  let g:neocomplete#enable_smart_case  = 1
-  let g:neocomplete#enable_camel_case  = 1
-  let g:neocomplete#max_list           = 15
-  let g:neocomplete#enable_auto_select = 1
+  let g:neocomplete#enable_at_startup     = 1
+  let g:neocomplete#enable_smart_case     = 1
+  let g:neocomplete#enable_camel_case     = 1
+  let g:neocomplete#max_list              = 15
+  let g:neocomplete#enable_auto_select    = 1
 
   " ------ dictionary ------
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -304,16 +305,16 @@ map <leader>W <leader><leader>W
 " nerdcommenter
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
-nmap /// <leader>c<Space>
-vmap /// <leader>c<Space>
+nmap /// <Leader>c<Space>
+vmap /// <Leader>c<Space>
 
 " tabular
-nmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
-nmap <leader>a/ :Tabularize ////<CR>
-vmap <leader>a/ :Tabularize ////<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a/ :Tabularize ////<CR>
+vmap <Leader>a/ :Tabularize ////<CR>
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 function! s:align()
   let p = '^\s*|\s.*\s|\s*$'
@@ -330,30 +331,37 @@ endfunction
 let g:indentLine_char = "│"
 
 "rainbow_parentheses
-nmap <leader>cp :RainbowParenthesesToggle<CR>
+nmap <Leader>cp :RainbowParenthesesToggle<CR>
 
 " NERDTree
-let NERDTreeIgnore=['\.class$']
-nmap <leader>[ :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store']
+let NERDTreeShowBookmarks   = 1
+let NERDTreeShowHidden      = 1
+let NERDTreeQuitOnOpen      = 1
+
+" ------ mappings ------
+nmap <Leader>[ :NERDTreeToggle<CR>
+nmap <Leader>f :NERDTreeFind<CR>
+nmap <Leader>x :NERDTreeCWD<CR>
+
 
 " tagbar
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 let g:tagbar_iconchars = ['▸', '▾']
-nmap <leader>] :TagbarToggle<CR>
+nmap <Leader>] :TagbarToggle<CR>
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
 
 " Ctrp
 let g:ctrlp_open_multiple_files = 'v'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-nmap <leader>p :CtrlP<CR>
-nmap <leader>b :CtrlPBuffer<CR>
+nmap <Leader>p :CtrlP<CR>
+nmap <Leader>b :CtrlPBuffer<CR>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme                      = 'powerlineish'
+let g:airline_theme                      = 'solarized'
 let g:airline_enable_branch              = 1
 let g:airline_enable_syntastic           = 1
 let g:airline_powerline_fonts            = 1
@@ -363,16 +371,16 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " SingleRun
-nmap <leader>r :SCCompileRun<CR>
+nmap <Leader>r :SCCompileRun<CR>
 
 " ConqureTerm
-nmap <leader>tb :ConqueTermVSplit bash<CR>
-nmap <leader>tz :ConqueTermVSplit zsh<CR>
+nmap <Leader>tb :ConqueTermVSplit bash<CR>
+nmap <Leader>tz :ConqueTermVSplit zsh<CR>
 
 " a.vim
-nmap <leader>aa :A<CR>
-nmap <leader>as :AS<CR>
-nmap <leader>av :AV<CR>
+nmap <Leader>aa :A<CR>
+nmap <Leader>as :AS<CR>
+nmap <Leader>av :AV<CR>
 
 "-----------------
 " Local
