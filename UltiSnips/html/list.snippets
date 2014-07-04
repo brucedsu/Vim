@@ -85,9 +85,28 @@ snippet dd "<dd>...</dd> (dd)"
 endsnippet
 
 snippet dd. "<dd class=...>...</dd> (dd.)"
-<dd class="${1}">${0}</dd>
+<dd class="$1">$0</dd>
 endsnippet
 
 snippet dd# "<dd id=...>...</dd> (dd#)"
-<dd id="${1}">${0}</dd>
+<dd id="$1">$0</dd>
+endsnippet
+
+# nav
+snippet nav "<nav> ... </nav> (nav)"
+<nav>
+	$0
+</nav>
+endsnippet
+
+snippet nav. "<nav class=...> ... </nav> (nav.)"
+<nav class="$1">
+	$0
+</nav>
+endsnippet
+
+snippet nav# "<nav id=...> ... </nav> (nav#)"
+<nav id="$1">
+	$0
+</nav>
 endsnippet
