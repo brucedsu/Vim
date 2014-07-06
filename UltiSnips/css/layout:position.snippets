@@ -1,15 +1,15 @@
 #-------------------
 # Position
 #-------------------
-snippet pos "position: ...; (pos)"
-position: ${0:<##>};
+snippet pos "position: ___;"
+position: ${1:static|relative|absolute|fixed};$0
 endsnippet
 
-snippet poss "position: static; (poss)"
+snippet poss "position: static;"
 position: static;
 endsnippet
 
-snippet posr "position: relative; (posr)"
+snippet posr "position: relative;"
 position: relative;
 endsnippet
 
@@ -22,34 +22,54 @@ position: fixed;
 endsnippet
 
 # top, right, bottom, left
-snippet t "top: ...; (t)"
-top: ${0:<##>};
+snippet t "top: ___;"
+top: ${1:<##>};$0
 endsnippet
 
-snippet ta "top: auto; (ta)"
-top: auto;
+# snippet ta "top: auto;"
+# top: auto;
+# endsnippet
+
+snippet r "right: ___;"
+right: ${1:<##>};$0
 endsnippet
 
-snippet r "right: ...; (r)"
-right: ${0:<##>};
-endsnippet
-
-snippet ra "right: auto; (ra)"
+snippet ra "right: auto;"
 right: auto;
 endsnippet
 
-snippet b "bottom: ...; (b)"
-bottom: ${0:<##>};
+snippet bm "bottom: ...;"
+bottom: ${1:<##>};$0
 endsnippet
 
-snippet ba "bottom: auto; (ba)"
+snippet bma "bottom: auto;"
 bottom: auto;
 endsnippet
 
-snippet l "left: ...; (l)"
-left: ${0:<##>};
+snippet l "left: ...;"
+left: ${1:<##>};$0
 endsnippet
 
-snippet la "left: auto; (la)"
+snippet la "left: auto;"
 left: auto;
+endsnippet
+
+snippet lt "left: ___; top: ___"
+left: ${1:<##>};
+top: ${2:<##>};$0
+endsnippet
+
+snippet lb "left: ___; bottom: ___"
+left: ${1:<##>};
+bottom: ${2:<##>};$0
+endsnippet
+
+snippet rt "right: ___; top: ___"
+right: ${1:<##>};
+top: ${2:<##>};$0
+endsnippet
+
+snippet rb "right: ___; bottom: ___"
+right: ${1:<##>};
+bottom: ${2:<##>};$0
 endsnippet

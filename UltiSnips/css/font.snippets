@@ -2,104 +2,100 @@
 # Font
 #-------------------
 # color
-snippet c "color: ...; (c)"
-color: ${0:<##>};
+snippet c "color: ___;"
+color: ${1:<##>};$0
 endsnippet
 
 # font size
-snippet fsi "font-size: ...; (fsi)"
-font-size: ${0:<##>};
+snippet fz "font-size: ___;"
+font-size: ${1:small|large|smaller|larger};$0
 endsnippet
 
-snippet fsis "font-size: small; (fsis)"
+snippet fzs "font-size: small;"
 font-size: small;
 endsnippet
 
-snippet fsil "font-size: large; (fsil)"
+snippet fzl "font-size: large;"
 font-size: large;
 endsnippet
 
-snippet fsisr "font-size: smaller; (fsisr)"
+snippet fzsr "font-size: smaller;"
 font-size: smaller;
 endsnippet
 
-snippet fsilr "font-size: larger; (fsilr)"
+snippet fzlr "font-size: larger;"
 font-size: larger;
 endsnippet
 
 # font style
-snippet fst "font-style: ...; (fst)"
-font-style: ${0:<##>};
+snippet fs "font-style: ___"
+font-style: ${1:italic|oblique|normal};$0
 endsnippet
 
-snippet fsti "font-style: italic; (fsti)"
+snippet fsi "font-style: italic;"
 font-style: italic;
 endsnippet
 
-snippet fsto "font-style: oblique; (fsto)"
+snippet fso "font-style: oblique;"
 font-style: oblique;
 endsnippet
 
-snippet fstn "font-style: none; (fstn)"
-font-style: none;
+snippet fsn "font-style: normal;"
+font-style: normal;
 endsnippet
 
 # weight
-snippet fw "font-weight: ...; (fw)"
-font-weight: ${0:<##>};
+snippet fw "font-weight: ___;"
+font-weight: ${1:normal|bold|bolder|lighter};$0
 endsnippet
 
-snippet fwn "font-weight: normal; (fwn)"
+snippet fwn "font-weight: normal;"
 font-weight: normal;
 endsnippet
 
-snippet fwb "font-weight: bold; (fwb)"
+snippet fwb "font-weight: bold;"
 font-weight: bold;
 endsnippet
 
-snippet fwbr "font-weight: bolder; (fwbr)"
+snippet fwbr "font-weight: bolder;"
 font-weight: bolder;
 endsnippet
 
-snippet fwlr "font-weight: lighter; (fwlr)"
+snippet fwlr "font-weight: lighter;"
 font-weight: lighter;
 endsnippet
 
 # variant
-snippet fv "font-variant: ...; (fv)"
-font-variant: ${0:<##>};
+snippet fv "font-variant: ___;"
+font-variant: ${1:normal|small-caps};$0
 endsnippet
 
-snippet fvn "font-variant: normal; (fvn)"
+snippet fvn "font-variant: normal;"
 font-variant: normal;
 endsnippet
 
-snippet fvsc "font-variant: small-caps; (fvsc)"
+snippet fvsc "font-variant: small-caps;"
 font-variant: small-caps;
 endsnippet
 
 # family
-snippet ff "font-family: ...; (ff)"
-font-family: ${0:<##>};
+snippet ff "font-family: ___;"
+font-family: ${1:<##>};$0
 endsnippet
 
-snippet ffs "font-family: serif; (ffs)"
-font-family: ${0:Georgia, 'Times New Roman'}, serif;
+snippet ffs "font-family: serif;"
+font-family: ${1:Georgia, 'Times New Roman'}, serif;$0
 endsnippet
 
-snippet ffss "font-family: sans-serif; (ffss)"
-font-family: ${0:Helvetica, Arial}, sans-serif;
+snippet ffss "font-family: sans-serif;"
+font-family: ${1:Helvetica, Arial}, sans-serif;$0
 endsnippet
 
-snippet ffm "font-family: monospace; (ffm)"
-font-family: ${0:Monaco, 'Courier New'}, monospace;
+snippet ffm "font-family: monospace;"
+font-family: ${1:Monaco, 'Courier New'}, monospace;$0
 endsnippet
 
 # font
-snippet f "font: ...; (f)"
-font: ${0:<##>};
-endsnippet
-
-snippet f+ "font: 1em Helvetica; (f+)"
-font: ${1:1em} ${2:Helvetica}, ${0:sans-serif};
+snippet ft "font: 1em Helvetica, sans-serif;"
+font: ${1:1em} ${2:Helvetica}, ${3:sans-serif};$0
 endsnippet

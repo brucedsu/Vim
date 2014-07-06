@@ -2,71 +2,67 @@
 # List Style
 #-------------------
 # marker image
-snippet lsi "list-style-image: url(...); (lsi)"
-list-style-image: url('${0:<##>}');
+snippet lsi "list-style-image: url(___);"
+list-style-image: url('${1:<##>}');$0
 endsnippet
 
-snippet lsin "list-style-image: none; (lsin)"
+snippet lsin "list-style-image: none;"
 list-style-image: none;
 endsnippet
 
 # marker type
 snippet lst "list-style-type: ...; (lst)"
-list-style-type: ${0:<##>};
+list-style-type: ${1:disc|circle|square|decimal|decimal-leading-zero|lower-roman|upper-roman|none};$0
 endsnippet
 
-snippet lstd "list-style-type: disc; (lstd)"
+snippet lstd "list-style-type: disc;"
 list-style-type: disc;
 endsnippet
 
-snippet lstc "list-style-type: circle; (lstc)"
+snippet lstc "list-style-type: circle;"
 list-style-type: circle;
 endsnippet
 
-snippet lsts "list-style-type: square; (lsts)"
+snippet lsts "list-style-type: square;"
 list-style-type: square;
 endsnippet
 
-snippet lstdc "list-style-type: decimal; (lstdc)"
+snippet lstdc "list-style-type: decimal;"
 list-style-type: decimal;
 endsnippet
 
-snippet lstdclz "list-style-type: decimal-leading-zero; (lstdclz)"
+snippet lstdclz "list-style-type: decimal-leading-zero;"
 list-style-type: decimal-leading-zero;
 endsnippet
 
-snippet lstlr "list-style-type: lower-roman; (lstlr)"
+snippet lstlr "list-style-type: lower-roman;"
 list-style-type: lower-roman;
 endsnippet
 
-snippet lstur "list-style-type: upper-roman; (lstur)"
+snippet lstur "list-style-type: upper-roman;"
 list-style-type: upper-roman;
 endsnippet
 
-snippet lstn "list-style-type: none; (lstn)"
+snippet lstn "list-style-type: none;"
 list-style-type: none;
 endsnippet
 
 # marker position
-snippet lsp "list-style-position: ...; (lsp)"
-list-style-position: ${0:<##>};
+snippet lsp "list-style-position: ___;"
+list-style-position: ${1:inside|outside};$0
 endsnippet
 
-snippet lspi "list-style-position: inside; (lspi)"
+snippet lspi "list-style-position: inside;"
 list-style-position: inside;
 endsnippet
 
-snippet lspo "list-style-position: outside; (lspo)"
+snippet lspo "list-style-position: outside;"
 list-style-position: outside;
 endsnippet
 
 # list style
-snippet ls "list-style: ...; (ls)"
-list-style: ${0:<##>};
-endsnippet
-
-snippet ls+ "list-style: circle inside url; (ls+)"
-list-style: ${1:circle} ${2:inside} url('${3:<##>}');
+snippet ls "list-style: circle inside url;"
+list-style: ${1:circle} ${2:outside} url('${3:<##>}');$0
 endsnippet
 
 snippet lsn "list-style: none; (lsn)"

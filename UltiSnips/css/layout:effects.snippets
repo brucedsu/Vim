@@ -2,48 +2,48 @@
 # Effetcs
 #-------------------
 # z-index
-snippet z "z-index: ...; (z)"
-z-index: ${0:<##>};
+snippet z "z-index: ___;"
+z-index: ${1:<##>};$0
 endsnippet
 
-snippet za "z-inline: auto; (za)"
+snippet za "z-inline: auto;"
 z-index: auto;
 endsnippet
 
 # overflow
-snippet ov "overflow: ...; (ov)"
-overflow: ${0:<##>};
+snippet o "overflow: ___;"
+overflow: ${1:auto|hidden|scroll|visible};$0
 endsnippet
 
-snippet ova "overflow: auto; (ova)"
+snippet oa "overflow: auto;"
 overflow: auto;
 endsnippet
 
-snippet ovh "overflow: hidden; (ovh)"
+snippet oh "overflow: hidden;"
 overflow: hidden;
 endsnippet
 
-snippet ovs "overflow: scroll; (ovs)"
+snippet os "overflow: scroll; (ovs)"
 overflow: scroll;
 endsnippet
 
-snippet ovv "overflow: visiblity; (ovv)"
+snippet ov "overflow: visible; (ovv)"
 overflow: visible;
 endsnippet
 
 # visiblity
-snippet v "visiblity: ...; (v)"
-visibility: ${0:<##>};
+snippet v "visiblity: ___;"
+visibility: ${1:collapse|hidden|visible};$0
 endsnippet
 
-snippet vc "visiblity: collapse; (vc)"
+snippet vc "visiblity: collapse;"
 visibility: collapse;
 endsnippet
 
-snippet vh "visiblity: hidden; (vh)"
+snippet vh "visiblity: hidden;"
 visibility: hidden;
 endsnippet
 
-snippet vv "visiblity: visible; (vv)"
+snippet vv "visiblity: visible;"
 visibility: visible;
 endsnippet

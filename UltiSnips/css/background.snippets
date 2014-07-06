@@ -2,67 +2,67 @@
 # Background
 #-------------------
 # image
-snippet bgi "background-image: ...; (bgi)"
-background-image: url('${0:<##>}');
+snippet bgi "background-image: url('___');"
+background-image: url('${1:<##>}');$0
 endsnippet
 
-snippet bgin "background-image: none; (bgin)"
+snippet bgin "background-image: none;"
 background-image: none;
 endsnippet
 
 # color
-snippet bgc "background-color: ...; (bgc)"
-background-color: ${0:<##>};
+snippet bgc "background-color: ___;"
+background-color: ${1:<##>};$0
 endsnippet
 
-snippet bgct "background-color: transparent; (bgct)"
+snippet bgct "background-color: transparent;"
 background-color: transparent;
 endsnippet
 
 # repeat
-snippet bgr "background-repeat: ...; (bgr)"
-background-repeat: ${0:<##>};
+snippet bgr "background-repeat: ___;"
+background-repeat: ${1:repeat|repeat-x|repeat-y|no-repeat};$0
 endsnippet
 
-snippet bgrr "background-repeat: repeat; (bgrr)"
+snippet bgrr "background-repeat: repeat;"
 background-repeat: repeat;
 endsnippet
 
-snippet bgrx "background-repeat: repeat-x; (bgrx)"
+snippet bgrx "background-repeat: repeat-x;"
 background-repeat: repeat-x;
 endsnippet
 
-snippet bgry "background-repeat: repeat-y; (bgry)"
+snippet bgry "background-repeat: repeat-y;"
 background-repeat: repeat-y;
 endsnippet
 
-snippet bgrn "background-repeat: none; (bgrn)"
+snippet bgrn "background-repeat: no-repeat;"
 background-repeat: no-repeat;
 endsnippet
 
 # attachment
-snippet bga "background-attachment: ...; (bga)"
-background-attachment: ${0:<##>};
+snippet bga "background-attachment: ___;"
+background-attachment: ${1:scroll|fixed|local};$0
 endsnippet
 
-snippet bgas "background-attachment: scroll; (bgas)"
+snippet bgas "background-attachment: scroll;"
 background-attachment: scroll;
 endsnippet
 
-snippet bgaf "background-attachment: fixed; (bgaf)"
+snippet bgaf "background-attachment: fixed;"
 background-attachment: fixed;
 endsnippet
 
+snippet bgal "background-attachment: local"
+background-attachment: local;
+endsnippet
+
 # position
-snippet bgp "background-position: x y; (bgp)"
-background-position: ${1:0} ${0:0};
+snippet bgp "background-position: ___;"
+background-position: ${1:0} ${2:0};$0
 endsnippet
 
 # background
-snippet bg "background: ...;"
-background: ${0:<##>};
-endsnippet
-
-snippet bg+ "background: #FFF url no-reapt scroll 0 0; (bg+)"
-background: ${1:#FFF} url('${2:<##>}') ${3:no-repeat} ${4:scroll} ${5:0} ${0:0};
+snippet bg "background: ___;"
+background: ${1:#FFF} url('${2:<##>}') ${3:no-repeat} ${4:scroll} ${5:0} ${6:0};$0
 endsnippet

@@ -2,18 +2,18 @@
 # Value
 #-------------------
 # color
-snippet rgb "rgb(r, g, b) (rgb)"
-rgb(${1:red}, ${2:green}, ${0:blue})
+snippet rgb "rgb(r, g, b)"
+rgb(${1:red}, ${2:green}, ${3:blue})$0
 endsnippet
 
-snippet rgba "rgba(r, g, b, a) (rgba)"
-rgba(${1:red}, ${2:green}, ${3:blue}, .${0:alpha})
+snippet rgba "rgba(r, g, b, a)"
+rgba(${1:red}, ${2:green}, ${3:blue}, .${4:alpha})$0
 endsnippet
 
-snippet hsl "hsl(h, s, l) (hsl)"
-hsl(${1}, $2%, $0%)
+snippet hsl "hsl(h, s, l)"
+hsl(${1}, $2%, $3%)$0
 endsnippet
 
-snippet hsla "hsla(h, s, l, a) (hsla)"
-hsl($1, $2%, $3%, .$0)
+snippet hsla "hsla(h, s, l, a)"
+hsl($1, $2%, $3%, .$4)$0
 endsnippet

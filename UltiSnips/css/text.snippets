@@ -2,135 +2,135 @@
 # Text
 #-------------------
 # indent
-snippet ti "text-indent: ...; (ti)"
-text-indent: ${0:<##>};
+snippet ti "text-indent: ___;"
+text-indent: ${1:<##>};$0
 endsnippet
 
-snippet ti- "text-indent: -9999px; (ti-)"
+snippet ti- "text-indent: -9999px;"
 text-indent: -9999px;
 endsnippet
 
 # alignment
-snippet ta "text-align: ...; (ta)"
-text-align: ${0:<##>};
+snippet ta "text-align: ___;"
+text-align: ${1:center|left|right|justify};$0
 endsnippet
 
-snippet tac "text-align: center; (tac)"
+snippet tac "text-align: center;"
 text-align: center;
 endsnippet
 
-snippet tal "text-align: left; (tal)"
+snippet tal "text-align: left;"
 text-align: left;
 endsnippet
 
-snippet tar "text-align: right; (tar)"
+snippet tar "text-align: right;"
 text-align: right;
 endsnippet
 
-snippet taj "text-align: justify; (taj)"
+snippet taj "text-align: justify;"
 text-align: justify;
 endsnippet
 
 # vertical align
-snippet va "vertical-align: ...; (va)"
-vertical-align: ${0:<##>};
+snippet va "vertical-align: ___;"
+vertical-align: ${1:top|middle|bottom};$0
 endsnippet
 
-snippet vat "vertical-align: top; (vat)"
+snippet vat "vertical-align: top;"
 vertical-align: top;
 endsnippet
 
-snippet vam "vertical-align: middle; (vam)"
+snippet vam "vertical-align: middle;"
 vertical-align: middle;
 endsnippet
 
-snippet vab "vertical-align: bottom; (vab)"
+snippet vab "vertical-align: bottom;"
 vertical-align: bottom;
 endsnippet
 
 # transformation
-snippet tt "text-transform: ...; (tt)"
-text-transform: ${0:<##>};
+snippet tt "text-transform: ___;"
+text-transform: ${1:uppercase|lowercase|capitalize|none};$0
 endsnippet
 
-snippet ttn "text-transform: none (ttn)"
-text-transform: none;
-endsnippet
-
-snippet ttu "text-transform: uppercase; (ttu)"
+snippet ttu "text-transform: uppercase;"
 text-transform: uppercase;
 endsnippet
 
-snippet ttl "text-transform: lowercase (ttl)"
+snippet ttl "text-transform: lowercase;"
 text-transform: lowercase;
 endsnippet
 
-snippet ttc "text-transform: capitalize (ttc)"
+snippet ttc "text-transform: capitalize;"
 text-transform: capitalize;
 endsnippet
 
+snippet ttn "text-transform: none"
+text-transform: none;
+endsnippet
+
 # decoration
-snippet td "text-decoration: ...; (td)"
-text-decoration: ${0:<##>};
+snippet td "text-decoration: ___;"
+text-decoration: ${1:underline|overline|line-through|none};
 endsnippet
 
-snippet tdn "text-decoration: none; (tdn)"
-text-decoration: none;
-endsnippet
-
-snippet tdu "text-decoration: underline; (tdu)"
+snippet tdu "text-decoration: underline;"
 text-decoration: underline;
 endsnippet
 
-snippet tdo "text-decoration: overline (tdo)"
+snippet tdo "text-decoration: overline;"
 text-decoration: overline;
 endsnippet
 
-snippet tdlt "text-decoration: line-through (tdlt)"
+snippet tdlt "text-decoration: line-through;"
 text-decoration: line-through;
 endsnippet
 
+snippet tdn "text-decoration: none;"
+text-decoration: none;
+endsnippet
+
 # line height
-snippet lh "line-height: ...; (lh)"
-line-height: ${0:<##>};
+snippet lh "line-height: ___;"
+line-height: ${1:<##>};$0
 endsnippet
 
 # word spacing
-snippet wos "word-spacing: ...; (wos)"
-word-spacing: ${0:<##>};
+snippet wos "word-spacing: ___;"
+word-spacing: ${1:<##>};$0
 endsnippet
 
 # letter spacing
-snippet les "letter-spacing: ...; (les)"
-letter-spacing: ${0:<##>};
+snippet les "letter-spacing: ___;"
+letter-spacing: ${1:<##>};$0
 endsnippet
 
 # white space
-snippet whs "white-space: ...; (whs)"
-white-space: ${0:<##>};
+snippet whs "white-space: ___;"
+white-space: ${1:normal|pre|nowrap|pre-wrap|pre-line};$0
 endsnippet
 
-snippet whsn "white-space: normal; (whsn)"
+snippet whsn "white-space: normal;"
 white-space: normal;
 endsnippet
 
-snippet whsp "white-space: pre; (whsp)"
+snippet whsp "white-space: pre;"
 white-space: pre;
 endsnippet
 
-snippet whsnw "white-space: nowrap; (whsnw)"
+snippet whsnw "white-space: nowrap;"
 white-space: nowrap;
 endsnippet
 
-snippet whspw "white-space: pre-wrap; (whspw)"
+snippet whspw "white-space: pre-wrap;"
 white-space: pre-wrap;
 endsnippet
 
-snippet whspl "white-space: pre-line; (whspl)"
+snippet whspl "white-space: pre-line;"
 white-space: pre-line;
 endsnippet
 
 # text shadow
-snippet ts "text-shadow: ...; (tsh)"
-text-shadow: ${0:<##>};
+snippet ts "text-shadow: 0 0 0 #000;"
+text-shadow: ${1:0} ${2:0} ${3:0} ${4:#000};$0
 endsnippet

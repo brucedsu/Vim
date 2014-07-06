@@ -1,68 +1,202 @@
 #-------------------
 # Selector
 #-------------------
-# universal
-snippet * "* { ... } (*)"
+snippet . "___ { ___ }" b
+${1:selector} {
+	${0:declaration}
+}
+endsnippet
+
+snippet * "* { ___ }" b
 * {
-	$0
+	${0:declaration}
 }
 endsnippet
 
-snippet . ".X { ... } (.)"
-.${1:X} {
-	$0
+snippet .# "#___ { ___ }" b
+#${1:id} {
+	${0:declaration}
 }
 endsnippet
 
-snippet # "#X { ... } (#)"
-#${1:X} {
-	$0
+snippet .. ".___ { ___ }" b
+.${1:class} {
+	${0:declaration}
+}
+endsnippet
+
+snippet .2 "___ ___ { ___ }" b
+${1:ancestor} ${2:descendant} {
+	${0:declaration}
 }
 endsnippet
 
 # child selector
-snippet > "X > Y { ... } (>)"
-${1:X} > ${2:Y} {
-	$0
+snippet > "___ > ___ { ___ }" b
+${1:parent} > ${2:child} {
+	${0:declaration}
 }
 endsnippet
 
-# adjacent selector
-snippet + "X + Y { ... } (+)"
-${1:X} + ${2:Y} {
-	$0
+# adjacent sibling selector
+snippet + "___ + ___ { ___ }" b
+${1:selector1} + ${2:selector2} {
+	${0:declaration}
 }
 endsnippet
 
 # general sibling selector
-snippet ~ "X ~ Y { ... } (~)"
-${1:X} ~ ${2:Y} {
-	$0
+snippet ~ "___ ~ ___ { ___ }"
+${1:selector1} ~ ${2:selector2} {
+	${0:declaration}
 }
 endsnippet
 
-snippet = "X[...=...] { ... } (=)"
-${1:X}[${2:href}="${3:foo}"] {
-	$0
+# substring matching
+snippet = "___[___=___] { ___ }"
+${1:selector}[${2:attr}="${3:value}"] {
+	${0:declaration}
 }
 endsnippet
 
-snippet *= "X[...*=...] { ... } (=)"
-${1:X}[${2:href}*="${3:foo}"] {
-	$0
+snippet *= "___[___*=___] { ___ }"
+${1:selector}[${2:attr}*="${3:value}"] {
+	${0:declaration}
 }
 endsnippet
 
-snippet ^= "X[...^=...] { ... } (=)"
-${1:X}[${2:href}^="${3:http://}"] {
-	$0
+snippet ^= "___[___^=___] { ___ }"
+${1:selector}[${2:attr}^="${3:value}"] {
+	${0:declaration}
 }
 endsnippet
 
-snippet $= "X[...$=...] { ... } (=)"
-${1:X}[${2:href}$="${3:.png}"] {
-	$0
+snippet $= "___[___$=___] { ___ }"
+${1:selector}[${2:attr}$="${3:value}"] {
+	${0:declaration}
 }
 endsnippet
 
-# pseudo-class
+# pseudo class
+snippet :l ":link" i
+:link {
+	${0:declaration}
+}
+endsnippet
+
+snippet :v ":visited" i
+:visited {
+	${0:declaration}
+}
+endsnippet
+
+snippet :h ":hover" i
+:hover {
+	${0:declaration}
+}
+endsnippet
+
+snippet :a ":active" i
+:active {
+	${0:declaration}
+}
+endsnippet
+
+snippet :c ":checked" i
+:checked {
+	${0:declaration}
+}
+endsnippet
+
+snippet :b ":before" i
+:before {
+	${0:declaration}
+}
+endsnippet
+
+snippet :af ":after" i
+:after {
+	${0:declaration}
+}
+endsnippet
+
+snippet :n ":not(___)" i
+:not(${1:selector}) {
+	${0:declaration}
+}
+endsnippet
+
+# pseudo element
+snippet :fli ":first-line" i
+:first-line {
+	${0:declaration}
+}
+endsnippet
+
+snippet :fle ":first-letter" i
+:first-letter {
+	${0:declaration}
+}
+endsnippet
+
+# ------ child ------
+snippet :fc ":first-child" i
+:first-child {
+	${0:declaration}
+}
+endsnippet
+
+snippet :lc ":last-child" i
+:last-child {
+	${0:declaration}
+}
+endsnippet
+
+snippet :nc ":nth-child(___)" i
+:nth-child(${1:n}) {
+	${0:declaration}
+}
+endsnippet
+
+snippet :nlc ":nth-last-child(___)" i
+:nth-last-child(${1:n}) {
+	${0:declaration}
+}
+endsnippet
+
+snippet :oc ":only-child" i
+:only-child {
+	${0:declaration}
+}
+endsnippet
+
+# ------ type ------
+snippet :fot ":first-of-type" i
+:first-of-type {
+	${0:declaration}
+}
+endsnippet
+
+snippet :lot ":last-of-type" i
+:last-of-type {
+	${0:declaration}
+}
+endsnippet
+
+snippet :not ":nth-of-type(___)" i
+:nth-of-type(${1:n}) {
+	${0:declaration}
+}
+endsnippet
+
+snippet :nlot ":nth-last-of-type(___)" i
+:nth-last-of-type(${1:n}) {
+	${0:declaration}
+}
+endsnippet
+
+snippet :oft ":only-of-type" i
+:only-of-type {
+	${0:declaration}
+}
+endsnippet

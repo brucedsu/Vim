@@ -2,65 +2,75 @@
 # Box
 #-------------------
 # width
-snippet w "width: ...; (w)"
-width: ${0:<##>};
+snippet w "width: ___;"
+width: ${1:<##>};$0
 endsnippet
 
-snippet wa "width: auto; (wa)"
+snippet wa "width: auto;"
 width: auto;
 endsnippet
 
-snippet miw "min-width: ...; (miw)"
-min-width: ${0:<##>};
+snippet miw "min-width: ___;"
+min-width: ${1:<##>};$0
 endsnippet
 
-snippet maw "max-width: ...; (maw)"
-max-width: ${0:<##>};
+snippet maw "max-width: ___;"
+max-width: ${1:<##>};$0
 endsnippet
 
 # height
-snippet h "height: ...; (h)"
-height: ${0:<##>};
+snippet h "height: ___;"
+height: ${1:<##>};$0
 endsnippet
 
-snippet ha "height: auto; (ha)"
+snippet ha "height: auto;"
 height: auto;
 endsnippet
 
-snippet mih "min-height: ...; (mih)"
-min-height: ${0:<##>};
+snippet mih "min-height: ___;"
+min-height: ${1:<##>};$0
 endsnippet
 
-snippet mah "max-height: ...; (mah)"
-max-height: ${0:<##>};
+snippet mah "max-height: ___;"
+max-height: ${1:<##>};$0
+endsnippet
+
+# width & height
+snippet wh "width: ___; height: ___;"
+width: ${1:<##>};
+height: ${2:<##>};$0
 endsnippet
 
 # display
-snippet d "display: ...; (d)"
-display: ${0:<##>};
+snippet d "display: ___;"
+display: ${1:none|block|inline|inline-block};$0
 endsnippet
 
-snippet db "display: block; (db)"
+snippet dn "display: none"
+display: none;
+endsnippet
+
+snippet db "display: block;"
 display: block;
 endsnippet
 
-snippet di "display: inline; (di)"
+snippet di "display: inline;"
 display: inline;
 endsnippet
 
-snippet dib "display: inline-block; (dib)"
+snippet dib "display: inline-block;"
 display: inline-block;
 endsnippet
 
 # box sizing
-snippet bs "box-sizing: ...; (bs)"
-box-sizing: ${0:<##>};
+snippet bs "box-sizing: ___;"
+box-sizing: ${1:border-box|content-box};$0
 endsnippet
 
-snippet bsbb "box-sizing: border-box; (bsbb)"
+snippet bsb "box-sizing: border-box;"
 box-sizing: border-box;
 endsnippet
 
-snippet bscb "box-sizing: content-box; (bscb)"
+snippet bsc "box-sizing: content-box;"
 box-sizing: content-box;
 endsnippet
