@@ -1,0 +1,65 @@
+#-------------------
+# Head
+#-------------------
+snippet head "<head>" w
+<head>
+	<meta charset="utf-8">
+	<title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
+	${0:<##>}
+</head>
+endsnippet
+
+snippet title "<title>" w
+<title>${0:`!p snip.rv = snip.basename or "Page Title"`}</title>
+endsnippet
+
+# link
+snippet link "<link>" w
+<link rel="${1:stylesheet}" type="${2:text/css}" href="${0:<##>}">
+endsnippet
+
+snippet css "<link type=css href=___>" w
+<link rel="stylesheet" type="text/css" href="${0:<##>}">
+endsnippet
+
+# meta
+snippet meta "<meta name=___ content=___>" w
+<meta name="${1:author|description|keywords}" content="${0:<##>}">
+endsnippet
+
+snippet metach "<meta charset=utf-8>" w
+<meta charset="utf-8">
+endsnippet
+
+snippet author "<meta name=author>" w
+<meta name="author" content="Hejia Su">
+endsnippet
+
+snippet keyword "<meta name=keyword name=___>" w
+<meta name="keyword" content="${0:<##>}">
+endsnippet
+
+# script
+snippet script "<script>" w
+<script type="text/javascript">
+	${0:<##>}
+</script>
+endsnippet
+
+snippet scriptsrc "<script src=___>" w
+<script type="text/javascript" charset="utf-8" src="${0:<##>}"></script>
+endsnippet
+
+# noscript
+snippet noscript "<noscript>" w
+<noscript>
+	${0:<##>}
+</noscript>
+endsnippet
+
+# style
+snippet style "<style>" w
+<style type="text/css">
+	${0:<##>}
+</style>
+endsnippet

@@ -1,1 +1,32 @@
+#-------------------
+# HTML
+#-------------------
+snippet doc "<!DOCTYPE html>" b
+<!DOCTYPE html>
+endsnippet
 
+snippet html "<html>" b
+<html lang="en">
+${0:<##>}
+</html>
+endsnippet
+
+snippet body "<body>" b
+<body>
+	${0:<##>}
+</body>
+endsnippet
+
+# template
+snippet html5 "HTML5 template" b
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>${1:My Page}</title>
+</head>
+<body>
+	${0:<##>}
+</body>
+</html>
+endsnippet

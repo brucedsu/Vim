@@ -1,112 +1,115 @@
 #-------------------
 # List
 #-------------------
-snippet ol "<ol> ... </ol> (ol)"
-<ol>
-	$0
-</ol>
-endsnippet
-
-snippet ol. "<ol class=...> ... </ol> (ol.)"
-<ol class="$1>
-	$0
-</ol>
-endsnippet
-
-snippet ol# "<ol id=...> ... </ol> (ol#)"
-<ol id="$1>
-	$0
-</ol>
-endsnippet
-
-snippet ul "<ul> ... </ul> (ul)"
+# unordered
+snippet ul "<ul>"
 <ul>
-	$0
+	${0:<##>}
 </ul>
 endsnippet
 
-snippet ul. "<ul class=...> ... </ul> (ul.)"
-<ul class="$1">
-	$0
+snippet ul. "<ul class=___>"
+<ul class="${1:<##>}">
+	${0:<##>}
 </ul>
 endsnippet
 
-snippet ul# "<ul id=...> ... </ul> (ul#)"
-<ul id="$1">
-	$0
+snippet ul# "<ul id=___>"
+<ul id="${1:<##>}">
+	${0:<##>}
 </ul>
 endsnippet
 
-snippet li "<li>...</li> (li)"
-<li>$0</li>
+# ordered
+snippet ol "<ol>"
+<ol>
+	${0:<##>}
+</ol>
 endsnippet
 
-snippet li. "<li class=...>...</li> (li.)"
-<li class="$1">$0</li>
+snippet ol. "<ol class=___>"
+<ol class="${1:<##>}>
+	${0:<##>}
+</ol>
+endsnippet
+
+snippet ol# "<ol id=___>"
+<ol id="${1:<##>}>
+	${0:<##>}
+</ol>
+endsnippet
+
+# definition
+snippet dl "<dl>"
+<dl>
+	${0:<##>}
+</dl>
+endsnippet
+
+snippet dl. "<dl class=___>"
+<dl class="${1:<##>}">
+	${0:<##>}
+</dl>
+endsnippet
+
+snippet dl# "<dl id=___>"
+<dl id="${1:<##>}">
+	${0:<##>}
+</dl>
+endsnippet
+
+snippet dt "<dt>"
+<dt>${0:<##>}</dt>
+endsnippet
+
+snippet dt. "<dt class=___>"
+<dt class="${1:<##>}">${0:<##>}</dt>
+endsnippet
+
+snippet dt# "<dt id=___>"
+<dt id="${1:<##>}">${0:<##>}</dt>
+endsnippet
+
+snippet dd "<dd>"
+<dd>${0:<##>}</dd>
+endsnippet
+
+snippet dd. "<dd class=___>"
+<dd class="${1:<##>}">${0:<##>}</dd>
+endsnippet
+
+snippet dd# "<dd id=___>"
+<dd id="${1:<##>}">${0:<##>}</dd>
+endsnippet
+
+# list item
+snippet li "<li>"
+<li>${0:<##>}</li>
+endsnippet
+
+snippet li. "<li class=___>"
+<li class="${1:<##>}">${0:<##>}</li>
 endsnippet
 
 snippet lia
-<li><a href="$1:#">$0</a></li>
-endsnippet
-
-# definition list
-snippet dl "<dl> ... </dl> (dl)"
-<dl>
-	$0
-</dl>
-endsnippet
-
-snippet dl. "<dl class=...> ... </dl> (dl.)"
-<dl class="$1">
-	$0
-</dl>
-endsnippet
-
-snippet dl# "<dl id=...> ... </dl> (dl#)"
-<dl id="$1">
-	$0
-</dl>
-endsnippet
-
-snippet dt "<dt>...</dt> (dt)"
-<dt>$0</dt>
-endsnippet
-
-snippet dt. "<dt class=...>...</dt> (dt.)"
-<dt class="$1">$0</dt>
-endsnippet
-
-snippet dt# "<dt id=...>...</dt> (dt#)"
-<dt id="$1">$0</dt>
-endsnippet
-
-snippet dd "<dd>...</dd> (dd)"
-<dd>$0</dd>
-endsnippet
-
-snippet dd. "<dd class=...>...</dd> (dd.)"
-<dd class="$1">$0</dd>
-endsnippet
-
-snippet dd# "<dd id=...>...</dd> (dd#)"
-<dd id="$1">$0</dd>
+<li><a href="${1:<##>}">${0:<##>}</a></li>
 endsnippet
 
 # nav
-snippet nav "<nav> ... </nav> (nav)"
+snippet nav "<nav>"
 <nav>
-	$0
+	${0:<##>}
 </nav>
 endsnippet
 
-snippet nav. "<nav class=...> ... </nav> (nav.)"
-<nav class="$1">
-	$0
+snippet nav. "<nav class=___>"
+<nav class="${1:<##>}">
+	${0:<##>}
 </nav>
 endsnippet
 
-snippet nav# "<nav id=...> ... </nav> (nav#)"
-<nav id="$1">
-	$0
+snippet nav# "<nav id=___>"
+<nav id="${1:<##>}">
+	${0:<##>}
 </nav>
 endsnippet

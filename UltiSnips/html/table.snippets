@@ -1,62 +1,102 @@
 #-------------------
 # Table
 #-------------------
-snippet table "<table> ... </table> (table)"
+# table
+snippet table "<table>"
 <table>
-	$0
+	${0:<##>}
 </table>
 endsnippet
 
-snippet table. "<table class=...> ... </table> (table.)"
+snippet table. "<table class=___>"
 <table class="$1">
-	$0
+	${0:<##>}
 </table>
 endsnippet
 
-snippet table# "<table id=...> ... </table> (table#)"
-<table id="$1">
-	$0
+snippet table# "<table id=___>"
+<table id="${1:<##>}">
+	${0:<##>}
 </table>
 endsnippet
 
-snippet tr "<tr> ... </tr> (tr)"
+# row
+snippet tr "<tr>"
 <tr>
-	$0
+	${0:<##>}
 </tr>
 endsnippet
 
-snippet th "<th>...</th> (th)"
-<th>$0</th>
+snippet tr. "<tr class=___>"
+<tr class="${1:<##>}">
+	${0:<##>}
+</tr>
 endsnippet
 
-snippet th. "<th class=...>...</th> (th.)"
-<th class="$1">$0</th>
+snippet tr# "<tr id=___>"
+<tr id="${1:<##>}">
+	${0:<##>}
+</tr>
 endsnippet
 
-snippet th# "<th id=...>...</th> (th#)"
-<th id="$1">$0</th>
+snippet th "<th>"
+<th>${0:<##>}</th>
 endsnippet
 
-snippet td "<td>...</td> (td)"
-<td>$0</td>
+snippet th. "<th class=___>"
+<th class="${1:<##>}">${0:<##>}</th>
 endsnippet
 
-snippet td. "<td class=...>...</td> (td.)"
-<td class="$1">$0</td>
+snippet th# "<th id=___>"
+<th id="${1:<##>}">${0:<##>}</th>
 endsnippet
 
-snippet td# "<td id=...>...</td> (td#)"
-<td id="$1">$0</td>
+snippet td "<td>"
+<td>${0:<##>}</td>
 endsnippet
 
-snippet thead "<thead> ... </thead> (thead)"
+snippet td. "<td class=___>"
+<td class="${1:<##>}">${0:<##>}</td>
+endsnippet
+
+snippet td# "<td id=___>"
+<td id="${1:<##>}">${0:<##>}</td>
+endsnippet
+
+# thead
+snippet thead "<thead>"
 <thead>
-	$0
+	${0:<##>}
 </thead>
 endsnippet
 
-snippet tfoot "<tfoot> ... </tfoot> (tfoot)"
+snippet thead. "<thead class=___>"
+<thead class="${1:<##>}">
+	${0:<##>}
+</thead>
+endsnippet
+
+snippet thead# "<thead id=___>"
+<thead id="${1:<##>}"
+	${0:<##>}
+</thead>
+endsnippet
+
+# tfoot
+snippet tfoot "<tfoot>"
 <tfoot>
-	${0}
+	${0:<##>}
+</tfoot>
+endsnippet
+
+snippet tfoot. "<tfoot class=___>"
+<tfoot class="${1:<##>}"
+	${0:<##>}
+</tfoot>
+endsnippet
+
+snippet tfoot# "<tfoot id=___>"
+<tfoot id="${1:<##>}"
+	${0:<##>}
 </tfoot>
 endsnippet

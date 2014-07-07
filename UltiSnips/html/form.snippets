@@ -1,95 +1,109 @@
 #-------------------
 # Form
 #-------------------
-snippet form "<form> ... </form> (form)"
-<form action="${1:#}" method="${2:POST}" name="$3">
-	$0
+# form
+snippet form "<form>"
+<form action="${1:<##>}" method="${2:POST}" name="${3:<##>}">
+	${0:<##>}
 </form>
 endsnippet
 
-snippet form. "<form class=...> ... </form> (form.)"
-<form class="$1" action="${2:#}" method="${3:POST}" name="$3">
-	$0
+snippet form. "<form class=___>"
+<form class="${1:<##>}" action="${2:<##>}" method="${3:POST}" name="${4:<##>}">
+	${0:<##>}
 </form>
 endsnippet
 
-snippet form# "<form id=...> ... </form> (form#)"
-<form id="$1" action="${2:#}" method="${3:POST}" name="$3">
-	$0
+snippet form# "<form id=___>"
+<form id="${1:<##>}" action="${2:<##>}" method="${3:POST}" name="${4:<##>}">
+	${0:<##>}
 </form>
+endsnippet
+
+# fieldset
+snippet fieldset "<fieldset>"
+<fieldset>
+	${0:<##>}
+</fieldset>
+endsnippet
+
+snippet fieldset. "<fieldset class=___>"
+<fieldset class="${1:<##>}">
+	${0:<##>}
+</fieldset>
+endsnippet
+
+snippet fieldset# "<fieldset id=___>"
+<fieldset id="${1:<##>}">
+	${0:<##>}
+</fieldset>
+endsnippet
+
+# legend
+snippet legend "<legend>"
+<legend>${0:<##>}</legend>
+endsnippet
+
+snippet legend. "<legend class=___>"
+<legend class="${1:<##>}">${0:<##>}</legend>
+endsnippet
+
+snippet legend# "<legend id=___>"
+<legend id="${1:<##>}">${0:<##>}</legend>
 endsnippet
 
 # input
-snippet input "<input type=... name=... id=... value=...> (input)"
-<input type="$1" name="$2" id="$2" value="$0">
+snippet input "<input>"
+<input type="${1:<##>}" name="${2:<##>}" id="$2" value="${0:<##>}">
 endsnippet
 
-snippet input. "<input class=... > (input.)"
-<input class="$1" type="$1" name="$2" id="$2" value="$0">
+snippet input. "<input class=___ >"
+<input class="${1:<##>}" type="${2:<##>}" name="${3:<##>}" id="$3" value="${0:<##>}">
 endsnippet
 
-snippet text "<input type=text ...> (text)"
-<input type="text" name="$0" id="$0">
+snippet text "<input type=text>"
+<input type="text" name="${0:<##>}" id="$0">
 endsnippet
 
-snippet password "<input type=password ...> (password)"
-<input type="password" name="$0" id="$0">
+snippet password "<input type=password>"
+<input type="password" name="${0:<##>}" id="$0">
 endsnippet
 
-snippet radio "<input type=radio ...> (radio)"
-<input type="radio" name="$1" id="$2" value="$0">
+snippet radio "<input type=radio>"
+<input type="radio" name="${1:<##>}" id="${2:<##>}" value="${0:<##>}">
 endsnippet
 
-snippet checkbox "<input type=checkbox ...> (checkbox)"
-<input type="checkbox" name="$1" id="$2" value="$0">
+snippet checkbox "<input type=checkbox>"
+<input type="checkbox" name="${1:<##>}" id="${2:<##>}" value="${0:<##>}">
 endsnippet
 
-snippet submit "<input type=submit ...> (submit)"
-<input type="submit" value="$0">
+snippet submit "<input type=submit>"
+<input type="submit" value="${0:<##>}">
 endsnippet
 
-snippet textarea "<textarea>...</textarea> (textarea)"
-<textarea name="$1" id="$1" rows="$2" cols="$3">$0</textarea>
+# label
+snippet label "<label for=...>...</label> (label)" i
+<label for="${1:<##>}">${0:<##>}</label>
 endsnippet
 
-snippet select "<select name=... id=...> ... </select> (select)"
-<select name="$1" id="$1">
-	$0
+# select
+snippet select "<select name=___ id=___>"
+<select name="${1:<##>}" id="$1">
+	${0:<##>}
 </select>
 endsnippet
 
-snippet opt "<option>...</option> (opt)"
-<option>$0</option>
+snippet opt "<option>"
+<option>${0:<##>}</option>
 endsnippet
 
-snippet optgroup "<optgroup> ... </optgroup> (optgroup)"
-<optgroup label="$1">
-	$0
+snippet optgroup "<optgroup>"
+<optgroup label="${1:<##>}">
+	${0:<##>}
 </optgroup>
 endsnippet
 
-snippet fieldset "<fieldset> ... </fieldset> (fieldset)"
-<fieldset>
-	$0
-</fieldset>
-endsnippet
-
-snippet fieldset. "<fieldset class=...> ... </fieldset> (fieldset.)"
-<fieldset class="$1">
-	$0
-</fieldset>
-endsnippet
-
-snippet fieldset# "<fieldset id=...> ... </fieldset> (fieldset#)"
-<fieldset id="$1">
-	$0
-</fieldset>
-endsnippet
-
-snippet legend "<legend>...</legend> (legend)"
-<legend>$0</legend>
-endsnippet
-
-snippet label "<label for=...>...</label> (label)" i
-<label for="$1">$0</label>
+# text area
+snippet textarea "<textarea>"
+<textarea name="${1:<##>}" id="$1" rows="${2:<##>}" cols="${3:<##>}">${0:<##>}</textarea>
 endsnippet
