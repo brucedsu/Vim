@@ -241,11 +241,12 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 let g:acp_enableAtStartup = 0
 if has("lua")
   " neocomplete
-  let g:neocomplete#enable_at_startup     = 1
-  let g:neocomplete#enable_smart_case     = 1
-  let g:neocomplete#enable_camel_case     = 1
-  let g:neocomplete#max_list              = 15
-  let g:neocomplete#enable_auto_select    = 1
+  let g:neocomplete#enable_at_startup            = 1
+  let g:neocomplete#enable_smart_case            = 1
+  let g:neocomplete#enable_camel_case            = 1
+  let g:neocomplete#max_list                     = 15
+  let g:neocomplete#enable_auto_select           = 1
+  let g:neocomplete#auto_completion_start_length = 1
 
   " ------ dictionary ------
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -343,7 +344,6 @@ let NERDTreeQuitOnOpen      = 1
 nmap <Leader>[ :NERDTreeToggle<CR>
 nmap <Leader>f :NERDTreeFind<CR>
 nmap <Leader>x :NERDTreeCWD<CR>
-
 
 " tagbar
 let g:tagbar_autofocus = 1
