@@ -9,7 +9,7 @@
 
 ## Components
 
-* [Seil](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
+* [Seil: map ESC to caps lock on OS X](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
 
 ## Installation
 
@@ -31,5 +31,5 @@
 ## To-do list:
 
     1. Code templates (✓ UltiSnips)
-    2. iTerm cursor: NORMAL = block, INSERT = vertical bar
+    2. iTerm cursor: NORMAL = block, INSERT = vertical bar (✓ not PERFECT)
     3. Reformat code (not only reindent)
