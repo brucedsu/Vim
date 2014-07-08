@@ -118,6 +118,12 @@ set laststatus=2
 " disable automatically inserting comment at the beginning of next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~ "iTerm"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
+endif
+
 "-----------------
 " Mapping
 "-----------------
