@@ -54,7 +54,7 @@ Bundle 'vim-scripts/Visual-Mark'
 "-----------------
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
-Bundle 'Yggdroot/indentLine'
+Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
@@ -69,6 +69,7 @@ Bundle 'tpope/vim-surround'
 " markdown
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'tpope/vim-markdown'
+Bundle 'suan/vim-instant-markdown'
 
 " css
 Bundle 'ap/vim-css-color'

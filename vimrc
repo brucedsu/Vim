@@ -119,10 +119,10 @@ set laststatus=2
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " change cursor shape between insert and normal mode in iTerm2.app
-if $TERM_PROGRAM =~ "iTerm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
-endif
+" if $TERM_PROGRAM =~ "iTerm"
+  " let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
+  " let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
+" endif
 
 "-----------------
 " Mapping
@@ -334,11 +334,15 @@ function! s:align()
   endif
 endfunction
 
-" indentLine
-let g:indentLine_char = "│"
+" vim-indent-guide
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
 
 "rainbow_parentheses
 nmap <Leader>cp :RainbowParenthesesToggle<CR>
+
+" vim-instant-markdown
+set shell=bash\ -i
 
 " NERDTree
 let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store']
