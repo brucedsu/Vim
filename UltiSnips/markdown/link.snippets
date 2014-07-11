@@ -1,17 +1,15 @@
 #-------------------
-# Link & Email
+# Link
 #-------------------
-snippet a "[link](url title) (a)"
-[${1:link text}](${2:url} "${3:title}")
+snippet a "[link](url title)"
+[${1:link text}](${2:url} "${0:title}")
 endsnippet
 
-snippet e "<username@domain> (e)"
-<${1:/* username */}@${2:/* domain */}>
+snippet e "<username@domain>"
+<${1:/* username */}@${0:/* domain */}>
 endsnippet
 
-#-------------------
-# Image
-#-------------------
-snippet ! "![alt](url title) (!)"
-![${1:alt text}](${2:url} "${3:title}")
+# image
+snippet ! "![alt](url title)"
+![${1:alt text}](${2:url} "${0:title}")
 endsnippet
