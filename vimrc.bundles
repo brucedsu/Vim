@@ -1,130 +1,167 @@
-"-----------------
-" Setup vundle
-"-----------------
-let has_vundle = 1
-let vundle_readme = expand("~/.vim/bundle/vundle/README.md")
-if !filereadable(vundle_readme)
-    let has_vundle = 0
-    echo "Installing vundle..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-endif
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" Modeline and Copyright {
+" vim: set ts=4 sts=4 sw=4 foldmarker={,} foldlevel=1 foldmethod=marker:
+"    ____       _ ____              _                     _ _
+"   |  _ \  ___(_) ___| _   _      | |__  _   _ _ __   __| | | ___  ___
+"   | | | |/ _ \ \___ \| | | |_____| '_ \| | | | '_ \ / _` | |/ _ \/ __|
+"   | |_| |  __/ |___) | |_| |_____| |_) | |_| | | | | (_| | |  __/\__ \
+"   |____/ \___|_|____/ \__,_|     |_.__/ \__,_|_| |_|\__,_|_|\___||___/
+"
+" DeiSu's vim bundles.
+" Copyright © 2014 DeiSu. All Rights Reserved.
+" }
 
-Bundle 'gmarik/vundle'
+" Setup Vundle {
 
-"-----------------
-" UnBundle
-"-----------------
-function! UnBundle(arg, ...)
-    let bundle = vundle#config#init_bundle(a:arg, a:000)
-    call filter(g:bundles, 'v:val["name_spec"] != "' . a:arg. '"')
-endfunction
+    " Install Vundle {
+        let has_vundle = 1
+        let vundle_plugin = expand("~/.vim/bundle/vundle/autoload/vundle.vim")
+        if !filereadable(vundle_plugin)
+            let has_vundle = 0
+            echo "Installing vundle..."
+            echo ""
+            silent !mkdir -p ~/.vim/bundle
+            silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        endif
+        set rtp+=~/.vim/bundle/vundle
+        call vundle#rc()
+        Bundle 'gmarik/vundle'
+    " }
 
-com! -nargs=+       UnBundle
-\ call UnBundle(<args>)
+" }
 
-"-----------------
-" Completion
-"-----------------
-Bundle 'jiangmiao/auto-pairs'
-if has("lua")
-    Bundle 'Shougo/neocomplete.vim'
-else
-    Bundle 'Shougo/neocomplcache.vim'
-endif
-Bundle 'SirVer/ultisnips'
+" Functions {
 
-"-----------------
-" Navigation
-"-----------------
-Bundle 'joequery/Stupid-EasyMotion'
-if v:version >= 703
-    Bundle 'myusuf3/numbers.vim'
-endif
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'edsono/vim-matchit'
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/Visual-Mark'
+    " UnBundle {
+    function! UnBundle(arg, ...)
+        let bundle = vundle#config#init_bundle(a:arg, a:000)
+        call filter(g:bundles, 'v:val["name_spec"] != "' . a:arg. '"')
+    endfunction
 
-"-----------------
-" Editing
-"-----------------
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'godlygeek/tabular'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'tpope/vim-speeddating'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-ragtag'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'terryma/vim-multiple-cursors'
+    com! -nargs=+       UnBundle
+    \ call UnBundle(<args>)
+    " }
 
-" markup
-Bundle 'Valloric/MatchTagAlways'
-Bundle 'tpope/vim-surround'
+" }
 
-" markdown
-Bundle 'nelstrom/vim-markdown-folding'
-Bundle 'tpope/vim-markdown'
-Bundle 'suan/vim-instant-markdown'
+" Bundles {
 
-" css
-Bundle 'ap/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
+    " Completion {
+        Bundle 'jiangmiao/auto-pairs'
+        Bundle 'SirVer/ultisnips'
+        if has("lua")
+            Bundle 'Shougo/neocomplete.vim'
+        else
+            Bundle 'Shougo/neocomplcache.vim'
+        endif
+    " }
 
-"-----------------
-" IDE
-"-----------------
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-if executable('ctags')
-    Bundle 'majutsushi/tagbar'
-endif
-Bundle 'scrooloose/syntastic'
-Bundle 'xuhdev/SingleCompile'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
-if has('gui_running') || $TERM_PROGRAM == 'iTerm.app'
-    Bundle 'bling/vim-airline'
-else
-    Bundle 'Lokaltog/vim-powerline'
-endif
+    " Navigation {
+        Bundle 'joequery/Stupid-EasyMotion'
+        if v:version >= 703
+            Bundle 'myusuf3/numbers.vim'
+        endif
+        Bundle 'nelstrom/vim-visual-star-search'
+        Bundle 'edsono/vim-matchit'
+        Bundle 'vim-scripts/a.vim'
+        Bundle 'vim-scripts/Visual-Mark'
+    " }
 
-"-----------------
-" Utilities
-"-----------------
-Bundle 'chilicuil/conque'
+" Editing {
 
-"-----------------
-" Colors
-"-----------------
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'sickill/vim-monokai'
-Bundle 'tomasr/molokai'
-Bundle 'nelstrom/vim-mac-classic-theme'
-Bundle 'noahfrederick/vim-hemisu'
-Bundle 'rickharris/vim-blackboard'
+    " General {
+        Bundle 'scrooloose/nerdcommenter'
+        Bundle 'godlygeek/tabular'
+        Bundle 'nathanaelkane/vim-indent-guides'
+        Bundle 'tpope/vim-speeddating'
+        Bundle 'tpope/vim-unimpaired'
+        Bundle 'tpope/vim-repeat'
+        Bundle 'tpope/vim-ragtag'
+        Bundle 'kien/rainbow_parentheses.vim'
+        Bundle 'terryma/vim-multiple-cursors'
+        Bundle 'gorodinskiy/vim-coloresque'
+        Bundle 'sjl/gundo.vim'
+        Bundle 'tpope/vim-eunuch'
+    " }
 
-"-----------------
-" Local
-"-----------------
-if filereadable(expand("~/.vimrc.bundles.local"))
-    source ~/.vimrc.bundles.local
-endif
+    " markdown {
+        Bundle 'nelstrom/vim-markdown-folding'
+        Bundle 'tpope/vim-markdown'
+        Bundle 'suan/vim-instant-markdown'
+    " }
 
-"-----------------
-" Install
-"-----------------
-if has_vundle == 0
-    echo "Installing bundles..."
-    echo ""
-    :BundleInstall
-endif
+    " markup {
+        Bundle 'Valloric/MatchTagAlways'
+        Bundle 'tpope/vim-surround'
+        Bundle 'vim-scripts/HTML-AutoCloseTag'
+    " }
 
-"-----------------
-" Cleanup
-"-----------------
-filetype plugin indent on
+    " css {
+        Bundle 'hail2u/vim-css3-syntax'
+    " }
+
+    "php {
+        " Bundle 'spf13/PIV'
+    " }
+" }
+
+" IDE {
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'kien/ctrlp.vim'
+    if executable('ctags')
+        Bundle 'majutsushi/tagbar'
+    endif
+    Bundle 'scrooloose/syntastic'
+    Bundle 'xuhdev/SingleCompile'
+    Bundle 'airblade/vim-gitgutter'
+    Bundle 'tpope/vim-fugitive'
+    if has('gui_running') || $TERM_PROGRAM == 'iTerm.app'
+        Bundle 'bling/vim-airline'
+    else
+        Bundle 'Lokaltog/vim-powerline'
+    endif
+" }
+
+" Utilities {
+    Bundle 'chilicuil/conque'
+" }
+
+    " Colors {
+        Bundle 'altercation/vim-colors-solarized'
+        Bundle 'sickill/vim-monokai'
+        Bundle 'tomasr/molokai'
+        Bundle 'nelstrom/vim-mac-classic-theme'
+        Bundle 'noahfrederick/vim-hemisu'
+        Bundle 'rickharris/vim-blackboard'
+    " }
+
+" }
+
+" Local {
+
+    " Local Bundles {
+        if filereadable(expand("~/.vimrc.bundles.local"))
+            source ~/.vimrc.bundles.local
+        endif
+    " }
+
+" }
+
+" Install {
+
+    " Install Bundles {
+    if has_vundle == 0
+        echo "Installing bundles..."
+        echo ""
+        :BundleInstall
+    endif
+    " }
+
+" }
+
+" Cleanup {
+
+    " Cleanup {
+        filetype plugin indent on
+    " }
+
+" }
