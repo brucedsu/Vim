@@ -48,15 +48,11 @@
     " Completion {
         Bundle 'jiangmiao/auto-pairs'
         Bundle 'SirVer/ultisnips'
-        if has("lua")
-            Bundle 'Shougo/neocomplete.vim'
-        else
-            Bundle 'Shougo/neocomplcache.vim'
-        endif
+        Bundle 'Valloric/YouCompleteMe'
     " }
 
     " Navigation {
-        Bundle 'joequery/Stupid-EasyMotion'
+        Bundle 'Lokaltog/vim-easymotion'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
         endif
@@ -66,64 +62,62 @@
         Bundle 'vim-scripts/Visual-Mark'
     " }
 
-" Editing {
+    " Editing {
 
-    " General {
-        Bundle 'scrooloose/nerdcommenter'
-        Bundle 'godlygeek/tabular'
-        Bundle 'nathanaelkane/vim-indent-guides'
-        Bundle 'tpope/vim-speeddating'
-        Bundle 'tpope/vim-unimpaired'
-        Bundle 'tpope/vim-repeat'
-        Bundle 'tpope/vim-ragtag'
-        Bundle 'kien/rainbow_parentheses.vim'
-        Bundle 'terryma/vim-multiple-cursors'
-        Bundle 'gorodinskiy/vim-coloresque'
-        Bundle 'sjl/gundo.vim'
-        Bundle 'tpope/vim-eunuch'
+        " General {
+            Bundle 'scrooloose/nerdcommenter'
+            Bundle 'godlygeek/tabular'
+            " Bundle 'nathanaelkane/vim-indent-guides'
+            Bundle 'Yggdroot/indentLine'
+            Bundle 'tpope/vim-speeddating'
+            Bundle 'tpope/vim-unimpaired'
+            Bundle 'tpope/vim-repeat'
+            Bundle 'tpope/vim-ragtag'
+            Bundle 'kien/rainbow_parentheses.vim'
+            Bundle 'terryma/vim-multiple-cursors'
+            Bundle 'gorodinskiy/vim-coloresque'
+            Bundle 'sjl/gundo.vim'
+            Bundle 'tpope/vim-eunuch'
+        " }
+
+        " markdown {
+            Bundle 'nelstrom/vim-markdown-folding'
+            Bundle 'tpope/vim-markdown'
+            Bundle 'suan/vim-instant-markdown'
+        " }
+
+        " markup {
+            Bundle 'Valloric/MatchTagAlways'
+            Bundle 'tpope/vim-surround'
+            Bundle 'vim-scripts/HTML-AutoCloseTag'
+        " }
+
+        " css {
+            Bundle 'hail2u/vim-css3-syntax'
+        " }
+
     " }
 
-    " markdown {
-        Bundle 'nelstrom/vim-markdown-folding'
-        Bundle 'tpope/vim-markdown'
-        Bundle 'suan/vim-instant-markdown'
+    " IDE {
+        Bundle 'scrooloose/nerdtree'
+        Bundle 'kien/ctrlp.vim'
+        if executable('ctags')
+            Bundle 'majutsushi/tagbar'
+        endif
+        Bundle 'scrooloose/syntastic'
+        Bundle 'xuhdev/SingleCompile'
+        Bundle 'airblade/vim-gitgutter'
+        Bundle 'tpope/vim-fugitive'
+        if has('gui_running') || $TERM_PROGRAM == 'iTerm.app'
+            Bundle 'bling/vim-airline'
+        else
+            Bundle 'Lokaltog/vim-powerline'
+        endif
     " }
 
-    " markup {
-        Bundle 'Valloric/MatchTagAlways'
-        Bundle 'tpope/vim-surround'
-        Bundle 'vim-scripts/HTML-AutoCloseTag'
+    " Utilities {
+        Bundle 'chilicuil/conque'
     " }
-
-    " css {
-        Bundle 'hail2u/vim-css3-syntax'
-    " }
-
-    "php {
-        " Bundle 'spf13/PIV'
-    " }
-" }
-
-" IDE {
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'kien/ctrlp.vim'
-    if executable('ctags')
-        Bundle 'majutsushi/tagbar'
-    endif
-    Bundle 'scrooloose/syntastic'
-    Bundle 'xuhdev/SingleCompile'
-    Bundle 'airblade/vim-gitgutter'
-    Bundle 'tpope/vim-fugitive'
-    if has('gui_running') || $TERM_PROGRAM == 'iTerm.app'
-        Bundle 'bling/vim-airline'
-    else
-        Bundle 'Lokaltog/vim-powerline'
-    endif
-" }
-
-" Utilities {
-    Bundle 'chilicuil/conque'
-" }
 
     " Colors {
         Bundle 'altercation/vim-colors-solarized'

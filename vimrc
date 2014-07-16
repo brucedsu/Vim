@@ -1,5 +1,5 @@
 " Modeline and Copyright {
-" vim: set ts=4 sts=4 sw=4 foldmarker={,} foldlevel=1 foldmethod=marker:
+" vim: set ts=4 sts=4 sw=4 tw=0 foldmarker={,} foldlevel=1 foldmethod=marker:
 "    ____       _ ____                   _
 "   |  _ \  ___(_) ___| _   _     __   _(_)_ __ ___  _ __ ___
 "   | | | |/ _ \ \___ \| | | |____\ \ / / | '_ ` _ \| '__/ __|
@@ -37,7 +37,7 @@
 
 " }
 
-" Bundles {
+" Bundle {
 
     " Vundle {
         if filereadable(expand("~/.vimrc.bundles"))
@@ -50,19 +50,29 @@
 " General {
 
     " General {
-    syntax on
-    set autoread
-    set autowrite
-    set backspace=indent,eol,start
-    set clipboard=unnamed
-    set hidden
-    set history=1000
-    set pastetoggle=<F2>
-    set scrolloff=3
-    set showcmd
-    set showmode
-    set visualbell
-    set wildmenu
+        syntax on
+        set autoread
+        set autowrite
+        set backspace=indent,eol,start
+        set clipboard=unnamed
+        set backupdir=~/.tmp
+        set directory=~/.tmp
+        set hidden
+        set history=1000
+        set pastetoggle=<F2>
+        set scrolloff=3
+        set showcmd
+        set showmode
+        set undolevels=1000
+        set visualbell
+        set wildmenu
+    " }
+
+    " Performance {
+        " (hopefully) removes the delay when hitting esc in insert mode
+        set noesckeys
+        set ttimeout
+        set ttimeoutlen=1
     " }
 
     " Auto-source {
@@ -86,11 +96,29 @@
         if v:version >= 703
           set colorcolumn=72
         endif
+        set splitright
     " }
 
     " Folding {
         set foldmethod=syntax
         set foldlevelstart=99
+        set foldcolumn=3
+
+        " preserve folding state
+        set viewoptions-=options
+        augroup vimrc
+            autocmd BufWritePost *
+            \   if expand('%') != '' && &buftype !~ 'nofile'
+            \|      mkview
+            \|  endif
+            autocmd BufRead *
+            \   if expand('%') != '' && &buftype !~ 'nofile'
+            \|      silent loadview
+            \|  endif
+        augroup END
+
+        " set fold based on ft
+        autocmd FileType php,html setlocal foldmethod=indent
     " }
 
     " Encoding {
@@ -112,7 +140,12 @@
     " Wrapping {
         set nowrap
         command! -nargs=* Wrap setlocal wrap linebreak nolist
-        autocmd Filetype markdown setlocal wrap linebreak nolist spell
+        autocmd Filetype markdown setlocal wrap linebreak nolist
+    " }
+
+    " Spelling {
+        " turn on spell checking for plain txt and markdowm
+        autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
     " }
 
     " Invisibles {
@@ -153,10 +186,20 @@
 " Interface {
 
     " Colors {
+        " use light bewtween 7 am ~ 7pm
+        function! SetSolarizedBackground()
+            if (strftime("%H") >= 7) && (strftime("%H") <= 18)
+              set background=light
+            else
+              set background=dark
+            endif
+        endfunction
+
         " use solarized as default
         if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-          set background=dark
           colorscheme solarized
+          set background=light
+          " :call SetSolarizedBackground()
         endif
     " }
 
@@ -174,13 +217,8 @@
         set cursorline cursorcolumn
     " }
 
-    " Status Line {
-        " set to 2 for airline or powerline
-        set laststatus=2
-    " }
-
     " Formatting {
-        " disable automatically inserting comment at the beginning of next line
+        " don't add insert comment prefix when I hit enter on a comment line
         autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
     " }
 
@@ -214,7 +252,8 @@
         imap <C-s> <Esc>:w<CR>a
     " }
 
-    " folding {
+    " Folding {
+        " use space to toggle folding
         nnoremap <Space> za
         vnoremap <Space> za
     " }
@@ -287,23 +326,27 @@
         nmap <Leader>et :tabe %%
     " }
 
-" Navigation {
-    " navigations for screen line
-    if OSX()
-      nmap <D-h> gh
-      nmap <D-j> gj
-      nmap <D-k> gk
-      nmap <D-l> gl
-      nmap <D-4> g$
-      nmap <D-6> g^
-      vmap <D-h> gh
-      vmap <D-j> gj
-      vmap <D-k> gk
-      vmap <D-l> gl
-      vmap <D-4> g$
-      vmap <D-6> g^
-    endif
-" }
+    " Navigation {
+        " navigations for screen line
+        if OSX()
+          nmap <D-h> gh
+          nmap <D-j> gj
+          nmap <D-k> gk
+          nmap <D-l> gl
+          nmap <D-4> g$
+          nmap <D-6> g^
+          vmap <D-h> gh
+          vmap <D-j> gj
+          vmap <D-k> gk
+          vmap <D-l> gl
+          vmap <D-4> g$
+          vmap <D-6> g^
+        endif
+
+        " wrapped lines goes down/up to next row, rather than next line in file.
+        noremap j gj
+        noremap k gk
+    " }
 
     " Spell {
         nmap <silent> <Leader>sp :set spell!<CR>
@@ -312,10 +355,13 @@
     " Formatting {
         " manually remove trailing spaces
         nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+
         " reindent
         nmap _= :call Preserve("normal gg=G")<CR>
+
         " remove trailing spaces before saving
         autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+
         " preserve cursor postion while excuting commands
         function! Preserve(command)
           " Preparation: save the last search, and cursor position
@@ -342,77 +388,50 @@
             let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
         " }
 
-        " neocomplete / neocomplcache {
-            let g:acp_enableAtStartup = 0
-            if has("lua")
-              " neocomplete
-              let g:neocomplete#enable_at_startup            = 1
-              let g:neocomplete#enable_smart_case            = 1
-              let g:neocomplete#enable_camel_case            = 1
-              let g:neocomplete#max_list                     = 15
-              let g:neocomplete#enable_auto_select           = 1
-              let g:neocomplete#auto_completion_start_length = 1
+        " YoucompleteMe {
+            let g:acp_enableAtStartup                     = 0
+            let g:ycm_min_num_of_chars_for_completion     = 1
+            let g:ycm_collect_identifiers_from_tags_files = 1
 
-              " ------ dictionary ------
-              let g:neocomplete#sources#dictionary#dictionaries = {
-                    \ 'default' : '',
-                    \ 'vimshell' : $HOME.'/.vimshell_hist',
-                    \ 'scheme' : $HOME.'/.gosh_completions'
-                    \ }
+            " cycle
+            let g:ycm_key_list_select_completion          = ['<C-n>', '<Down>']
+            let g:ycm_key_list_previous_completion        = ['<C-p>', '<Up>']
 
-              " ------ keyword ------
-              if !exists('g:neocomplete#keyword_patterns')
-                let g:neocomplete#keyword_patterns = {}
-              endif
-              let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+            " comment
+            let g:ycm_complete_in_comments                          = 1
+            let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-              " ------ mappings ------
-              inoremap <expr><C-y> neocomplete#close_popup()
-              inoremap <expr><C-e> neocomplete#cancel_popup()
-              imap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
-            else
-              " neocomplecache
-              let g:neocomplcache_enable_at_startup            = 1
-              let g:neocomplcache_enable_smart_case            = 1
-              let g:neocomplcache_enable_camel_case_completion = 1
-              let g:neocomplcache_enable_underbar_completion   = 1
-              let g:neocomplcache_max_list                     = 15
-              let g:neocomplcache_enable_auto_select           = 1
+            " path
+            let $PATH                       = '/usr/local/bin:'.$PATH
+            let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
-              " ------ dictionary ------
-              let g:neocomplcache_dictionary_filetype_lists = {
-                    \ 'default' : '',
-                    \ 'vimshell' : $HOME.'/.vimshell_hist',
-                    \ 'scheme' : $HOME.'/.gosh_completions'
-                    \ }
-
-              " ------ keyword ------
-              if !exists('g:neocomplcache_keyword_patterns')
-                let g:neocomplcache_keyword_patterns = {}
-              endif
-              let g:neocomplcache_keyword_patterns._ = '\h\w*'
-
-              " ------ mappings ------
-              inoremap <expr><C-y> neocomplcache#close_popup()
-              inoremap <expr><C-e> neocomplcache#cancel_popup()
-              imap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-            endif
+            " enable omni completion
+            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+            autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+            autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+            autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+            autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
         " }
 
     " }
 
     " Navigation {
 
-        " Stupid EasyMotion {
-            map <leader>w <leader><leader>w
-            map <leader>W <leader><leader>W
+        " easymotion {
+            map \ <Plug>(easymotion-prefix)
+            map <Leader>w <Plug>(easymotion-bd-w)
+            map <Leader>W <Plug>(easymotion-bd-W)
+            map <Leader>j <Plug>(easymotion-j)
+            map <Leader>k <Plug>(easymotion-k)
         " }
 
-    " a.vim {
-        nmap <Leader>aa :A<CR>
-        nmap <Leader>as :AS<CR>
-        nmap <Leader>av :AV<CR>
-    " }
+        " a.vim {
+            nmap <Leader>aa :A<CR>
+            nmap <Leader>as :AS<CR>
+            nmap <Leader>av :AV<CR>
+        " }
 
     " }
 
@@ -421,8 +440,8 @@
         " nerdcommenter {
             let NERDSpaceDelims=1
             let NERDCompactSexyComs=1
-            nmap /// <Leader>c<Space>
-            vmap /// <Leader>c<Space>
+            nmap // <Leader>c<Space>
+            vmap // <Leader>c<Space>
         " }
 
         " tabular {
@@ -446,9 +465,17 @@
         " }
 
         " vim-indent-guide {
-            let g:indent_guides_guide_size = 1
-            let g:indent_guides_enable_on_vim_startup = 1
-            let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'markdown']
+            " let g:indent_guides_guide_size            = 1
+            " let g:indent_guides_enable_on_vim_startup = 1
+            " let g:indent_guides_exclude_filetypes     = ['help', 'nerdtree', 'markdown']
+        " }
+
+        " indentLine {
+            let g:indentLine_char                 = '│'
+            let g:indentLine_first_char           = '│'
+            let g:indentLine_showFirstIndentLevel = 0
+            let g:indentLine_faster               = 1
+            let g:indentLine_fileTypeExclude      = ['sql']
         " }
 
         " vim-unimpaired {
@@ -472,18 +499,17 @@
     " IDE {
 
         " NERDTree {
-            let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store']
-            let NERDTreeShowBookmarks   = 1
-            let NERDTreeShowHidden      = 1
-            let NERDTreeQuitOnOpen      = 1
+            let NERDTreeIgnore        = ['\.class$', '\.git', '\.svn', '\.DS_Store']
+            let NERDTreeShowBookmarks = 1
+            let NERDTreeShowHidden    = 1
+            let NERDTreeQuitOnOpen    = 1
 
             " ------ mappings ------
             nmap <Leader>[ :NERDTreeToggle<CR>
             nmap <Leader>f :NERDTreeFind<CR>
-            nmap <Leader>x :NERDTreeCWD<CR>
         " }
 
-        " Ctrp {
+        " ctrp {
             let g:ctrlp_open_multiple_files = 'v'
             let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
             nmap <Leader>p :CtrlP<CR>
@@ -500,10 +526,17 @@
         " }
 
         " SingleCompile {
-            nmap <Leader>r :SCCompileRun<CR>
+            nmap <F3> :SCCompileRun<CR>
+            nmap <F4> :SCCompile<CR>
+        " }
+
+        " Fugitive {
+            nnoremap <silent> <leader>gs :Gstatus<CR>
+            nnoremap <silent> <leader>gl :Glog<CR>
         " }
 
         " vim-airline {
+            set laststatus=2
             let g:airline#extensions#tabline#enabled = 1
             let g:airline_theme                      = 'solarized'
             let g:airline_enable_branch              = 1
@@ -525,6 +558,23 @@
 
     " }
 
+" }
+
+" Function {
+
+    " Rename {
+        function! RenameFile()
+            let old_name = expand('%')
+            let new_name = input('New file name: ', expand('%'), 'file')
+            if new_name != '' && new_name != old_name
+                exec ':saveas ' . new_name
+                exec ':silent !rm ' . old_name
+                redraw!
+            endif
+        endfunction
+
+        map <Leader>r :call RenameFile()<CR>
+    " }
 " }
 
 " Local {
