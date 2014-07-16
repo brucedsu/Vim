@@ -66,18 +66,20 @@
 
         " General {
             Bundle 'scrooloose/nerdcommenter'
-            Bundle 'godlygeek/tabular'
-            " Bundle 'nathanaelkane/vim-indent-guides'
             Bundle 'Yggdroot/indentLine'
             Bundle 'tpope/vim-speeddating'
-            Bundle 'tpope/vim-unimpaired'
             Bundle 'tpope/vim-repeat'
             Bundle 'tpope/vim-ragtag'
             Bundle 'kien/rainbow_parentheses.vim'
-            Bundle 'terryma/vim-multiple-cursors'
-            Bundle 'gorodinskiy/vim-coloresque'
             Bundle 'sjl/gundo.vim'
             Bundle 'tpope/vim-eunuch'
+        " }
+
+        " Refactor {
+            Bundle 'godlygeek/tabular'
+            Bundle 'tpope/vim-unimpaired'
+            Bundle 'terryma/vim-multiple-cursors'
+            Bundle 'tommcdo/vim-exchange'
         " }
 
         " markdown {
@@ -94,6 +96,7 @@
 
         " css {
             Bundle 'hail2u/vim-css3-syntax'
+            Bundle 'gorodinskiy/vim-coloresque'
         " }
 
     " }
