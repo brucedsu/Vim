@@ -2,24 +2,30 @@
 # Block
 #-------------------
 # paragraph
-snippet p "paragraph" w
+snippet p "paragraph"
 <p>${0:<##>}</p>
 endsnippet
 
+snippet P "paragraph is indented on separate line"
+<p>
+	${0:<##>}
+</p>
+endsnippet
+
 # div
-snippet div "<div>" w
+snippet div "<div>"
 <div>
 	${0:<##>}
 </div>
 endsnippet
 
-snippet div. "<div class=___>" w
+snippet div. "<div class=___>"
 <div class="${1:<##>}">
 	${0:<##>}
 </div>
 endsnippet
 
-snippet div# "<div id=___>" w
+snippet div# "<div id=___>
 <div id="${1:<##>}">
 	${0:<##>}
 </div>
