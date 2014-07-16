@@ -73,6 +73,9 @@
         set noesckeys
         set ttimeout
         set ttimeoutlen=1
+
+        " don't wait so long for the next keypress
+        set ttimeoutlen=500
     " }
 
     " Auto-source {
@@ -133,6 +136,8 @@
         set autoindent
         set smartindent
         set smarttab
+
+        " ft based indentation
         autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
         autocmd FileType css setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
     " }
@@ -144,7 +149,7 @@
     " }
 
     " Spelling {
-        " turn on spell checking for plain txt and markdowm
+        " turn on spell checking for markdowm and plain txt
         autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
     " }
 
@@ -250,6 +255,10 @@
     " Saving {
         nmap <C-s> :w<CR>
         imap <C-s> <Esc>:w<CR>a
+
+        " allow us to savea file we don't have permission to
+        " *after* we have already opened it
+        cnoremap w!! w !sudo tee % >/dev/null
     " }
 
     " Folding {
@@ -287,6 +296,7 @@
         map <C-l> <C-w>l
         map <C-j> <C-w>j
         map <C-k> <C-w>k
+        map <C-=> <C-w>=
         nmap <Leader>nw :new<CR>
         nmap <Leader>nv :vnew<CR>
     " }
@@ -346,10 +356,18 @@
         " wrapped lines goes down/up to next row, rather than next line in file.
         noremap j gj
         noremap k gk
+
+        " power scroll up/down
+        noremap K 16gk
+        noremap J 16gj
+    " }
+
+    " Directory {
+        noremap <Leader>cd :cd %:p:h<CR>
     " }
 
     " Spell {
-        nmap <silent> <Leader>sp :set spell!<CR>
+        nmap <silent> <Leader>ss :set spell!<CR>
     " }
 
     " Formatting {
@@ -379,6 +397,12 @@
 " }
 
 " Plugin {
+
+    " Vundle {
+        nmap <Leader>vi :BundleInstall<CR>
+        nmap <Leader>vu :BundleUpdate<CR>
+        nmap <Leader>vl :BundleList<CR>
+    " }
 
     " Completion {
 
@@ -444,6 +468,22 @@
             vmap // <Leader>c<Space>
         " }
 
+        " indentLine {
+            let g:indentLine_char                 = '│'
+            let g:indentLine_first_char           = '│'
+            let g:indentLine_showFirstIndentLevel = 0
+            let g:indentLine_faster               = 1
+            let g:indentLine_fileTypeExclude      = ['sql']
+        " }
+
+        "rainbow_parentheses {
+            nmap <F6> :RainbowParenthesesToggle<CR>
+        " }
+
+        " gundo {
+            nnoremap <F5> :GundoToggle<CR>
+        " }
+
         " tabular {
             nmap <Leader>a= :Tabularize /=<CR>
             vmap <Leader>a= :Tabularize /=<CR>
@@ -464,20 +504,6 @@
             endfunction
         " }
 
-        " vim-indent-guide {
-            " let g:indent_guides_guide_size            = 1
-            " let g:indent_guides_enable_on_vim_startup = 1
-            " let g:indent_guides_exclude_filetypes     = ['help', 'nerdtree', 'markdown']
-        " }
-
-        " indentLine {
-            let g:indentLine_char                 = '│'
-            let g:indentLine_first_char           = '│'
-            let g:indentLine_showFirstIndentLevel = 0
-            let g:indentLine_faster               = 1
-            let g:indentLine_fileTypeExclude      = ['sql']
-        " }
-
         " vim-unimpaired {
             " text bubbling with unimpaired
             nmap <C-Up> [e
@@ -486,20 +512,12 @@
             vmap <C-Down> ]egv
         " }
 
-        "rainbow_parentheses {
-            nmap <Leader>cp :RainbowParenthesesToggle<CR>
-        " }
-
-        " Gundo {
-            nnoremap <Leader>u :GundoToggle<CR>
-        " }
-
     " }
 
     " IDE {
 
         " NERDTree {
-            let NERDTreeIgnore        = ['\.class$', '\.git', '\.svn', '\.DS_Store']
+            let NERDTreeIgnore        = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o']
             let NERDTreeShowBookmarks = 1
             let NERDTreeShowHidden    = 1
             let NERDTreeQuitOnOpen    = 1
@@ -564,17 +582,18 @@
 
     " Rename {
         function! RenameFile()
-            let old_name = expand('%')
-            let new_name = input('New file name: ', expand('%'), 'file')
+            let old_name = escape(expand('%'), ' ')
+            let new_name = escape(input('New file name: ', '', 'file'), ' ')
             if new_name != '' && new_name != old_name
                 exec ':saveas ' . new_name
-                exec ':silent !rm ' . old_name
+                exec ':silent !rm -rf ' . old_name
                 redraw!
             endif
         endfunction
 
         map <Leader>r :call RenameFile()<CR>
     " }
+
 " }
 
 " Local {
