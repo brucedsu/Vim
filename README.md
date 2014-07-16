@@ -5,7 +5,7 @@
     brew install lua
     brew install ruby
     brew install vim --with-python --with-ruby --with-perl --with-lua
-    brew install macvim --env-std --override-system-vim --with-cscope --with-lua --HEAD
+    brew install macvim --env-std --override-system-vim --with-cscope --with-python --with-ruby --with-perl --with-lua --HEAD
 
 ## Components
 
