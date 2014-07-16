@@ -16,7 +16,8 @@
     " General {
         set guifont=Menlo\ for\ Powerline:h14
         highlight Comment cterm=italic
-        set guicursor+=a:blinkon0               " disable blinking
+        " disable blinking
+        " set guicursor+=a:blinkon0
         set guioptions-=T
     " }
 
