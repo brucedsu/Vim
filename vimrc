@@ -1,21 +1,16 @@
-" Modeline and Copyright {
-" vim: set ts=4 sts=4 sw=4 tw=0 foldmarker={,} foldlevel=1 foldmethod=marker:
-"    ____       _ ____                   _
-"   |  _ \  ___(_) ___| _   _     __   _(_)_ __ ___  _ __ ___
-"   | | | |/ _ \ \___ \| | | |____\ \ / / | '_ ` _ \| '__/ __|
-"   | |_| |  __/ |___) | |_| |_____\ V /| | | | | | | | | (__
-"   |____/ \___|_|____/ \__,_|      \_/ |_|_| |_| |_|_|  \___|
+"  Modeline and Copyright {
+"  vim: set ts=4 sts=4 sw=4 tw=0 foldmarker={,} foldlevel=1 foldmethod=marker:
+"     ____       _ ____                   _
+"    |  _ \  ___(_) ___| _   _     __   _(_)_ __ ___
+"    | | | |/ _ \ \___ \| | | |____\ \ / / | '_ ` _ \
+"    | |_| |  __/ |___) | |_| |_____\ V /| | | | | | |
+"    |____/ \___|_|____/ \__,_|      \_/ |_|_| |_| |_|
 "
-" DeiSu's vim configurations.
-" Copyright © 2014 DeiSu. All Rights Reserved.
+"  DeiSu's personal vimrc.
+"  Copyright © 2014 DeiSu. All Rights Reserved.
 " }
 
 " Environment {
-
-    " Nocompatible {
-        " don't bother with vi compatibility
-        set nocompatible
-    " }
 
     " Platforms {
         silent function! OSX()
@@ -29,103 +24,95 @@
         endfunction
     " }
 
-    " Shell {
-        if ($TERM_PROGRAM != "iTerm.app") && ($TERM_PROGRAM != "Apple_Terminal")
-            set shell=zsh\ -i
+    " Basics {
+        set nocompatible
+        if !WINDOWS()
+            set shell=/bin/zsh
         endif
     " }
 
 " }
 
 " Bundle {
-
-    " Vundle {
-        if filereadable(expand("~/.vimrc.bundles"))
-          source ~/.vimrc.bundles
-        endif
-    " }
-
+    if filereadable(expand("~/.vimrc.bundles"))
+      source ~/.vimrc.bundles
+    endif
 " }
 
 " General {
+    syntax on
+    set backspace=indent,eol,start
+    set clipboard=unnamed
+    set history=1000
+    set pastetoggle=<F2>
+    set scrolloff=3
+    set showcmd
+    set showmode
+    set visualbell
+    set wildmenu
+    let mapleader = ","
 
-    " General {
-        syntax on
-        set autoread
-        set autowrite
-        set backspace=indent,eol,start
-        set clipboard=unnamed
-        set backupdir=~/.tmp
-        set directory=~/.tmp
-        set hidden
-        set history=1000
-        set pastetoggle=<F2>
-        set scrolloff=3
-        set showcmd
-        set showmode
-        set undolevels=1000
-        set visualbell
-        set wildmenu
-    " }
+    " removes the delay when hitting esc in insert mode in terminal
+    set noesckeys
+    set ttimeout
+    set ttimeoutlen=1
 
-    " Performance {
-        " (hopefully) removes the delay when hitting esc in insert mode
-        set noesckeys
-        set ttimeout
-        set ttimeoutlen=1
-
-        " don't wait so long for the next keypress
-        set ttimeoutlen=500
-    " }
-
-    " Auto-source {
-        autocmd BufWritePost ~/.vimrc source $MYVIMRC
-        autocmd BufWritePost ~/.vimrc.bundle source $MYVIMRC
-        autocmd BufWritePost ~/.gvimrc source ~/.gvimrc
-    " }
-
+    " don't wait so long for the next keypress
+    set ttimeoutlen=500
 " }
 
-" Text Editing {
+" Editing {
 
     " Filetype {
         autocmd BufNewFile,BufReadPost *.md set filetype=markdown
         autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
     " }
 
-    " Show {
-        set number
-        set ruler
-        if v:version >= 703
-          set colorcolumn=72
-        endif
-        set splitright
-    " }
-
-    " Folding {
-        set foldmethod=syntax
-        set foldlevelstart=99
-        set foldcolumn=3
-
-        " preserve folding state
-        set viewoptions-=options
-        augroup vimrc
-            autocmd BufWritePost *
-            \   if expand('%') != '' && &buftype !~ 'nofile'
-            \|      mkview
-            \|  endif
-            autocmd BufRead *
-            \   if expand('%') != '' && &buftype !~ 'nofile'
-            \|      silent loadview
-            \|  endif
-        augroup END
-
-        " set fold based on ft
-        autocmd FileType php,html setlocal foldmethod=indent
-    " }
-
     " Encoding {
         set encoding=utf-8
+    " }
+
+    " Spelling {
+        set spelllang=en
+        autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
+        nmap <silent> <Leader>ss :set spell!<CR>
+    " }
+
+    " Searching {
+        set ignorecase
+        set hlsearch
+        set incsearch
+        set smartcase
+        nnoremap <CR> :nohl<CR>
+    " }
+
+    " Position {
+        " return to last edit position when opening files
+        autocmd BufReadPost *
+              \ if line("'\"") > 0 && line("'\"") <= line("$") |
+              \   exe "normal! g`\"" |
+              \ endif"`'")"'")
+    " }
+
+" }
+
+" Editor {
+
+    " Wrapping {
+        set nowrap
+        command! -nargs=* Wrap setlocal wrap linebreak nolist
+        autocmd Filetype markdown setlocal wrap linebreak nolist
+    " }
+
+    " Invisibles {
+        set listchars=tab:▸\ ,trail:▫,eol:¬
+        nmap <Leader>l :set list!<CR>
+
+        " remove trailing spaces before saving
+        autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+
+        " manually remove trailing spaces
+        nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
     " }
 
     " Indentation {
@@ -140,246 +127,50 @@
         " ft based indentation
         autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
         autocmd FileType css setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
-    " }
 
-    " Wrapping {
-        set nowrap
-        command! -nargs=* Wrap setlocal wrap linebreak nolist
-        autocmd Filetype markdown setlocal wrap linebreak nolist
-    " }
-
-    " Spelling {
-        " turn on spell checking for markdowm and plain txt
-        autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
-    " }
-
-    " Invisibles {
-        set listchars=tab:▸\ ,trail:▫,eol:¬
-    " }
-
-    " Searching {
-        set ignorecase
-        set hlsearch
-        set incsearch
-        set smartcase
-    " }
-
-    " Position {
-        " return to last edit position when opening files
-        autocmd BufReadPost *
-              \ if line("'\"") > 0 && line("'\"") <= line("$") |
-              \   exe "normal! g`\"" |
-              \ endif"`'")"'")
-    " }
-
-    " Paste {
-        " automatically turn on/off togglepaste while pasting in OSX Terminal
-        let &t_SI .= "\<Esc>[?2004h"
-        let &t_EI .= "\<Esc>[?2004l"
-
-        inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-        function! XTermPasteBegin()
-          set pastetoggle=<Esc>[201~
-          set paste
-          return ""
-        endfunction
-    " }
-
-" }
-
-" Interface {
-
-    " Colors {
-        " use light bewtween 7 am ~ 7pm
-        function! SetSolarizedBackground()
-            if (strftime("%H") >= 7) && (strftime("%H") <= 18)
-              set background=light
-            else
-              set background=dark
-            endif
-        endfunction
-
-        " use solarized as default
-        if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-          colorscheme solarized
-          set background=light
-          " :call SetSolarizedBackground()
-        endif
-    " }
-
-    " Font {
-        " use italic for comments in iTerm
-        if ($TERM_PROGRAM == 'iTerm.app')
-          highlight Comment cterm=italic
-        endif
-    " }
-
-    " Highlight {
-        " hightlight current cursor position
-        au WinLeave * set nocursorline nocursorcolumn
-        au WinEnter * set cursorline cursorcolumn
-        set cursorline cursorcolumn
-    " }
-
-    " Formatting {
-        " don't add insert comment prefix when I hit enter on a comment line
-        autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-    " }
-
-    " Cursor {
-        " change cursor shape between insert and normal mode in iTerm2.app
-        if $TERM_PROGRAM =~ "iTerm"
-          let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
-          let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
-        endif
-    " }
-
-" }
-
-" Mapping {
-
-    " Leader {
-        let mapleader = ","
-    " }
-
-    " List {
-        nmap <Leader>l :set list!<CR>
-    " }
-
-    " Quiting {
-        nmap <Leader>qq :q<CR>
-        nmap <Leader>q1 :q!<CR>
-    " }
-
-    " Saving {
-        nmap <C-s> :w<CR>
-        imap <C-s> <Esc>:w<CR>a
-
-        " allow us to savea file we don't have permission to
-        " *after* we have already opened it
-        cnoremap w!! w !sudo tee % >/dev/null
-    " }
-
-    " Folding {
-        " use space to toggle folding
-        nnoremap <Space> za
-        vnoremap <Space> za
-    " }
-
-    " Config {
-        nmap <Leader>vv :edit $MYVIMRC<CR>
-        nmap <Leader>vb :edit ~/.vimrc.bundles<CR>
-        nmap <Leader>vg :edit ~/.gvimrc<CR>
-        nmap <Leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-    " }
-
-    " Indentation {
         if OSX()
           nmap <D-[> <<
           nmap <D-]> >>
           vmap <D-[> <gv
           vmap <D-]> >gv
         endif
-    " }
-
-    " Buffer {
-        nmap <Leader>. :bp<CR>
-        nmap <Leader>/ :bn<CR>
-        nmap <Leader>dd :bd<CR>
-        nmap <Leader>d1 :bd!<CR>
-        nmap <Leader>e :e#<CR>
-    " }
-
-    " Window {
-        map <C-h> <C-w>h
-        map <C-l> <C-w>l
-        map <C-j> <C-w>j
-        map <C-k> <C-w>k
-        map <C-=> <C-w>=
-        nmap <Leader>nw :new<CR>
-        nmap <Leader>nv :vnew<CR>
-    " }
-
-    " Tab {
-        nmap <Leader>1 1gt
-        nmap <Leader>2 2gt
-        nmap <Leader>3 3gt
-        nmap <Leader>4 4gt
-        nmap <Leader>5 5gt
-        nmap <Leader>6 6gt
-        nmap <Leader>7 7gt
-        nmap <Leader>8 8gt
-        nmap <Leader>9 9gt
-        nmap <Leader>0 :tablast<CR>
-        nmap <Leader>nt :tabnew<CR>
-        nmap <Leader>tt :tabedit<Space>
-        nmap <Leader>; :tabprev<CR>
-        nmap <Leader>' :tabnext<CR>
-    " }
-
-    " Search {
-        nnoremap <CR> :nohl<CR>
-    " }
-
-    " Make {
-        " save before make
-        nmap <Leader>mm :w<CR>:make<CR>
-        nmap <Leader>mc :make clean<CR>
-    " }
-
-    " Editing {
-        cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-        nmap <Leader>ew :e %%
-        nmap <Leader>es :sp %%
-        nmap <Leader>ev :vsp %%
-        nmap <Leader>et :tabe %%
-    " }
-
-    " Navigation {
-        " navigations for screen line
-        if OSX()
-          nmap <D-h> gh
-          nmap <D-j> gj
-          nmap <D-k> gk
-          nmap <D-l> gl
-          nmap <D-4> g$
-          nmap <D-6> g^
-          vmap <D-h> gh
-          vmap <D-j> gj
-          vmap <D-k> gk
-          vmap <D-l> gl
-          vmap <D-4> g$
-          vmap <D-6> g^
-        endif
-
-        " wrapped lines goes down/up to next row, rather than next line in file.
-        noremap j gj
-        noremap k gk
-
-        " power scroll up/down
-        noremap K 16gk
-        noremap J 16gj
-    " }
-
-    " Directory {
-        noremap <Leader>cd :cd %:p:h<CR>
-    " }
-
-    " Spell {
-        nmap <silent> <Leader>ss :set spell!<CR>
-    " }
-
-    " Formatting {
-        " manually remove trailing spaces
-        nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
-
         " reindent
         nmap _= :call Preserve("normal gg=G")<CR>
 
-        " remove trailing spaces before saving
-        autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+    " }
 
+    " Folding {
+        set foldmethod=syntax
+        set foldlevelstart=99
+        set foldcolumn=3
+
+        " ft based folding
+        autocmd FileType php,html setlocal foldmethod=indent
+
+        " preserve folding state
+        set viewoptions-=options
+        augroup vimrc
+            autocmd BufWritePost *
+            \   if expand('%') != '' && &buftype !~ 'nofile'
+            \|      mkview
+            \|  endif
+            autocmd BufRead *
+            \   if expand('%') != '' && &buftype !~ 'nofile'
+            \|      silent loadview
+            \|  endif
+        augroup END
+
+        " use space to toggle folding
+        nnoremap <Space> za
+        vnoremap <Space> za
+    " }
+
+    " Comment {
+        " don't add insert comment prefix when I hit enter on a comment line
+        autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    " }
+
+    " Preserve {
         " preserve cursor postion while excuting commands
         function! Preserve(command)
           " Preparation: save the last search, and cursor position
@@ -393,7 +184,230 @@
           call cursor(l, c)
         endfunction
     " }
+" }
 
+" Interface {
+
+    " Colorscheme {
+        if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+            colorscheme solarized
+            set background=light
+        else
+            colorscheme desert
+            set background=dark
+        endif
+    " }
+
+    " Font {
+        " use italic for comments in iTerm
+        if ($TERM_PROGRAM == 'iTerm.app')
+          highlight Comment cterm=italic
+        endif
+    " }
+
+    " Number & Ruler & Colorcolumn {
+        set number
+        set ruler
+        if v:version >= 703
+          set colorcolumn=72
+        endif
+    " }
+
+    " Highlight {
+        " hightlight current cursor position
+        au WinLeave * set nocursorline nocursorcolumn
+        au WinEnter * set cursorline cursorcolumn
+        set cursorline cursorcolumn
+    " }
+
+    " Cursor {
+        " change cursor shape between insert and normal mode in iTerm2.app
+        if $TERM_PROGRAM =~ "iTerm"
+          let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
+          let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
+        endif
+    " }
+
+" }
+
+" Directory {
+    set backupdir=~/.tmp
+    set directory=~/.tmp
+
+    " jump to current file's directory
+    noremap <Leader>cd :cd %:p:h<CR>
+"}
+
+" File {
+
+    " Rename {
+        function! RenameFile()
+            let old_name = escape(expand('%'), ' ')
+            let new_name = escape(input('New file name: ', '', 'file'), ' ')
+            if new_name != '' && new_name != old_name
+                exec ':saveas ' . new_name
+                exec ':silent !rm -rf ' . old_name
+                redraw!
+            endif
+        endfunction
+        nmap <Leader>r :call RenameFile()<CR>
+    " }
+
+" }
+
+" Buffer {
+    set autoread
+    set autowrite
+    set hidden
+    set undolevels=1000
+
+    " Open {
+        cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+        nmap <Leader>ew :e %%
+        nmap <Leader>es :sp %%
+        nmap <Leader>ev :vsp %%
+        nmap <Leader>et :tabe %%
+        nmap <Leader>tt :tabedit<Space>
+    " }
+
+    " Save {
+        nmap <C-s> :w<CR>
+        imap <C-s> <Esc>:w<CR>a
+
+        " allow us to savea file we don't have permission to
+        " *after* we have already opened it
+        cnoremap w!! w !sudo tee % >/dev/null
+    " }
+
+    " Quit {
+        " :Q to quit (should be default)
+        command! Q q
+        nmap <Leader>qq :q<CR>
+        nmap <Leader>q1 :q!<CR>
+    " }
+
+    " Delete {
+        nmap <Leader>dd :bd<CR>
+    " }
+
+    " Navigate {
+        nmap <Leader>. :bp<CR>
+        nmap <Leader>/ :bn<CR>
+        " switch to alternative buffer
+        " nmap <Leader>e :e#<CR>
+    " }
+
+    " Config {
+        nmap <Leader>vv :edit $MYVIMRC<CR>
+        nmap <Leader>vb :edit ~/.vimrc.bundles<CR>
+        nmap <Leader>vg :edit ~/.gvimrc<CR>
+        nmap <Leader>so :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+    " }
+
+    " Count Word {
+        function! CountWord()
+            let s:old_status = v:statusmsg
+            let position = getpos(".")
+            exe ":silent normal g\<c-g>"
+            let stat = v:statusmsg
+            let s:word_count = 0
+            if stat != '--No lines in buffer--'
+            let s:word_count = str2nr(split(v:statusmsg)[11])
+            let v:statusmsg = s:old_status
+            end
+            call setpos('.', position)
+            return s:word_count
+        endfunction
+
+        nmap <Leader>cw :echo CountWord() . " Words"<CR>
+    " }
+
+" }
+
+" Window {
+    set splitright
+
+    " Create {
+        nmap <Leader>nw :new<CR>
+        nmap <Leader>nv :vnew<CR>
+    " }
+
+    " Navigate {
+        map <C-h> <C-w>h
+        map <C-l> <C-w>l
+        map <C-j> <C-w>j
+        map <C-k> <C-w>k
+    " }
+
+    " Resize {
+        nmap <Leader>= <C-w>=
+        nmap \| <C-w>\|
+        nmap _ <C-w>_
+        nmap + 4<C-w>>
+        nmap - 4<C-w><
+    " }
+
+" }
+
+" Tab {
+
+    " Create {
+        nmap <Leader>nt :tabnew<CR>
+    " }
+
+    " Navigate {
+        nmap <Leader>1 1gt
+        nmap <Leader>2 2gt
+        nmap <Leader>3 3gt
+        nmap <Leader>4 4gt
+        nmap <Leader>5 5gt
+        nmap <Leader>6 6gt
+        nmap <Leader>7 7gt
+        nmap <Leader>8 8gt
+        nmap <Leader>9 9gt
+        nmap <Leader>0 :tablast<CR>
+        nmap <Leader>; :tabprev<CR>
+        nmap <Leader>' :tabnext<CR>
+    "}
+
+" }
+
+" Navigate {
+
+    " Screen Line {
+        if OSX()
+            nmap <D-h> gh
+            nmap <D-j> gj
+            nmap <D-k> gk
+            nmap <D-l> gl
+            nmap <D-4> g$
+            nmap <D-6> g^
+            vmap <D-h> gh
+            vmap <D-j> gj
+            vmap <D-k> gk
+            vmap <D-l> gl
+            vmap <D-4> g$
+            vmap <D-6> g^
+        endif
+
+        " wrapped lines goes down/up to next row, rather than next line in file.
+        noremap j gj
+        noremap k gk
+        noremap <down> gj
+        noremap <up> gk
+    "}
+
+    " Power Scroll {
+        noremap K 16gk
+        noremap J 16gj
+    " }
+
+" }
+
+" Make {
+    " save before make
+    nmap <Leader>mm :w<CR>:make<CR>
+    nmap <Leader>mc :make clean<CR>
 " }
 
 " Plugin {
@@ -413,9 +427,10 @@
         " }
 
         " YoucompleteMe {
-            let g:acp_enableAtStartup                     = 0
-            let g:ycm_min_num_of_chars_for_completion     = 1
-            let g:ycm_collect_identifiers_from_tags_files = 1
+            let g:acp_enableAtStartup                          = 0
+            let g:ycm_min_num_of_chars_for_completion          = 1
+            let g:ycm_collect_identifiers_from_tags_files      = 1
+            let g:ycm_autoclose_preview_window_after_insertion = 1
 
             " cycle
             let g:ycm_key_list_select_completion          = ['<C-n>', '<Down>']
@@ -464,8 +479,8 @@
         " nerdcommenter {
             let NERDSpaceDelims=1
             let NERDCompactSexyComs=1
-            nmap // <Leader>c<Space>
-            vmap // <Leader>c<Space>
+            nmap /// <Leader>c<Space>
+            vmap /// <Leader>c<Space>
         " }
 
         " indentLine {
@@ -578,30 +593,8 @@
 
 " }
 
-" Function {
-
-    " Rename {
-        function! RenameFile()
-            let old_name = escape(expand('%'), ' ')
-            let new_name = escape(input('New file name: ', '', 'file'), ' ')
-            if new_name != '' && new_name != old_name
-                exec ':saveas ' . new_name
-                exec ':silent !rm -rf ' . old_name
-                redraw!
-            endif
-        endfunction
-
-        map <Leader>r :call RenameFile()<CR>
-    " }
-
-" }
-
 " Local {
-
-    " Local VIMRC {
-        if filereadable(expand("~/.vimrc.local"))
-          source ~/.vimrc.local
-        endif
-    " }
-
+    if filereadable(expand("~/.vimrc.local"))
+      source ~/.vimrc.local
+    endif
 " }
