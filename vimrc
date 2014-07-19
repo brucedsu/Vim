@@ -1,4 +1,4 @@
-" vim: tw=80 foldlevel=0 foldmethod=marker
+" vim: ts=2 sts=2 sw=2 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
 "     ____       _ ____                   _
 "    |  _ \  ___(_) ___| _   _     __   _(_)_ __ ___  _ __ ___
 "    | | | |/ _ \ \___ \| | | |____\ \ / / | '_ ` _ \| '__/ __|
@@ -8,40 +8,42 @@
 " DeiSu's personal vimrc.
 " Copyright © 2014 DeiSu. All Rights Reserved.
 
-" Environment ------------------------------------------------------------- {{{
+" Environment {
 
 " don't bother with vi compatibility
 set nocompatible
 
 " platforms
 silent function! OSX()
-    return has('macunix')
+  return has('macunix')
 endfunction
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+  return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 silent function! WINDOWS()
-    return (has('win16') || has('win32') || has('win64'))
+  return (has('win16') || has('win32') || has('win64'))
 endfunction
 
 " zsh
 if !WINDOWS()
-    set shell=/bin/zsh
+  set shell=/bin/zsh
 endif
 
-" }}}
-" Bundle ------------------------------------------------------------------ {{{
+" }
+" Bundle {
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-" }}}
-" General ----------------------------------------------------------------- {{{
+" }
+" General {
 
 syntax on
 set backspace=indent,eol,start
 set clipboard=unnamed
+set cmdheight=2
+set completeopt=menuone
 set history=1000
 set pastetoggle=<F2>
 set scrolloff=3
@@ -54,15 +56,16 @@ set wildmenu
 let mapleader      = ","
 let maplocalleader = "\\"
 
-" time out on key codes but not mappings
-" makes terminal work happily
-set notimeout
+" time out on both key codes and mappings
+set timeout
+set timeoutlen=500
 set ttimeout
 set ttimeoutlen=10
 
-" Backups {{{
+" Backups {
 
 set backup
+set noswapfile
 set undofile
 set undoreload=10000
 set undodir=~/.vim/tmp/undo//
@@ -71,19 +74,19 @@ set directory=~/.vim/tmp/swap//
 
 " make backup folders automatically if they don't exist
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 
-" }}}
+" }
 
-" }}}
-" Editing ----------------------------------------------------------------- {{{
+" }
+" Editing {
 
 " filetype
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -96,6 +99,14 @@ set encoding=utf-8
 set spelllang=en
 autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
 nnoremap <silent> <Leader>ss :set spell!<CR>
+
+inoremap jk <esc>
+
+" split: S is covered by cc
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
+" keep the cursor in place while joining lines
+nnoremap J mzJ`z
 
 " jump to current file's directory
 noremap <Leader>cd :cd %:p:h<CR>
@@ -112,17 +123,17 @@ nnoremap <Leader>vb :vi ~/.vimrc.bundles<CR>
 nnoremap <Leader>vg :vi ~/.gvimrc<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
 
-" }}}
-" Editor ------------------------------------------------------------------ {{{
+" }
+" Editor {
 
-" Wrapping {{{
+" Wrapping {
 
 set nowrap
 command! -nargs=* Wrap setlocal wrap linebreak nolist
 autocmd Filetype markdown setlocal wrap linebreak nolist
 
-" }}}
-" Invisibles {{{
+" }
+" Invisibles {
 
 set listchars=tab:▸\ ,trail:▫,eol:¬
 nnoremap <Leader>l :set list!<CR>
@@ -133,8 +144,8 @@ autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
 " manually remove trailing spaces
 nnoremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 
-" }}}
-" Indentation {{{
+" }
+" Indentation {
 
 set expandtab
 set tabstop=4
@@ -146,7 +157,7 @@ set smarttab
 
 " ft based indentation
 autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-autocmd FileType css setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 
 if OSX()
   nnoremap <D-[> <<
@@ -158,41 +169,86 @@ endif
 " reindent
 nnoremap _= :call Preserve("normal gg=G")<CR>
 
-" }}}
-" Folding {{{
+" }
+" Folding {
 
 set foldmethod=syntax
 set foldlevelstart=99
-set foldcolumn=3
 
 " ft based folding
 autocmd FileType php,html setlocal foldmethod=indent
 
 " preserve folding state
 set viewoptions-=options
-augroup vimrc
-    autocmd BufWritePost *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      mkview
-    \|  endif
-    autocmd BufRead *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      silent loadview
-    \|  endif
+augroup folding
+  autocmd BufWritePost *
+        \   if expand('%') != '' && &buftype !~ 'nofile'
+        \|      mkview
+        \|  endif
+  autocmd BufRead *
+        \   if expand('%') != '' && &buftype !~ 'nofile'
+        \|      silent loadview
+        \|  endif
 augroup END
 
 " use space to toggle folding
 nnoremap <Space> za
 vnoremap <Space> za
 
-" }}}
-" Comment {{{
+" fold text
+" excerpt from https://github.com/gpakosz/.vim/blob/vanilla/.vimrc
+function! BaseFoldText() " {
+  let l:lpadding = &fdc
+  redir => l:signs
+    execute 'silent sign place buffer='.bufnr('%')
+  redir End
+  let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+
+  if exists("+relativenumber")
+    if (&number)
+      let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+    elseif (&relativenumber)
+      let l:lpadding += max([&numberwidth, strlen(v:foldstart) + strlen(v:foldstart - line('w0')), strlen(v:foldstart) + strlen(line('w$') - v:foldstart)]) + 1
+    endif
+  else
+    if (&number)
+      let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+    endif
+  endif
+
+  " expand tabs
+  let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+  let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+
+  let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+  let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+  let l:width = winwidth(0) - l:lpadding - l:infolen
+
+  let l:separator = ' … '
+  let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+  let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+  let l:text = l:start . ' … ' . l:end
+
+  " foldtext
+  return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+endfunction
+
+" }
+function! VimConfigFileFoldText() " {
+  " remove quatation marks and the following space
+  return substitute(BaseFoldText(), "\" ", "", "g")
+endfunction
+" }
+set foldtext=BaseFoldText()
+
+" }
+" Comment {
 
 " don't add insert comment prefix when I hit enter on a comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" }}}
-" Preserve {{{
+" }
+" Preserve {
 
 " preserve cursor postion while excuting commands
 function! Preserve(command)
@@ -207,39 +263,52 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-" }}}
+" }
 
-" }}}
-" Product ----------------------------------------------------------------- {{{
+" }
+" Product {
 
 " save before make
 nnoremap <Leader>mm :w<CR>:make<CR>
 nnoremap <Leader>mc :make clean<CR>
 
-" }}}
-" Interface --------------------------------------------------------------- {{{
+" }
+" Interface {
 
-" Colorscheme {{{
+" Colorscheme {
+
+" use background light bewtween 7 am ~ 7pm, otherwise dark
+function! SetBackground()
+  if (strftime("%H") >= 7) && (strftime("%H") <= 18)
+    set background=light
+  else
+    set background=dark
+  endif
+endfunction
 
 " use solarized as default
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-    colorscheme solarized
-    set background=light
+  colorscheme solarized
 else
-    colorscheme desert
-    set background=dark
+  colorscheme desert
+endif
+call SetBackground()
+
+" use dark in terminals
+if $TERM_PROGRAM == "iTerm.app" || $TERM_PROGRAM == "Apple_Terminal"
+  set background=dark
 endif
 
-" }}}
-" Font {{{
+" }
+" Font {
 
-    " use italic for comments in iTerm
-    if ($TERM_PROGRAM == 'iTerm.app')
-      highlight Comment cterm=italic
-    endif
+" use italic for comments in iTerm
+if ($TERM_PROGRAM == 'iTerm.app')
+  highlight Comment cterm=italic
+endif
 
-" }}}
-" Number & Ruler & Colorcolumn {{{
+" }
+" Number & Ruler & Colorcolumn {
 
 set number
 set ruler
@@ -247,16 +316,16 @@ if v:version >= 703
   set colorcolumn=72
 endif
 
-" }}}
-" Highlight {{{
+" }
+" Highlight {
 
 " hightlight current cursor position
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 
-" }}}
-" Cursor {{{
+" }
+" Cursor {
 
 " change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
@@ -264,12 +333,10 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
 endif
 
-" }}}
+" }
 
-" }}}
-" Searching and Movement -------------------------------------------------- {{{
-
-" Searching {{{
+" }
+" Searching and Movement {
 
 set ignorecase
 set smartcase
@@ -279,10 +346,10 @@ set hlsearch
 nnoremap <CR> :nohl<CR>
 
 " keep search matches in the middle of the window
+nnoremap * *zzzv
+nnoremap # #zzzv
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-" }}}
 
 " matchit
 runtime macros/matchit.vim
@@ -302,47 +369,55 @@ noremap H ^
 noremap L $
 vnoremap L g_
 
-" Power Scroll
-noremap K 16gk
-noremap J 16gj
+" disable arrow keys
+noremap <left> <nop>
+noremap <right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
 
-" }}}
-" File -------------------------------------------------------------------- {{{
+" power scroll
+if OSX()
+  nnoremap <D-k> 15gk
+  nnoremap <D-j> 15gj
+endif
 
-" Rename {{{
+" }
+" File {
+
+" Rename {
 
 function! RenameFile()
-    let old_name = escape(expand('%'), ' ')
-    let new_name = escape(input('New file name: ', '', 'file'), ' ')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm -rf ' . old_name
-        redraw!
-    endif
+  let old_name = escape(expand('%'), ' ')
+  let new_name = escape(input('New file name: ', '', 'file'), ' ')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm -rf ' . old_name
+    redraw!
+  endif
 endfunction
 nnoremap <Leader>rn :call RenameFile()<CR>
 
-" }}}
+" }
 
-" }}}
-" Buffer ------------------------------------------------------------------ {{{
+" }
+" Buffer {
 
 set autoread
 set autowrite
 set hidden
 set undolevels=1000
 
-" Open {{{
+" Open {
 
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-nnoremap <Leader>ew :e %%
-nnoremap <Leader>es :sp %%
-nnoremap <Leader>ev :vsp %%
-nnoremap <Leader>et :tabe %%
-nnoremap <Leader>tt :tabedit<Space>
+nmap <Leader>ew :e %%
+nmap <Leader>es :sp %%
+nmap <Leader>ev :vsp %%
+nmap <Leader>et :tabe %%
+nmap <Leader>tt :tabedit<Space>
 
-" }}}
-" Save {{{
+" }
+" Save {
 
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>a
@@ -351,72 +426,75 @@ inoremap <C-s> <Esc>:w<CR>a
 " *after* we have already opened it
 cnoremap w!! w !sudo tee % >/dev/null
 
-" }}}
-" Quit {{{
+" save when losing focus
+au FocusLost * :silent! wall
+
+" }
+" Quit {
 
 " :Q to quit (should be default)
 command! Q q
 nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>q1 :q!<CR>
 
-" }}}
-" Delete {{{
+" }
+" Delete {
 
 nnoremap <Leader>dd :bd<CR>
 
-" }}}
-" Navigate {{{
+" }
+" Navigate {
 
 nnoremap <Leader>. :bp<CR>
 nnoremap <Leader>/ :bn<CR>
 " switch to alternative buffer
 nnoremap <Leader>e :e#<CR>
 
-" }}}
-" Count Word {{{
+" }
+" Count Word {
 
 function! CountWord()
-    let s:old_status = v:statusmsg
-    let position = getpos(".")
-    exe ":silent normal g\<c-g>"
-    let stat = v:statusmsg
-    let s:word_count = 0
-    if stat != '--No lines in buffer--'
+  let s:old_status = v:statusmsg
+  let position = getpos(".")
+  exe ":silent normal g\<c-g>"
+  let stat = v:statusmsg
+  let s:word_count = 0
+  if stat != '--No lines in buffer--'
     let s:word_count = str2nr(split(v:statusmsg)[11])
     let v:statusmsg = s:old_status
-    end
-    call setpos('.', position)
-    return s:word_count
+  end
+  call setpos('.', position)
+  return s:word_count
 endfunction
 
 nnoremap <Leader>cw :echo CountWord() . " Words"<CR>
 
-" }}}
+" }
 
-" }}}
-" Window ------------------------------------------------------------------ {{{
+" }
+" Window {
 
 set splitright
 
-" Create
+" create
 nnoremap <Leader>nw :new<CR>
 nnoremap <Leader>nv :vnew<CR>
 
-" Navigate
+" navigate
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
-" Resize
+" resize
 nnoremap <Leader>= <C-w>=
 nnoremap \| <C-w>\|
 nnoremap _ <C-w>_
 nnoremap + 4<C-w>>
 nnoremap - 4<C-w><
 
-" }}}
-" Tab --------------------------------------------------------------------- {{{
+" }
+" Tab {
 
 " Create
 nnoremap <Leader>nt :tabnew<CR>
@@ -435,33 +513,37 @@ nnoremap <Leader>0 :tablast<CR>
 nnoremap <Leader>; :tabprev<CR>
 nnoremap <Leader>' :tabnext<CR>
 
-" }}}
-" Plugin ------------------------------------------------------------------ {{{
+" }
+" Plugin {
 
-" Vundle {{{
+" Vundle {
 
 nnoremap <Leader>vi :BundleInstall<CR>
 nnoremap <Leader>vu :BundleUpdate<CR>
 nnoremap <Leader>vl :BundleList<CR>
 
-" }}}
-" Ultisnips {{{
+" }
+" Ultisnips {
 
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 
-" }}}
-" YoucompleteMe {{{
+" }
+" YoucompleteMe {
 
 let g:acp_enableAtStartup                          = 0
-let g:ycm_min_num_of_chars_for_completion          = 1
+let g:ycm_min_num_of_chars_for_completion          = 2
 let g:ycm_collect_identifiers_from_tags_files      = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" preview
+let g:ycm_add_preview_to_completeopt                = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion  = 1
 
 " cycle
-let g:ycm_key_list_select_completion          = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion        = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion   = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
 
 " comment
 let g:ycm_complete_in_comments                          = 1
@@ -480,32 +562,32 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-" }}}
-" easymotion {{{
+" }
+" easymotion {
 
-nnoremap \ <Plug>(easymotion-prefix)
-nnoremap <Leader>w <Plug>(easymotion-bd-w)
-nnoremap <Leader>W <Plug>(easymotion-bd-W)
-nnoremap <Leader>j <Plug>(easymotion-j)
-nnoremap <Leader>k <Plug>(easymotion-k)
+nmap \ <Plug>(easymotion-prefix)
+nmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>W <Plug>(easymotion-bd-W)
+nmap <Leader>j <Plug>(easymotion-j)
+nmap <Leader>k <Plug>(easymotion-k)
 
-" }}}
-" a.vim {{{
+" }
+" a.vim {
 
 nnoremap <Leader>aa :A<CR>
 nnoremap <Leader>as :AS<CR>
 nnoremap <Leader>av :AV<CR>
 
-" }}}
-" nerdcommenter {{{
+" }
+" nerdcommenter {
 
 let NERDSpaceDelims=1
 let NERDCompactSexyComs=1
 nmap /// <Leader>c<Space>
 vmap /// <Leader>c<Space>
 
-" }}}
-" indentLine {{{
+" }
+" indentLine {
 
 let g:indentLine_char                 = '│'
 let g:indentLine_first_char           = '│'
@@ -513,18 +595,18 @@ let g:indentLine_showFirstIndentLevel = 0
 let g:indentLine_faster               = 1
 let g:indentLine_fileTypeExclude      = ['sql']
 
-" }}}
-"rainbow_parentheses {{{
+" }
+"rainbow_parentheses {
 
 nmap <F6> :RainbowParenthesesToggle<CR>
 
-" }}}
-" gundo {{{
+" }
+" gundo {
 
 nnoremap <F5> :GundoToggle<CR>
 
-" }}}
-" tabular {{{
+" }
+" tabular {
 
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
@@ -544,8 +626,8 @@ function! s:align()
   endif
 endfunction
 
-" }}}
-" vim-unimpaired {{{
+" }
+" vim-unimpaired {
 
 " text bubbling with unimpaired
 nmap <C-Up> [e
@@ -553,8 +635,8 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" }}}
-" NERDTree {{{
+" }
+" NERDTree {
 
 let NERDTreeIgnore        = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o']
 let NERDTreeShowBookmarks = 1
@@ -562,19 +644,20 @@ let NERDTreeShowHidden    = 1
 let NERDTreeQuitOnOpen    = 1
 nnoremap <Leader>[ :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
+nnoremap <Leader>x :NERDTreeCWD<CR>
 
-" }}}
-" ctrp {{{
+" }
+" ctrp {
 
 let g:ctrlp_open_multiple_files = 'v'
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$\|\.jpeg$\|\.gif$\|\.pdf$' }
+      \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$\|\.jpeg$\|\.gif$\|\.pdf$' }
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
-" }}}
-" tagbar {{{
+" }
+" tagbar {
 
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
@@ -583,22 +666,24 @@ let g:tagbar_iconchars = ['▸', '▾']
 nnoremap <Leader>] :TagbarToggle<CR>
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
 
-" }}}
-" SingleCompile {{{
+" }
+" SingleCompile {
 
 nnoremap <F3> :SCCompileRun<CR>
+inoremap <F3> <esc>:SCCompileRun<CR>
 nnoremap <F4> :SCCompile<CR>
+inoremap <F4> :<esc>:SCCompile<CR>
 
-" }}}
-" Fugitive {{{
+" }
+" Fugitive {
 
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 
-" }}}
-" vim-airline {{{
+" }
+" vim-airline {
 
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
@@ -610,19 +695,19 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" }}}
-" ConqureTerm {{{
+" }
+" ConqureTerm {
 
 nnoremap <Leader>tb :ConqueTermVSplit bash<CR>
 nnoremap <Leader>tz :ConqueTermVSplit zsh<CR>
 
-" }}}
+" }
 
-" }}}
-" Local ------------------------------------------------------------------- {{{
+" }
+" Local {
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-" }}}
+" }

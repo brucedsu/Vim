@@ -1,4 +1,4 @@
-" vim: tw=80 foldlevel=0 foldmethod=marker
+" vim: ts=2 sts=2 sw=2 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
 "    ____       _ ____                          _
 "   |  _ \  ___(_) ___| _   _        __ ___   _(_)_ __ ___  _ __ ___
 "   | | | |/ _ \ \___ \| | | |_____ / _` \ \ / / | '_ ` _ \| '__/ __|
@@ -9,7 +9,7 @@
 " DeiSu's personal gvim.
 " Copyright © 2014 DeiSu. All Rights Reserved.
 
-" Interface --------------------------------------------------------------- {{{
+" Interface {
 
 set guifont=Menlo\ for\ Powerline:h14
 highlight Comment cterm=italic
@@ -17,9 +17,8 @@ highlight Comment cterm=italic
 " set guicursor+=a:blinkon0
 set guioptions-=T
 
-" }}}
-
-" Local ------------------------------------------------------------------- {{{
+" }
+" Local {
 
 if has('gui_running')
     if filereadable(expand("~/.gvimrc.local"))
@@ -27,4 +26,4 @@ if has('gui_running')
     endif
 endif
 
-" }}}
+" }
