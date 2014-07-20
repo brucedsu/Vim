@@ -52,7 +52,7 @@ set showmode
 set visualbell
 set wildmenu
 
-" leader
+" leaders
 let mapleader      = ","
 let maplocalleader = "\\"
 
@@ -100,8 +100,6 @@ set spelllang=en
 autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
 nnoremap <silent> <Leader>ss :set spell!<CR>
 
-inoremap jk <esc>
-
 " split: S is covered by cc
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
@@ -109,7 +107,7 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 nnoremap J mzJ`z
 
 " jump to current file's directory
-noremap <Leader>cd :cd %:p:h<CR>
+nnoremap <Leader>cd :cd %:p:h<CR>
 
 " return to last edit position when opening files
 autocmd BufReadPost *
@@ -434,13 +432,14 @@ au FocusLost * :silent! wall
 
 " :Q to quit (should be default)
 command! Q q
-nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>q :q<CR>
 nnoremap <Leader>q1 :q!<CR>
 
 " }
 " Delete {
 
 nnoremap <Leader>dd :bd<CR>
+nnoremap <Leader>DD :ene<CR>:bw #<CR>
 
 " }
 " Navigate {
@@ -596,7 +595,7 @@ let g:indentLine_faster               = 1
 let g:indentLine_fileTypeExclude      = ['sql']
 
 " }
-"rainbow_parentheses {
+" rainbow_parentheses {
 
 nmap <F6> :RainbowParenthesesToggle<CR>
 
@@ -677,10 +676,17 @@ inoremap <F4> :<esc>:SCCompile<CR>
 " }
 " Fugitive {
 
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <Leader>gs :Gstatus<CR>
+nnoremap <silent> <Leader>gd :Gvdiff<CR>
+nnoremap <silent> <Leader>gc :Gcommit<CR>
+nnoremap <silent> <Leader>gl :Glog<CR>
+nnoremap <silent> <Leader>gw :Gwrite<CR>
+nnoremap <silent> <Leader>gr :Gread<CR>
+nnoremap <silent> <Leader>grm :Gremove<CR>
+nnoremap <Leader>gm :Gmove<Space>
+nnoremap <silent> <Leader>gb :Gblame<CR>
+nnoremap <Leader>ga :Git add<Space>
+nnoremap <silent> <Leader>ge :Gedit<CR>
 
 " }
 " vim-airline {
