@@ -49,7 +49,7 @@ if v:version >= 703
     Bundle 'myusuf3/numbers.vim'
 endif
 Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'vim-scripts/a.vim'
+Bundle 'brucedsu/a.vim'
 Bundle 'vim-scripts/Visual-Mark'
 
 " }
