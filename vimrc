@@ -96,8 +96,8 @@ autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
 set encoding=utf-8
 
 " spelling
-set spelllang=en
-autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
+" set spelllang=en
+" autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
 nnoremap <silent> <Leader>ss :set spell!<CR>
 
 " split: S is covered by cc
@@ -154,7 +154,7 @@ set smartindent
 set smarttab
 
 " ft based indentation
-autocmd FileType make setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
+autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
 autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 
 if OSX()
@@ -174,7 +174,7 @@ set foldmethod=syntax
 set foldlevelstart=99
 
 " ft based folding
-autocmd FileType php,html setlocal foldmethod=indent
+autocmd FileType html,php setlocal foldmethod=indent
 
 " preserve folding state
 set viewoptions-=options
@@ -432,7 +432,7 @@ au FocusLost * :silent! wall
 
 " :Q to quit (should be default)
 command! Q q
-nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>q1 :q!<CR>
 
 " }
@@ -694,8 +694,8 @@ nnoremap <silent> <Leader>ge :Gedit<CR>
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme                      = 'solarized'
-let g:airline_enable_branch              = 1
-let g:airline_enable_syntastic           = 1
+" let g:airline_enable_branch              = 1
+" let g:airline_enable_syntastic           = 1
 let g:airline_powerline_fonts            = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}

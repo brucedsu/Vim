@@ -50,7 +50,6 @@ if v:version >= 703
 endif
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'brucedsu/a.vim'
-Bundle 'vim-scripts/Visual-Mark'
 
 " }
 " Editing {
@@ -61,6 +60,8 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'sjl/gundo.vim'
+" Bundle 'toyamarinyon/vim-swift'
+Bundle 'Keithbsmiley/swift.vim'
 
 " }
 " Refactor {

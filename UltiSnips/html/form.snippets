@@ -3,19 +3,19 @@
 #-------------------
 # form
 snippet form "<form>"
-<form action="${1:<##>}" method="${2:POST}" name="${3:<##>}">
+<form action="${1:<##>}" method="${2:POST}">
 	${0:<##>}
 </form>
 endsnippet
 
 snippet form. "<form class=___>"
-<form class="${1:<##>}" action="${2:<##>}" method="${3:POST}" name="${4:<##>}">
+<form class="${1:<##>}" action="${2:<##>}" method="${3:POST}">
 	${0:<##>}
 </form>
 endsnippet
 
 snippet form# "<form id=___>"
-<form id="${1:<##>}" action="${2:<##>}" method="${3:POST}" name="${4:<##>}">
+<form id="${1:<##>}" action="${2:<##>}" method="${3:POST}">
 	${0:<##>}
 </form>
 endsnippet
@@ -62,11 +62,11 @@ snippet input. "<input class=___ >"
 endsnippet
 
 snippet text "<input type=text>"
-<input type="text" name="${0:<##>}" id="$0">
+<input type="text" name="$1" id="$1">
 endsnippet
 
 snippet password "<input type=password>"
-<input type="password" name="${0:<##>}" id="$0">
+<input type="password" name="$1" id="$1">
 endsnippet
 
 snippet radio "<input type=radio>"

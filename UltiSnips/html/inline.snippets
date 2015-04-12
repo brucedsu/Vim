@@ -3,15 +3,15 @@
 #-------------------
 # anckor
 snippet a "<a href=___>"
-<a href="${1:#}">${0:<##>}</a>
+<a href="$1">$2</a>
 endsnippet
 
 snippet a. "<a href=___ class=___>"
-<a href="${1:#}" class="${2:<##>}">${0:<##>}</a>
+<a href="$1" class="$2">$3</a>
 endsnippet
 
 snippet a# "<a href=___ id=___>"
-<a href="${1:#}" id="${2:<##>}">${0:<##>}</a>
+<a href="$1" id="$2">$3</a>
 endsnippet
 
 # image
@@ -43,8 +43,8 @@ snippet embed "<embed src=___ type=___>"
 endsnippet
 
 # break
-snippet br "<br>" i
-<br>
+snippet br/ "<br />" i
+<br />
 endsnippet
 
 # quotation

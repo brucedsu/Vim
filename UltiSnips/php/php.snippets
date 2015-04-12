@@ -4,11 +4,27 @@ extends html
 snippet try "try catch block"
 try {
 	$1
-} catch (${2:Exception} $e) {
-	$0
+} catch (Exception $e) {
+	$2
 }
 endsnippet
 
 snippet vd "var_dump()"
-var_dump($0);
+var_dump($1);
+endsnippet
+
+snippet <? "<?php without closing tag" i
+<?php
+
+$0
+endsnippet
+
+snippet <?? "<?php with closing tag ?>" i
+<?php $0 ?>
+endsnippet
+
+snippet fe "foreach loop"
+foreach ($1 as $2) {
+	$3
+}
 endsnippet
