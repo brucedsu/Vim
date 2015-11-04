@@ -54,14 +54,14 @@
         Bundle 'myusuf3/numbers.vim'
     endif
     Bundle 'nelstrom/vim-visual-star-search'
-    Bundle 'brucedsu/a.vim'
+    " Bundle 'brucedsu/a.vim'
 
 " }
 
 " Editing {
 
     Bundle 'scrooloose/nerdcommenter'
-    Bundle 'Yggdroot/indentLine'
+    " Bundle 'Yggdroot/indentLine'
     Bundle 'tpope/vim-speeddating'
     Bundle 'tpope/vim-repeat'
     Bundle 'kien/rainbow_parentheses.vim'
@@ -79,31 +79,26 @@
 
 " }
 
-" Markdown {
+" Languages {
 
+    " Python
+    Bundle 'klen/python-mode'
+
+    " Markdown
     Bundle 'nelstrom/vim-markdown-folding'
     Bundle 'tpope/vim-markdown'
     Bundle 'suan/vim-instant-markdown'
 
-" }
-
-" Markup {
-
+    " Markup
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-ragtag'
     Bundle 'Valloric/MatchTagAlways'
 
-" }
-
-" CSS {
-
+    " CSS
     Bundle 'hail2u/vim-css3-syntax'
     Bundle 'gorodinskiy/vim-coloresque'
 
-" }
-
-" JSON {
-
+    " JSON
     Bundle 'elzr/vim-json'
 
 " }
@@ -129,18 +124,19 @@
 
 " Utilities {
 
-    Bundle 'chilicuil/conque'
+    " Bundle 'chilicuil/conque'
 
 " }
 
 " Colors {
 
+    " Only enable solarized
     Bundle 'altercation/vim-colors-solarized'
-    Bundle 'sickill/vim-monokai'
-    Bundle 'tomasr/molokai'
-    Bundle 'nelstrom/vim-mac-classic-theme'
-    Bundle 'noahfrederick/vim-hemisu'
-    Bundle 'rickharris/vim-blackboard'
+    " Bundle 'sickill/vim-monokai'
+    " Bundle 'tomasr/molokai'
+    " Bundle 'nelstrom/vim-mac-classic-theme'
+    " Bundle 'noahfrederick/vim-hemisu'
+    " Bundle 'rickharris/vim-blackboard'
 
 " }
 

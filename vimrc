@@ -158,9 +158,10 @@
         set smartindent
         set smarttab
 
-        " ft based indentation
+        " filetype based indentation
         autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
         autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+        au! FileType python setl nosmartindent
 
         if OSX()
             nnoremap <D-[> <<
@@ -323,7 +324,10 @@
 
     " Cursor {
         " change cursor shape between insert and normal mode in iTerm2.app
-        if $TERM_PROGRAM =~ "iTerm"
+        if exists('$TMUX')
+            let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+            let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+        elseif $TERM_PROGRAM =~ "iTerm"
             let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
             let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
         endif
@@ -522,9 +526,9 @@
     " }
 
     " YoucompleteMe {
-        let g:acp_enableAtStartup                          = 0
-        let g:ycm_min_num_of_chars_for_completion          = 2
-        let g:ycm_collect_identifiers_from_tags_files      = 1
+        let g:acp_enableAtStartup                     = 0
+        let g:ycm_min_num_of_chars_for_completion     = 2
+        let g:ycm_collect_identifiers_from_tags_files = 1
 
         " preview
         let g:ycm_add_preview_to_completeopt                = 0
@@ -575,8 +579,8 @@
     " }
 
     " indentLine {
-        let g:indentLine_char                 = '│'
-        let g:indentLine_first_char           = '│'
+        let g:indentLine_char                 = '┆'
+        let g:indentLine_first_char           = '┆'
         let g:indentLine_showFirstIndentLevel = 0
         let g:indentLine_faster               = 1
         let g:indentLine_fileTypeExclude      = ['sql']
@@ -680,8 +684,35 @@
     " }
 
     " ConqureTerm {
-        nnoremap <Leader>tb :ConqueTermVSplit bash<CR>
-        nnoremap <Leader>tz :ConqueTermVSplit zsh<CR>
+        " nnoremap <Leader>tb :ConqueTermVSplit bash<CR>
+        " nnoremap <Leader>tz :ConqueTermVSplit zsh<CR>
+    " }
+
+    " PyMode {
+        if !has('python')
+            let g:pymode = 0
+        endif
+
+        let g:pymode_doc = 1
+        let g:pymode_doc_bind = 'K'
+        let g:pymode_run = 0
+        let g:pymode_breakpoint = 0
+        let g:pymode_lint = 0
+        let g:pymode_lint_checkers = ['pyflakes']
+        let g:pymode_trim_whitespaces = 0
+        let g:pymode_options = 0
+        let g:pymode_rope = 0
+        let g:pymode_rope_lookup_project = 0
+        let g:pymode_rope_completion = 0
+    " }
+
+    " Syntastic {
+		let g:syntastic_error_symbol = '✗✗'
+		let g:syntastic_style_error_symbol = '✠✠'
+		let g:syntastic_warning_symbol = '∆∆'
+		let g:syntastic_style_warning_symbol = '≈≈'
+        let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
+        let g:syntastic_python_checkers = ['pyflakes']
     " }
 
 " }
@@ -693,3 +724,4 @@
     endif
 
 " }
+
