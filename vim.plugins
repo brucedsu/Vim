@@ -1,0 +1,367 @@
+" Modeline and Notes {
+" vim: ts=4 sts=4 sw=4 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
+"    ____       _ ____                    _             _
+"   |  _ \  ___(_) ___| _   _       _ __ | |_   _  __ _(_)_ __  ___
+"   | | | |/ _ \ \___ \| | | |_____| '_ \| | | | |/ _` | | '_ \/ __|
+"   | |_| |  __/ |___) | |_| |_____| |_) | | |_| | (_| | | | | \__ \
+"   |____/ \___|_|____/ \__,_|     | .__/|_|\__,_|\__, |_|_| |_|___/
+"                                  |_|            |___/
+"
+" DeiSu's personal vim plugins.
+" Use vim-plug as plugin manager.
+" Copyright © 2014-2015 DeiSu. All Rights Reserved.
+" }
+
+" vim-plug {
+
+    " automatic installation
+    if empty(glob('~/.vim/autoload/plug.vim'))
+      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall | source $MYVIMRC
+    endif
+
+    call plug#begin('~/.vim/plugins')
+
+    nnoremap <Leader>vi :PlugInstall<CR>
+    nnoremap <Leader>vu :PlugUpdate<CR>
+    nnoremap <Leader>vs :PlugStatus<CR>
+
+" }
+
+" Completion {
+
+    Plug 'jiangmiao/auto-pairs'
+
+    " ultinips {
+        Plug 'SirVer/ultisnips', { 'on': [] }
+
+        let g:UltiSnipsExpandTrigger       = "<tab>"
+        let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+        let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
+    " }
+
+    " YouCompleteMe {
+        Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
+
+        let g:ycm_min_num_of_chars_for_completion     = 1
+        let g:ycm_collect_identifiers_from_tags_files = 1
+
+        " preview
+        let g:ycm_add_preview_to_completeopt                = 0
+        let g:ycm_autoclose_preview_window_after_completion = 1
+        let g:ycm_autoclose_preview_window_after_insertion  = 1
+
+        " cycle
+        let g:ycm_key_list_select_completion   = ['<C-n>']
+        let g:ycm_key_list_previous_completion = ['<C-p>']
+
+        " comment
+        let g:ycm_complete_in_comments                          = 1
+        let g:ycm_collect_identifiers_from_comments_and_strings = 1
+
+        " path
+        let $PATH                       = '/usr/local/bin:'.$PATH
+        let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+        " enable omni completion
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    " }
+
+    " load ultisnips & YouCompleteMe first time I enter insert mode
+    augroup load_us_ycm
+        autocmd!
+        autocm InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
+                          \| call youcompleteme#Enable() | autocmd! load_us_ycm
+    augroup END
+
+" }
+
+" Navigation {
+
+    " easymotion {
+        Plug 'Lokaltog/vim-easymotion'
+
+        nmap \ <Plug>(easymotion-prefix)
+        nmap <Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader>W <Plug>(easymotion-bd-W)
+        nmap <Leader>j <Plug>(easymotion-j)
+        nmap <Leader>k <Plug>(easymotion-k)
+    " }
+
+    if v:version >= 703
+        Plug 'myusuf3/numbers.vim'
+    endif
+    Plug 'nelstrom/vim-visual-star-search'
+
+    " a.vim {
+        Plug 'brucedsu/a.vim'
+
+        nnoremap <Leader>aa :A<CR>
+        nnoremap <Leader>as :AS<CR>
+        nnoremap <Leader>av :AV<CR>
+    " }
+
+" }
+
+" Editing {
+
+    " nerdcommenter {
+        Plug 'scrooloose/nerdcommenter'
+
+        let NERDSpaceDelims     = 1
+        let NERDCompactSexyComs = 1
+        nmap /// <Leader>c<Space>
+        vmap /// <Leader>c<Space>
+    " }
+
+    " indentLine {
+        " Plug 'Yggdroot/indentLine'
+
+        " let g:indentLine_char                 = '┆'
+        " let g:indentLine_first_char           = '┆'
+        " let g:indentLine_showFirstIndentLevel = 0
+        " let g:indentLine_faster               = 1
+        " let g:indentLine_fileTypeExclude      = ['sql']
+    " }
+
+    Plug 'tpope/vim-speeddating'
+    Plug 'tpope/vim-repeat'
+
+    " rainbow_parentheses {
+        " Plug 'kien/rainbow_parentheses.vim'
+
+        " nmap <F6> :RainbowParenthesesToggle<CR>
+    " }
+
+    " gundo {
+        " Plug 'sjl/gundo.vim'
+
+        " nnoremap <F5> :GundoToggle<CR>
+    " }
+
+    Plug 'keith/swift.vim'
+
+" }
+
+" Refactor {
+
+    " tabular {
+        Plug 'godlygeek/tabular'
+
+        nmap <Leader>a= :Tabularize /=<CR>
+        vmap <Leader>a= :Tabularize /=<CR>
+        nmap <Leader>a: :Tabularize /:\zs<CR>
+        vmap <Leader>a: :Tabularize /:\zs<CR>
+        nmap <Leader>a/ :Tabularize ////<CR>
+        vmap <Leader>a/ :Tabularize ////<CR>
+        inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+        function! s:align()
+            let p = '^\s*|\s.*\s|\s*$'
+            if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+                let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+                let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+                Tabularize/|/l1
+                normal! 0
+                call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+            endif
+        endfunction
+    " }
+
+    " vim-unimpaired {
+        Plug 'tpope/vim-unimpaired'
+
+        " text bubbling with unimpaired
+        nmap <C-Up> [e
+        nmap <C-Down> ]e
+        vmap <C-Up> [egv
+        vmap <C-Down> ]egv
+    " }
+
+    Plug 'terryma/vim-multiple-cursors'
+    " Plug 'tommcdo/vim-exchange'
+
+" }
+
+" Languages {
+
+    " Python
+    " python-mode {
+        Plug 'klen/python-mode', { 'for': 'python' }
+
+        if !has('python')
+            let g:pymode = 0
+        endif
+
+        let g:pymode_doc = 1
+        let g:pymode_doc_bind = 'K'
+        let g:pymode_run = 0
+        let g:pymode_breakpoint = 0
+        let g:pymode_lint = 0
+        let g:pymode_lint_checkers = ['pyflakes']
+        let g:pymode_trim_whitespaces = 0
+        let g:pymode_options = 0
+        let g:pymode_rope = 0
+        let g:pymode_rope_lookup_project = 0
+        let g:pymode_rope_completion = 0
+    " }
+
+    " Markdown
+    Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
+    Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+    " Plug 'suan/vim-instant-markdown'
+
+    " Markup
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-ragtag'
+    Plug 'Valloric/MatchTagAlways'
+
+    " CSS
+    Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+    Plug 'gorodinskiy/vim-coloresque', { 'for': 'css' }
+
+    " JSON
+    Plug 'elzr/vim-json', { 'for': 'json' }
+
+" }
+
+" IDE {
+
+    " nerdtree {
+        Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+        let NERDTreeIgnore        = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o']
+        let NERDTreeShowBookmarks = 1
+        let NERDTreeShowHidden    = 1
+        let NERDTreeQuitOnOpen    = 1
+        nnoremap <Leader>[ :NERDTreeToggle<CR>
+        nnoremap <Leader>f :NERDTreeFind<CR>
+        nnoremap <Leader>x :NERDTreeCWD<CR>
+    " }
+
+    " ctrlp {
+        Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
+
+        let g:ctrlp_open_multiple_files = 'v'
+        let g:ctrlp_custom_ignore = {
+                  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+                  \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$\|\.jpeg$\|\.gif$\|\.pdf$' }
+        nnoremap <Leader>p :CtrlP<CR>
+        nnoremap <Leader>b :CtrlPBuffer<CR>
+    " }
+
+    " tagbar {
+        if executable('ctags')
+            Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+        endif
+
+        let g:tagbar_autofocus = 1
+        let g:tagbar_sort = 0
+        let g:tagbar_compact = 1
+        let g:tagbar_iconchars = ['▸', '▾']
+        nnoremap <Leader>] :TagbarToggle<CR>
+        set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
+    " }
+
+    " syntastic {
+        Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
+
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
+        let g:syntastic_error_symbol = '✗✗'
+        let g:syntastic_style_error_symbol = '✠✠'
+        let g:syntastic_warning_symbol = '∆∆'
+        let g:syntastic_style_warning_symbol = '≈≈'
+        let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
+        let g:syntastic_python_checkers = ['pyflakes']
+    " }
+
+    " SingleCompile {
+        " Plug 'xuhdev/SingleCompile'
+
+        " nnoremap <F3> :SCCompileRun<CR>
+        " inoremap <F3> <esc>:SCCompileRun<CR>
+        " nnoremap <F4> :SCCompile<CR>
+        " inoremap <F4> :<esc>:SCCompile<CR>
+    " }
+
+    Plug 'airblade/vim-gitgutter'
+
+    " fugitive {
+        Plug 'tpope/vim-fugitive'
+
+        nnoremap <silent> <Leader>gs :Gstatus<CR>
+        nnoremap <silent> <Leader>gd :Gvdiff<CR>
+        nnoremap <silent> <Leader>gc :Gcommit<CR>
+        nnoremap <silent> <Leader>gl :Glog<CR>
+        nnoremap <silent> <Leader>gw :Gwrite<CR>
+        nnoremap <silent> <Leader>gr :Gread<CR>
+        nnoremap <silent> <Leader>grm :Gremove<CR>
+        nnoremap <Leader>gm :Gmove<Space>
+        nnoremap <silent> <Leader>gb :Gblame<CR>
+        nnoremap <Leader>ga :Git add<Space>
+        nnoremap <silent> <Leader>ge :Gedit<CR>
+    " }
+
+    " vim-airline {
+        if has('gui_running') || $TERM_PROGRAM =~ 'iTerm'
+            Plug 'bling/vim-airline'
+
+            set laststatus=2
+            let g:airline#extensions#syntastic#enabled = 0
+            let g:airline#extensions#tagbar#enabled    = 0
+            let g:airline#extensions#tabline#enabled   = 1
+            let g:airline_theme                        = 'solarized'
+            let g:airline_powerline_fonts              = 1
+            if !exists('g:airline_symbols')
+              let g:airline_symbols = {}
+            endif
+        else
+            Plug 'Lokaltog/vim-powerline'
+        endif
+    " }
+
+" }
+
+" Utilities {
+
+    " conque {
+        " Plug 'chilicuil/conque'
+
+        " nnoremap <Leader>tb :ConqueTermVSplit bash<CR>
+        " nnoremap <Leader>tz :ConqueTermVSplit zsh<CR>
+    " }
+
+" }
+
+" Colors {
+
+    " Only enable solarized
+    Plug 'altercation/vim-colors-solarized'
+    " Plug 'sickill/vim-monokai'
+    " Plug 'tomasr/molokai'
+    " Plug 'nelstrom/vim-mac-classic-theme'
+    " Plug 'noahfrederick/vim-hemisu'
+    " Plug 'rickharris/vim-blackboard'
+
+" }
+
+" Local {
+
+    " if filereadable(expand("~/.vim.plugins.local"))
+        " source ~/.vim.plugins.local
+    " endif
+
+" }
+
+" End vim-plug Section {
+
+    call plug#end()
+
+" }

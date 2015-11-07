@@ -28,12 +28,12 @@ the `--with-override-system-vim` flag on
 
 ## Installation
 
-    git clone https://github.com/brucedsu/dotvim.git ~/.vim
+    $ git clone https://github.com/brucedsu/dotvim.git ~/.vim
 
 ## Create Symlinks:
 
     $ ln -s ~/.vim/vimrc ~/.vimrc
-    $ ln -s ~/.vim/vimrc.bundles ~/.vimrc.bundles
+    $ ln -s ~/.vim/vim.plugins ~/.vim.plugins
     $ ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ## Italic Font in iTerm 2 & Vim:
