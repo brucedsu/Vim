@@ -25,15 +25,18 @@
 
 " Completion {
     Plug 'jiangmiao/auto-pairs'
-    Plug 'SirVer/ultisnips', { 'on': [] }
+    Plug 'SirVer/ultisnips'
     Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
     Plug 'Valloric/ListToggle'
 
-    " load ultisnips & YouCompleteMe first time I enter insert mode
-    augroup load_us_ycm
+    " load ycm the first time enter insert mode
+    augroup load_ycm
         autocmd!
-        autocm InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
-                          \| call youcompleteme#Enable() | autocmd! load_us_ycm
+        autocmd! InsertEnter * call plug#load('YouCompleteMe')
+                            \| if exists('g:loaded_youcompleteme')
+                            \|     call youcompleteme#Enable()
+                            \| endif
+                            \| autocmd! load_ycm
     augroup END
 " }
 
