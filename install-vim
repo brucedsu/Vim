@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# 1. Create symbolic links
+ln -s ~/.vim/vimrc ~/.vimrc
+ln -s ~/.vim/vimrc.mappings ~/.vimrc.mappings
+ln -s ~/.vim/vimrc.plugins ~/.vimrc.plugins
+ln -s ~/.vim/vimrc.plugins.conf ~/.vimrc.plugins.conf
+
+# 2. Italic Font in iTerm 2
+cd ~/.vim/iterm2-italic
+tic xterm-256color-italic.terminfo
+
+# 3. Open vim and install plugins
+vim +PlugInstall
