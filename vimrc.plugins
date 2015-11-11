@@ -27,15 +27,19 @@
     Plug 'jiangmiao/auto-pairs'
     Plug 'SirVer/ultisnips'
     Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
+    Plug 'Shougo/neocomplcache.vim', { 'on': [] }
     Plug 'honza/vim-snippets'
 
     " ycm is the first choice
-    " if it doesn't work, use supertab
+    " use neocomplcache as a backup
     augroup load_completer
         autocmd!
         autocmd! InsertEnter * call plug#load('YouCompleteMe')
                             \| if exists('g:loaded_youcompleteme')
                             \|     call youcompleteme#Enable()
+                            \| else
+                            \|     call plug#load('neocomplcache.vim')
+                            \|     exec "NeoComplCacheEnable"
                             \| endif
                             \| autocmd! load_completer
     augroup END
