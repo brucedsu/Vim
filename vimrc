@@ -15,7 +15,7 @@
     set nocompatible
 
     " terminal {
-        if !deisufunc#WINDOWS()
+        if !deisufunc#Windows()
             set shell=/bin/zsh
         endif
         set ttyfast
@@ -173,23 +173,24 @@
 
     " Colorscheme {
         " use solarized as default
-        if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+        if filereadable(expand("~/.vim/plugins/vim-colors-solarized/colors/solarized.vim"))
             colorscheme solarized
         else
             colorscheme desert
         endif
 
-        call deisufunc#SetBackground()
-
-        " use dark in terminals
-        if $TERM_PROGRAM =~ "iTerm" || $TERM_PROGRAM =~ "Apple_Terminal"
+        " In MacVim, toggle dark/light base on time,
+        " otherwise, use dark
+        if deisufunc#MacVim()
+            call deisufunc#SetBackgroundBaseOnTime()
+        else
           set background=dark
         endif
     " }
 
     " Font {
         " use italic for comments in iTerm
-        if ($TERM_PROGRAM =~ 'iTerm')
+        if $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
             highlight Comment cterm=italic
         endif
     " }

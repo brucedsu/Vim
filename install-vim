@@ -6,9 +6,19 @@ ln -s ~/.vim/vimrc.mappings ~/.vimrc.mappings
 ln -s ~/.vim/vimrc.plugins ~/.vimrc.plugins
 ln -s ~/.vim/vimrc.plugins.conf ~/.vimrc.plugins.conf
 
-# 2. Italic Font in iTerm 2
+# 2. Italic Font in iTerm2
 cd ~/.vim/iterm2-italic
 tic xterm-256color-italic.terminfo
+# Set "Terminal Type" to "xterm-256color-italic"
+# Check "Italic text allowed" in iTerm's preference
 
-# 3. Open vim and install plugins
-vim +PlugInstall
+# 3. Italic Font for tmux in iTerm2
+cd ~/.vim/tmux-italic
+tic screen-256color-italic.terminfo
+echo "set -g default-terminal \"screen-256color-italic\"" >> ~/.tmux.conf
+
+# 4. Open vim, install plugins and quit
+vim +PlugInstall +qall
+
+# 5. Reopen vim, ready for work!
+vim

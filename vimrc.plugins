@@ -97,11 +97,7 @@
     " Plug 'xuhdev/SingleCompile'
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
-    if has('gui_running') || $TERM_PROGRAM =~ 'iTerm'
-        Plug 'bling/vim-airline'
-    else
-        Plug 'Lokaltog/vim-powerline'
-    endif
+    Plug 'bling/vim-airline'
 " }
 
 " Utilities {

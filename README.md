@@ -1,20 +1,20 @@
 ## Homebrew & Vim & MacVim
 
-1. Install homebrew package manaer
+1. Install homebrew package manager
 
-        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+        $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 2. Install python, lua, ruby by `brew`
 
-        brew install python
-        brew install lua
-        brew install ruby
+        $ brew install python
+        $ brew install lua
+        $ brew install ruby
 
 3. Install vim and macvim; macvim is going to replace the system vim with
 the `--with-override-system-vim` flag on
 
-        brew install vim --with-python --with-ruby --with-perl --with-lua
-        brew install macvim --env-std --with-override-system-vim --with-cscope --with-python --with-ruby --with-perl --with-lua --HEAD
+        $ brew install vim --with-python --with-ruby --with-perl --with-lua
+        $ brew install macvim --env-std --with-override-system-vim --with-cscope --with-python --with-ruby --with-perl --with-lua --HEAD
 
 4. Note:
 
@@ -29,19 +29,13 @@ the `--with-override-system-vim` flag on
 ## Installation
 
     $ git clone https://github.com/brucedsu/dotvim.git ~/.vim
+    $ cd ~/.vim
+    $ ./install-vim
 
-## Create Symlinks:
+## Italic Font in iTerm 2:
 
-    $ ln -s ~/.vim/vimrc ~/.vimrc
-    $ ln -s ~/.vim/vim.plugins ~/.vim.plugins
-    $ ln -s ~/.vim/gvimrc ~/.gvimrc
-
-## Italic Font in iTerm 2 & Vim:
-
-1. `$ cd ~/.vim/iterm2-italic`
-2. `$ tic xterm-256color-italic.terminfo`
-3. Set "Terminal Type" to "xterm-256color-italic"
-4. Check "Italic text allowed" in iTerm's preference
+1. Set "Terminal Type" to "xterm-256color-italic"
+2. Check "Italic text allowed" in iTerm's preference
 
 ## Perfect Powerline Font in iTerm 2
 

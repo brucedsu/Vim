@@ -11,33 +11,34 @@
 " }
 
 " Platforms {
-
     " OS X
     silent function! deisufunc#OSX()
         return has('macunix')
     endfunction
 
+    " MacVim
+    silent function! deisufunc#MacVim()
+        return has('gui_macvim')
+    endfunction
+
     " Linux
-    silent function! deisufunc#LINUX()
+    silent function! deisufunc#Linux()
         return has('unix') && !has('macunix') && !has('win32unix')
     endfunction
 
     " Windows
-    silent function! deisufunc#WINDOWS()
+    silent function! deisufunc#Windows()
         return (has('win16') || has('win32') || has('win64'))
     endfunction
-
 " }
 
 " Startup {
-
     " install YCM
     function! deisufunc#YCMInstall(info)
         if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer
+            !./install.py --clang-completer
         endif
     endfunction
-
 " }
 
 " Folding {
@@ -103,7 +104,7 @@
 " Interface {
 
     " use background light bewtween 7 am ~ 7pm, otherwise dark
-    function! deisufunc#SetBackground()
+    function! deisufunc#SetBackgroundBaseOnTime()
         if (strftime("%H") >= 7) && (strftime("%H") <= 18)
             set background=light
         else

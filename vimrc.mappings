@@ -42,7 +42,7 @@
     nnoremap _= :call deisufunc#Preserve("normal gg=G")<CR>
 
     " indent/unindent line(s) Mac OS X way
-    if has('gui_macvim')
+    if deisufunc#MacVim()
         nnoremap <D-[> <<
         nnoremap <D-]> >>
         vnoremap <D-[> <gv
@@ -89,7 +89,7 @@
     vnoremap L g_
 
     " power scroll
-    if has('gui_macvim')
+    if deisufunc#MacVim()
       nnoremap <D-k> 15gk
       nnoremap <D-j> 15gj
     endif
