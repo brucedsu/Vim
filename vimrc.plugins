@@ -1,0 +1,129 @@
+" Modeline and Notes {
+" vim: ts=4 sts=4 sw=4 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
+"    ____       _ ____                    _             _
+"   |  _ \  ___(_) ___| _   _       _ __ | |_   _  __ _(_)_ __  ___
+"   | | | |/ _ \ \___ \| | | |_____| '_ \| | | | |/ _` | | '_ \/ __|
+"   | |_| |  __/ |___) | |_| |_____| |_) | | |_| | (_| | | | | \__ \
+"   |____/ \___|_|____/ \__,_|     | .__/|_|\__,_|\__, |_|_| |_|___/
+"                                  |_|            |___/
+"
+" DeiSu's personal vim plugins.
+" I use vim-plug as my plugin manager.
+" Copyright © 2014-2015 DeiSu. All Rights Reserved.
+" }
+
+" Start vim-plug Section {
+    " automatically install vim-plug
+    if empty(glob('~/.vim/autoload/plug.vim'))
+      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall | source $MYVIMRC
+    endif
+
+    call plug#begin('~/.vim/plugins')
+" }
+
+" Completion {
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'SirVer/ultisnips', { 'on': [] }
+    Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
+    Plug 'Valloric/ListToggle'
+
+    " load ultisnips & YouCompleteMe first time I enter insert mode
+    augroup load_us_ycm
+        autocmd!
+        autocm InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
+                          \| call youcompleteme#Enable() | autocmd! load_us_ycm
+    augroup END
+" }
+
+" Navigation {
+    Plug 'Lokaltog/vim-easymotion'
+    if v:version >= 703
+        Plug 'myusuf3/numbers.vim'
+    endif
+    Plug 'nelstrom/vim-visual-star-search'
+    Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] }
+" }
+
+" Editing {
+    Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
+    Plug 'Yggdroot/indentLine', { 'on': ['IndentLinesEnable', 'IndentLinesToggle'] }
+    Plug 'tpope/vim-speeddating'
+    Plug 'tpope/vim-repeat'
+    Plug 'junegunn/rainbow_parentheses.vim'
+    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+" }
+
+" Refactor {
+    Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+    Plug 'tpope/vim-unimpaired'
+    Plug 'terryma/vim-multiple-cursors'
+    " Plug 'tommcdo/vim-exchange'
+" }
+
+" Languages {
+    " Swift
+    Plug 'keith/swift.vim', { 'for': 'swift' }
+
+    " Python
+    Plug 'klen/python-mode', { 'for': 'python' }
+
+    " Markdown
+    Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
+    Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+    " Plug 'suan/vim-instant-markdown'
+
+    " Markup
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-ragtag'
+    Plug 'Valloric/MatchTagAlways'
+
+    " CSS
+    Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+    Plug 'gorodinskiy/vim-coloresque', { 'for': 'css' }
+
+    " JSON
+    Plug 'elzr/vim-json', { 'for': 'json' }
+" }
+
+" IDE {
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer']}
+    if executable('ctags')
+        Plug 'majutsushi/tagbar'
+    endif
+    Plug 'scrooloose/syntastic', { 'for': 'python' }
+    " Plug 'xuhdev/SingleCompile'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+    if has('gui_running') || $TERM_PROGRAM =~ 'iTerm'
+        Plug 'bling/vim-airline'
+    else
+        Plug 'Lokaltog/vim-powerline'
+    endif
+" }
+
+" Utilities {
+    " Plug 'chilicuil/conque'
+" }
+
+" Colors {
+    " Only enable solarized
+    Plug 'altercation/vim-colors-solarized'
+    " Plug 'sickill/vim-monokai'
+    " Plug 'tomasr/molokai'
+    " Plug 'nelstrom/vim-mac-classic-theme'
+    " Plug 'noahfrederick/vim-hemisu'
+    " Plug 'rickharris/vim-blackboard'
+" }
+
+" Local {
+    if filereadable(expand("~/.vim.plugins.local"))
+        source ~/.vim.plugins.local
+    endif
+" }
+
+" End vim-plug Section {
+    call plug#end()
+" }
