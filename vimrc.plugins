@@ -27,16 +27,17 @@
     Plug 'jiangmiao/auto-pairs'
     Plug 'SirVer/ultisnips'
     Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
-    Plug 'Valloric/ListToggle'
+    Plug 'honza/vim-snippets'
 
-    " load ycm the first time enter insert mode
-    augroup load_ycm
+    " ycm is the first choice
+    " if it doesn't work, use supertab
+    augroup load_completer
         autocmd!
         autocmd! InsertEnter * call plug#load('YouCompleteMe')
                             \| if exists('g:loaded_youcompleteme')
                             \|     call youcompleteme#Enable()
                             \| endif
-                            \| autocmd! load_ycm
+                            \| autocmd! load_completer
     augroup END
 " }
 
@@ -47,6 +48,7 @@
     endif
     Plug 'nelstrom/vim-visual-star-search'
     Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] }
+    Plug 'Valloric/ListToggle'
 " }
 
 " Editing {

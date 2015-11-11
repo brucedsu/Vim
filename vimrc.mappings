@@ -52,8 +52,8 @@
     " general indent/unindent line(s)
     nnoremap <Tab> >>
     nnoremap <S-Tab> <<
-    vnoremap <Tab> >gv
-    vnoremap <S-Tab> <gv
+    vnoremap > >gv
+    vnoremap < <gv
 
     " use space to toggle folding
     nnoremap <Space> za

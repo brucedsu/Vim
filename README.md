@@ -29,8 +29,7 @@ the `--with-override-system-vim` flag on
 ## Installation
 
     $ git clone https://github.com/brucedsu/dotvim.git ~/.vim
-    $ cd ~/.vim
-    $ ./install-vim
+    $ cd ~/.vim && ./install-vim
 
 ## Italic Font in iTerm 2:
 
@@ -46,6 +45,7 @@ the `--with-override-system-vim` flag on
 
 ## To-dos:
 
-    1. Code templates (✓ UltiSnips)
-    2. iTerm cursor: NORMAL = block, INSERT = vertical bar (✓ not PERFECT)
-    3. Reformat code (not only reindent)
+1. Code templates (✓ UltiSnips)
+2. iTerm cursor: NORMAL = block, INSERT = vertical bar (✓ not PERFECT)
+3. Reformat code (not only reindent)
+4. Need a basic code completion plugin which doesn't need to be compiled (like ycm), doesn't need lua language support (like neocomplete), well-maintained (not like neocomplcache) and work well with ultisnips (no supertab, maybe I don't configure it correctly, but I don't want to try one more time).
