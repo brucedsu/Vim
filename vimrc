@@ -45,6 +45,7 @@
     set showmode
     set visualbell
     set wildmenu
+    set laststatus=2
 
     " leaders
     let mapleader      = ","
