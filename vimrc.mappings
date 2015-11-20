@@ -150,8 +150,8 @@
 
 " Window {
     " create
-    nnoremap <Leader>nw :vnew<CR>
-    nnoremap <Leader>nh :new<CR>
+    nnoremap <Leader>nw :new<CR>
+    nnoremap <Leader>nv :vnew<CR>
 
     " navigate
     nnoremap <C-h> <C-w>h
@@ -161,20 +161,9 @@
 " }
 
 " Tab {
-    " create
+    " new tab
     nnoremap <Leader>nt :tabnew<CR>
 
-    " navigate
-    " nnoremap <Leader>1 1gt
-    " nnoremap <Leader>2 2gt
-    " nnoremap <Leader>3 3gt
-    " nnoremap <Leader>4 4gt
-    " nnoremap <Leader>5 5gt
-    " nnoremap <Leader>6 6gt
-    " nnoremap <Leader>7 7gt
-    " nnoremap <Leader>8 8gt
-    " nnoremap <Leader>9 9gt
-    nnoremap <Leader>0 :tablast<CR>
     nnoremap <Up> :tabprev<CR>
     nnoremap <Down> :tabnext<CR>
 " }

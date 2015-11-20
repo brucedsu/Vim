@@ -131,7 +131,6 @@
         autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
         autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
         au! FileType python setl nosmartindent
-        " autocmd FileType yacc setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
     " }
 
     " Folding {
@@ -194,8 +193,13 @@
         set number
         set relativenumber
         set ruler
+
         if exists('&colorcolumn')
+            " default colorcolumn
             set colorcolumn=72
+
+            " filetype based color column
+            autocmd Filetype python setlocal colorcolumn=79
         endif
     " }
 
@@ -204,17 +208,6 @@
         au WinLeave * set nocursorline nocursorcolumn
         au WinEnter * set cursorline cursorcolumn
         set cursorline cursorcolumn
-    " }
-
-    " Cursor {
-        " change cursor shape between insert and normal mode in iTerm2.app
-        if exists('$TMUX')
-            let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-            let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-        else
-            let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
-            let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
-        endif
     " }
 
 " }
@@ -242,6 +235,7 @@
 
 " Window {
     set splitright
+    set splitbelow
 " }
 
 " Mappings {

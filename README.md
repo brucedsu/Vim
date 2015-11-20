@@ -43,6 +43,12 @@ the `--with-override-system-vim` flag on
 2. In iTerm2 preferences, set "Regular Font" to "14pt Menlo Regular"
 3. Set "Non-ASCII Font" to "13pt Moncao for Powerline"
 
+## Cursor
+
+* MacVim: blinking vertical bar in insert mode and blinking box in normal mode (default setup)
+* iTerm 2: blinking box in both insert and normal mode.
+* Note: the code for switching cursor shape between vertical bar and box in iTerm 2 is in `deprecated.vimrc`.
+
 ## To-dos:
 
 1. Code templates (✓ UltiSnips)
