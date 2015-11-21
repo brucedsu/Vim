@@ -1,5 +1,7 @@
 " ---------------------------- Modeline and Notes ---------------------------- {
-" vim: ts=4 sts=4 sw=4 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
+" vim: tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
+" vim: foldlevel=0 foldmarker={,} foldmethod=marker
+" vim: foldtext=deisufunc#DotVimsFoldText()
 "     ____       _ ____               __
 "    |  _ \  ___(_) ___| _   _       / _|_   _ _ __   ___
 "    | | | |/ _ \ \___ \| | | |_____| |_| | | | '_ \ / __|

@@ -33,6 +33,7 @@ nnoremap <Leader>vc :vi ~/.vimrc.plugins.conf<CR>
 nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
 nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
 nnoremap <Leader>vg :vi ~/.gvimrc<CR>
+nnoremap <Leader>vd :vi ~/.vim/deprecated.vimrc<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
 
 " }
