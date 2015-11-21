@@ -12,21 +12,17 @@
 " }
 
 " Interface {
-
     set guifont=Menlo\ for\ Powerline:h14
     highlight Comment cterm=italic
     " disable blinking
     " set guicursor+=a:blinkon0
     set guioptions-=T
-
 " }
 
 " Local {
-
     if has('gui_running')
         if filereadable(expand("~/.gvimrc.local"))
             source ~/.gvimrc.local
         endif
     endif
-
 " }
