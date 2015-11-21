@@ -1,4 +1,4 @@
-" Modeline and Notes {
+" ---------------------------- Modeline and Notes ---------------------------- {
 " vim: ts=4 sts=4 sw=4 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
 "    ____       _ ____                                          _
 "   |  _ \  ___(_) ___| _   _       _ __ ___   __ _ _ __  _ __ (_)_ __   __ _ ___
@@ -10,160 +10,169 @@
 " DeiSu's personal vim mappings.
 " Copyright © 2014-2015 DeiSu. All Rights Reserved.
 " }
+" --------------------------------- Editing ---------------------------------- {
 
-" Editing {
-    " toggle spell checking
-    nnoremap <silent> <Leader>ss :set spell!<CR>
+" jump to current file's directory
+nnoremap <Leader>cd :cd %:p:h<CR>
 
-    " split: S is covered by cc
-    nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+" toggle spell checking
+nnoremap <silent> <Leader>ss :set spell!<CR>
 
-    " keep the cursor in place while joining lines
-    nnoremap J mzJ`z
+" split: S is covered by cc
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-    " quick edit vim config files
-    nnoremap <Leader>vv :vi $MYVIMRC<CR>
-    nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
-    nnoremap <Leader>vc :vi ~/.vimrc.plugins.conf<CR>
-    nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
-    nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
-    nnoremap <Leader>vg :vi ~/.gvimrc<CR>
-    nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
-" }
+" keep the cursor in place while joining lines
+nnoremap J mzJ`z
 
-" Editor {
-    " toggle invisibles
-    nnoremap <Leader>sl :set list!<CR>
-
-    " manually remove trailing spaces
-    nnoremap _$ :call deisufunc#Preserve("%s/\\s\\+$//e")<CR>
-
-    " reindent
-    nnoremap _= :call deisufunc#Preserve("normal gg=G")<CR>
-
-    " indent/unindent line(s) Mac OS X way
-    if deisufunc#MacVim()
-        nnoremap <D-[> <<
-        nnoremap <D-]> >>
-        vnoremap <D-[> <gv
-        vnoremap <D-]> >gv
-    endif
-
-    " general indent/unindent line(s)
-    nnoremap <Tab> >>
-    nnoremap <S-Tab> <<
-    vnoremap > >gv
-    vnoremap < <gv
-
-    " use space to toggle folding
-    nnoremap <Space> za
-    vnoremap <Space> za
-" }
-
-" Product {
-    " save before make
-    nnoremap <Leader>mm :w<CR>:make<CR>
-    nnoremap <Leader>mc :make clean<CR>
-" }
-
-" Searching and Movement {
-    " clear search highlights
-    nnoremap <CR> :nohl<CR>
-
-    " keep search matches in the middle of the window
-    nnoremap * *zzzv
-    nnoremap # #zzzv
-    nnoremap n nzzzv
-    nnoremap N Nzzzv
-
-    " delete characters untill end of the line
-    nnoremap D d$
-
-    " wrapped lines goes down/up to next row, rather than next line in file.
-    noremap j gj
-    noremap k gk
-
-    " begining and end of line
-    noremap H ^
-    noremap L $
-    vnoremap L g_
-
-    " power scroll
-    if deisufunc#MacVim()
-      nnoremap <D-k> 15gk
-      nnoremap <D-j> 15gj
-    endif
-" }
-
-" File {
-    " rename file
-    nnoremap <Leader>rn :call deisufunc#RenameFile()<CR>
-" }
-
-" Buffer {
-
-    " Open {
-        cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-        nmap <Leader>ew :e %%
-        nmap <Leader>es :sp %%
-        nmap <Leader>ev :vsp %%
-        nmap <Leader>et :tabe %%
-    " }
-
-    " Save {
-        nnoremap <C-s> :w<CR>
-        inoremap <C-s> <Esc>:w<CR>a
-
-        " allow us to save a file we don't have permission to
-        " *after* we have already opened it
-        cnoremap w!! w !sudo tee % >/dev/null
-    " }
-
-    " Quit {
-        inoremap <C-Q> <Esc>:q<CR>
-        nnoremap <C-Q> :q<CR>
-        vnoremap <C-Q> <Esc>
-
-        " :Q to quit (should be default)
-        command! Q q
-    " }
-
-    " Delete Buffer {
-        nnoremap <Leader>dd :bd<CR>
-
-        " delete buffer but preserve window
-        nnoremap <Leader>DD :ene<CR>:bw #<CR>
-    " }
-
-    " Navigate {
-        nnoremap <Left> :bprev<CR>
-        nnoremap <Right> :bnext<CR>
-
-        " switch to alternative buffer
-        nnoremap <Leader>e :e#<CR>
-    " }
-
-    " count word
-    nnoremap <Leader>cw :echo deisufunc#CountWord() . " Words"<CR>
+" quick edit vim config files
+nnoremap <Leader>vv :vi $MYVIMRC<CR>
+nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
+nnoremap <Leader>vc :vi ~/.vimrc.plugins.conf<CR>
+nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
+nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
+nnoremap <Leader>vg :vi ~/.gvimrc<CR>
+nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
 
 " }
+" -------------------------------- Formatting -------------------------------- {
 
-" Window {
-    " create
-    nnoremap <Leader>nw :new<CR>
-    nnoremap <Leader>nv :vnew<CR>
+" toggle [i]nvisibles characters
+nnoremap <Leader>i :set list!<CR>
 
-    " navigate
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-l> <C-w>l
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-k> <C-w>k
+" manually remove trailing spaces
+nnoremap _$ :call deisufunc#Preserve("%s/\\s\\+$//e")<CR>
+
+" reindent
+nnoremap _= :call deisufunc#Preserve("normal gg=G")<CR>
+
+" indent/unindent line(s) Mac OS X way
+if deisufunc#MacVim()
+    nnoremap <D-[> <<
+    nnoremap <D-]> >>
+    vnoremap <D-[> <gv
+    vnoremap <D-]> >gv
+endif
+
+" general indent/unindent line(s)
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap > >gv
+vnoremap < <gv
+
+" use space to toggle folding
+nnoremap <Space> za
+vnoremap <Space> za
+
 " }
+" --------------------------------- Product ---------------------------------- {
 
-" Tab {
-    " new tab
-    nnoremap <Leader>nt :tabnew<CR>
+" save before make
+nnoremap <Leader>mm :w<CR>:make<CR>
+nnoremap <Leader>mc :make clean<CR>
 
-    nnoremap <Up> :tabprev<CR>
-    nnoremap <Down> :tabnext<CR>
+" }
+" ------------------------------ User Interface ------------------------------ {
+
+noremap <Leader>bg :call deisufunc#ToggleBG()<CR>
+
+" }
+" -------------------------- Searching and Movement -------------------------- {
+
+" remove search highlighting
+nmap <silent> <Leader>/ :nohlsearch<CR>
+
+" keep search matches in the middle of the window
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" delete characters untill end of the line
+nnoremap D d$
+
+" wrapped lines goes down/up to next row, rather than next line in file.
+noremap j gj
+noremap k gk
+
+" begining and end of line
+noremap H ^
+noremap L $
+vnoremap L g_
+
+" power scroll
+if deisufunc#MacVim()
+  nnoremap <D-k> 15gk
+  nnoremap <D-j> 15gj
+endif
+
+" }
+" ----------------------------------- File ----------------------------------- {
+
+" rename file
+nnoremap <Leader>rn :call deisufunc#RenameFile()<CR>
+
+" }
+" ---------------------------------- Buffer ---------------------------------- {
+
+" open
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+nmap <Leader>ew :e %%
+nmap <Leader>es :sp %%
+nmap <Leader>ev :vsp %%
+nmap <Leader>et :tabe %%
+
+" save
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
+
+" allow us to save a file we don't have permission to
+" *after* we have already opened it
+cnoremap w!! w !sudo tee % >/dev/null
+
+" quit
+inoremap <C-Q> <Esc>:q<CR>
+nnoremap <C-Q> :q<CR>
+vnoremap <C-Q> <Esc>
+
+" :Q to quit (should be default)
+command! Q q
+
+" delete buffer
+nnoremap <Leader>dd :bd<CR>
+
+" delete buffer but preserve window
+nnoremap <Leader>DD :ene<CR>:bw #<CR>
+
+" navigate
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
+
+" switch to alternative buffer
+nnoremap <Leader>e :e#<CR>
+
+" count word
+nnoremap <Leader>cw :echo deisufunc#CountWord() . " Words"<CR>
+
+" }
+" ---------------------------------- Window ---------------------------------- {
+
+" create
+nnoremap <Leader>nw :new<CR>
+nnoremap <Leader>nv :vnew<CR>
+
+" navigate
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" }
+" ----------------------------------- Tab ------------------------------------ {
+
+" new tab
+nnoremap <Leader>nt :tabnew<CR>
+
+nnoremap <Up> :tabprev<CR>
+nnoremap <Down> :tabnext<CR>
+
 " }
