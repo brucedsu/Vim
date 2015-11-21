@@ -82,6 +82,12 @@ silent function! deisufunc#BaseFoldText()
     return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
 endfunction
 
+" vim config files folding text
+function! deisufunc#DotVimsFoldText()
+    " remove quatation marks and the following space
+    return substitute(deisufunc#BaseFoldText(), "\" ", "", "g")
+endfunction
+
 " }
 " ------------------------------- Preservation ------------------------------- {
 

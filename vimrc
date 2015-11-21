@@ -1,5 +1,7 @@
 " ---------------------------- Modeline and Notes ---------------------------- {
-" vim: ts=4 sts=4 sw=4 tw=80 foldlevel=0 foldmarker={,} foldmethod=marker foldtext=VimConfigFileFoldText()
+" vim: tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
+" vim: foldlevel=0 foldmarker={,} foldmethod=marker
+" vim: foldtext=deisufunc#DotVimsFoldText()
 "    ____       _ ____                   _
 "   |  _ \  ___(_) ___| _   _     __   _(_)_ __ ___  _ __ ___
 "   | | | |/ _ \ \___ \| | | |____\ \ / / | '_ ` _ \| '__/ __|
@@ -34,22 +36,25 @@ endif
 " }
 " --------------------------------- General ---------------------------------- {
 
-set autoread
+set autoread                    " auto read when a file is changed from outside
 set autowrite
-set hidden
-set undolevels=1000
+set hidden                      " allows hide buffers with unsaved changes
+set history=1000                " store lots of :cmdline and search history
 set synmaxcol=128
-set backspace=indent,eol,start
-set clipboard=unnamed
-set cmdheight=2
-set completeopt=menuone
-set history=1000
+set clipboard=unnamed           " make vim use the system default clipboard
+set cmdheight=2                 " number of screen lines to use for the cmd line
 set visualbell
 set ttyfast
 set ttyscroll=3
 set lazyredraw
-set undofile
-set undoreload=10000
+set title                       " show file name in titlebar
+
+" the longest option makes completion insert the longest prefix of all
+" the possible matches
+set completeopt=menu,menuone,longest
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 
 " time out on both key codes and mappings
 set timeout
@@ -63,14 +68,18 @@ autocmd FocusLost * :silent! wall
 " }
 " --------------------------------- Backups ---------------------------------- {
 
-" backups are nice
-set backup
+" undo
+set undofile                    " store undo states even when files are closed
+set undodir=~/.vim/tmp/undo//   " where to save undo histories
+set undolevels=1000             " use many levels of undo
+set undoreload=10000            " number of lines to save for undo
 
-" don't bother with swap files
-set noswapfile
-
-set undodir=~/.vim/tmp/undo//
+" backup
+set backup                      " backups are nice
 set backupdir=~/.vim/tmp/backup//
+
+" swap
+set noswapfile                  " no swap files
 set directory=~/.vim/tmp/swap//
 
 " make backup folders automatically if they don't exist
@@ -95,7 +104,7 @@ autocmd BufNewFile,BufReadPost *vim.plugins* set filetype=vim
 " encoding
 set encoding=utf-8
 
-" spelling
+" spelling: default is off
 set nospell
 set spelllang=en
 
@@ -129,7 +138,7 @@ autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwi
 au! FileType python setl nosmartindent
 
 " toggle paste
-set pastetoggle=<F2>
+set pastetoggle=<F4>
 
 " folding
 set foldmethod=syntax
@@ -152,12 +161,6 @@ augroup folding
         \endif
 augroup END
 
-" vim config files folding text
-function! VimConfigFileFoldText()
-    " remove quatation marks and the following space
-    return substitute(deisufunc#BaseFoldText(), "\" ", "", "g")
-endfunction
-
 " remove trailing spaces before saving
 autocmd BufWritePre * :call deisufunc#Preserve("%s/\\s\\+$//e")
 
@@ -167,11 +170,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }
 " ------------------------------ User Interface ------------------------------ {
 
-" show uncomplete command
-set showcmd
-
-" show mode
-set showmode
+set showcmd                     " show incomplete cmds down the bottom
+set noshowmode                  " don't show the mode at the bottom
 
 " at least 3 lines above and below cursor
 set scrolloff=3
@@ -187,6 +187,7 @@ runtime macros/matchit.vim
 set wildmenu
 set wildmode=list:longest,full
 set wildignorecase
+set wildignore=*.o,*.obj,*~
 
 " color scheme: use solarized dark as default
 syntax on
