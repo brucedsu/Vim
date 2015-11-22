@@ -50,7 +50,11 @@ augroup END
 " }
 " -------------------------------- Navigation -------------------------------- {
 
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', { 'on': [
+    \ '<Plug>(easymotion-bd-w)',
+    \ '<Plug>(easymotion-bd-W)',
+    \ '<Plug>(easymotion-j)',
+    \ '<Plug>(easymotion-k)'] }
 if v:version >= 703
     Plug 'myusuf3/numbers.vim'
 endif
