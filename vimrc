@@ -37,11 +37,6 @@ endif
 " --------------------------------- General ---------------------------------- {
 
 filetype plugin indent on
-set mouse=a                     " enables the mouse in all modes
-set mousehide                   " hide mouse when typing
-set autoread                    " auto read when a file is changed from outside
-set autowrite
-set hidden                      " allows hide buffers with unsaved changes
 set history=1000                " store lots of :cmdline and search history
 set clipboard=unnamed           " make vim use the system default clipboard
 set cmdheight=2                 " number of screen lines to use for the cmd line
@@ -49,10 +44,24 @@ set visualbell
 set ttyscroll=3
 set title                       " show file name in titlebar
 
+" mouse
+set mouse=a                     " enables the mouse in all modes
+set mousehide                   " hide mouse when typing
+
+" buffer
+set autoread                    " automatically read files changed outside vim
+set autowrite                   " automatically save before make/exec command
+set hidden                      " allows hide buffers with unsaved changes
+
 " better rendering
 set ttyfast                     " send more characters to the screen for redrawing
 set lazyredraw                  " don't redraw screen while executing a macro
 set synmaxcol=128               " don't syntax highlight things after column 128
+
+" vertical/horizontal scroll off
+set scrolloff=3                 " at least 3 lines above and below cursor
+set sidescrolloff=7
+set sidescroll=1
 
 " the longest option makes completion insert the longest prefix of all
 " the possible matches
@@ -125,15 +134,14 @@ autocmd BufReadPost *
 " }
 " -------------------------------- Formatting -------------------------------- {
 
-" don't wrap long lines
-set nowrap
+set nowrap                      " don't wrap long lines
 
 " indentation
-set expandtab
+set expandtab                   " use spaces instead of tabs
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set autoindent
+set autoindent                  " auto indent new lines
 set smartindent
 set smarttab
 
@@ -177,9 +185,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 set showcmd                     " show incomplete cmds down the bottom
 set showmode                    " show mode at the bottom
-
-" at least 3 lines above and below cursor
-set scrolloff=3
 
 " status line
 set laststatus=2
