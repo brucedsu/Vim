@@ -36,18 +36,23 @@ endif
 " }
 " --------------------------------- General ---------------------------------- {
 
+filetype plugin indent on
+set mouse=a                     " enables the mouse in all modes
+set mousehide                   " hide mouse when typing
 set autoread                    " auto read when a file is changed from outside
 set autowrite
 set hidden                      " allows hide buffers with unsaved changes
 set history=1000                " store lots of :cmdline and search history
-set synmaxcol=128
 set clipboard=unnamed           " make vim use the system default clipboard
 set cmdheight=2                 " number of screen lines to use for the cmd line
 set visualbell
-set ttyfast
 set ttyscroll=3
-set lazyredraw
 set title                       " show file name in titlebar
+
+" better rendering
+set ttyfast                     " send more characters to the screen for redrawing
+set lazyredraw                  " don't redraw screen while executing a macro
+set synmaxcol=128               " don't syntax highlight things after column 128
 
 " the longest option makes completion insert the longest prefix of all
 " the possible matches
@@ -171,13 +176,14 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " ------------------------------ User Interface ------------------------------ {
 
 set showcmd                     " show incomplete cmds down the bottom
-set noshowmode                  " don't show the mode at the bottom
+set showmode                    " show mode at the bottom
 
 " at least 3 lines above and below cursor
 set scrolloff=3
 
 " status line
 set laststatus=2
+set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
 
 " match
 set showmatch
@@ -220,7 +226,7 @@ endif
 set nolist
 set listchars=tab:▸\ ,trail:▫,eol:¬,extends:❯,precedes:❮
 
-" hightlight current cursor position
+" highlight current cursor position
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
