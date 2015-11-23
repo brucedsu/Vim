@@ -56,7 +56,7 @@ set hidden                      " allows hide buffers with unsaved changes
 " better rendering
 set ttyfast                     " send more characters to the screen for redrawing
 set lazyredraw                  " don't redraw screen while executing a macro
-set synmaxcol=128               " don't syntax highlight things after column 128
+set synmaxcol=256               " don't syntax highlight things after column 256
 
 " vertical/horizontal scroll off
 set scrolloff=3                 " at least 3 lines above and below cursor
