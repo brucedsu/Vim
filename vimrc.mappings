@@ -133,9 +133,9 @@ inoremap <C-s> <Esc>:w<CR>a
 cnoremap w!! w !sudo tee % >/dev/null
 
 " quit
-inoremap <C-Q> <Esc>:q<CR>
-nnoremap <C-Q> :q<CR>
-vnoremap <C-Q> <Esc>
+inoremap <C-q> <Esc>:q<CR>
+nnoremap <C-q> :q<CR>
+vnoremap <C-q> <Esc>
 
 " :Q to quit (should be default)
 command! Q q
