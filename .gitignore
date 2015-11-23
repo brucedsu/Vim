@@ -4,3 +4,4 @@ plugins/
 
 view/
 tmp/
+autoload/plug.vim
