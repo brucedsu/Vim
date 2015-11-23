@@ -123,7 +123,7 @@ set nospell
 set spelllang=en
 
 " filetype based spelling
-autocmd BufRead,BufNewFile *.md,*.txt setlocal spell
+autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
 
 " return to last edit position when opening files
 autocmd BufReadPost *
@@ -199,6 +199,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignorecase
 set wildignore=*.o,*.obj,*~
+set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
 
 " color scheme: use solarized dark as default
 syntax on

@@ -20,6 +20,11 @@ nnoremap <Leader>cd :cd %:p:h<CR>
 " toggle spell checking
 nnoremap <silent> <Leader>ss :set spell!<CR>
 
+" do not save the replaced text in register when pasting in visual mode
+" paste the originally yanked text when hit p/P next time
+xnoremap p pgvy
+xnoremap P Pgvy
+
 " split: S is covered by cc
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
@@ -124,9 +129,10 @@ nmap <Leader>es :sp %%
 nmap <Leader>ev :vsp %%
 nmap <Leader>et :tabe %%
 
-" save
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>a
+" save: use update instead of write
+" update only writes when buffer has been modified
+inoremap <C-s> <Esc>:update<CR>a
+nnoremap <C-s> :update<CR>
 
 " allow us to save a file we don't have permission to
 " *after* we have already opened it
