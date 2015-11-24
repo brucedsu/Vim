@@ -129,10 +129,9 @@ nmap <Leader>es :sp %%
 nmap <Leader>ev :vsp %%
 nmap <Leader>et :tabe %%
 
-" save: use update instead of write
-" update only writes when buffer has been modified
-inoremap <C-s> <Esc>:update<CR>a
-nnoremap <C-s> :update<CR>
+" save
+inoremap <C-s> <Esc>:write<CR>a
+nnoremap <C-s> :write<CR>
 
 " allow us to save a file we don't have permission to
 " *after* we have already opened it

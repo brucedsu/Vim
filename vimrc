@@ -221,7 +221,6 @@ set ruler
 
 " colorcolumn
 if exists('&colorcolumn')
-    " default colorcolumn, 80
     set colorcolumn=80
 
     " filetype based color column
