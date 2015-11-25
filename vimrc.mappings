@@ -86,8 +86,8 @@ noremap <Leader>bg :call deisufunc#ToggleBG()<CR>
 " }
 " -------------------------- Searching and Movement -------------------------- {
 
-" remove search highlighting
-nmap <silent> <Leader>/ :nohlsearch<CR>
+" redraws the screen and removes any search highlighting
+nnoremap <C-L> :nohl<CR><C-L>
 
 " keep search matches in the middle of the window
 nnoremap * *zzzv
@@ -169,10 +169,10 @@ nnoremap <Leader>nw :new<CR>
 nnoremap <Leader>nv :vnew<CR>
 
 " navigate
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+nnoremap <Left> <C-w>h
+nnoremap <Right> <C-w>l
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
 
 " }
 " ----------------------------------- Tab ------------------------------------ {
@@ -180,7 +180,10 @@ nnoremap <C-k> <C-w>k
 " new tab
 nnoremap <Leader>nt :tabnew<CR>
 
-nnoremap <Up> :tabprev<CR>
-nnoremap <Down> :tabnext<CR>
+" close tab
+nnoremap <Leader>ct :tabclose<CR>
+
+" nnoremap <Up> :tabprev<CR>
+" nnoremap <Down> :tabnext<CR>
 
 " }
