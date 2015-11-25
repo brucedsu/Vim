@@ -11,16 +11,21 @@
 " DeiSu's personal functions.
 " Copyright © 2014-2015 DeiSu. All Rights Reserved.
 " }
-" -------------------------------- Platforms --------------------------------- {
+" ------------------------------- Environment -------------------------------- {
 
 " OS X
 silent function! deisufunc#OSX()
     return has('macunix')
 endfunction
 
-" MacVim
+" MacVim with gui_running
 silent function! deisufunc#MacVim()
-    return has('gui_macvim')
+    return has('gui_macvim') && has('gui_running')
+endfunction
+
+" iTerm2
+silent function! deisufunc#iTerm2()
+    return $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
 endfunction
 
 " Linux

@@ -18,7 +18,17 @@
 nnoremap <Leader>cd :cd %:p:h<CR>
 
 " toggle spell checking
-nnoremap <silent> <Leader>ss :set spell!<CR>
+nnoremap <silent> <Leader>ss :setlocal spell!<CR>
+
+" spelling shortcuts using <Leader>
+" ]s next misspelled word
+" [s previous misspelled word
+" zg add to dict
+" z= get sugesstions
+nnoremap <Leader>sn ]s
+nnoremap <Leader>sp [s
+nnoremap <Leader>sa zg
+nnoremap <Leader>su z=
 
 " do not save the replaced text in register when pasting in visual mode
 " paste the originally yanked text when hit p/P next time
@@ -112,6 +122,9 @@ if deisufunc#MacVim()
   nnoremap <D-k> 15gk
   nnoremap <D-j> 15gj
 endif
+
+noremap <C-j> 15gj
+noremap <C-k> 15gk
 
 " }
 " ----------------------------------- File ----------------------------------- {

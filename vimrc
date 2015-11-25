@@ -44,6 +44,13 @@ set visualbell
 set ttyscroll=3
 set title                       " show file name in titlebar
 
+" let vim use system default clipboard
+if has('unnamedplus')
+    set clipboard=unnamedplus,unnamed
+else
+    set clipboard=unnamed
+endif
+
 " mouse
 set mouse=a                     " enables the mouse in all modes
 set mousehide                   " hide mouse when typing
@@ -210,7 +217,7 @@ if filereadable(expand("~/.vim/plugins/vim-colors-solarized/colors/solarized.vim
 endif
 
 " italic comment in iTerm2
-if $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
+if deisufunc#iTerm2()
     highlight Comment cterm=italic
 endif
 
