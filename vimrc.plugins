@@ -93,11 +93,12 @@ Plug 'keith/swift.vim', { 'for': 'swift' }
 Plug 'klen/python-mode', { 'for': 'python' }
 
 " Markdown
-Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
-Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'nelstrom/vim-markdown-folding', { 'for': ['markdown', 'md'] }
+Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md'] }
 if executable('redcarpet') && executable('instant-markdown-d')
-    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
+    Plug 'suan/vim-instant-markdown', { 'for': ['markdown', 'md'] }
 endif
+Plug 'jszakmeister/markdown2ctags', { 'for': ['markdown', 'md']}
 
 " }
 " ------------------------- Front End Web Development -------------------------{
