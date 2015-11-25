@@ -81,6 +81,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
 " }
 " -------------------------------- Languages --------------------------------- {
@@ -123,6 +124,12 @@ Plug 'scrooloose/syntastic', { 'for': ['python', 'javascript', 'html', 'css'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
+
+" }
+" -------------------------------- Utilities --------------------------------- {
+
+Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': 'VimShell' }
+            \| Plug 'Shougo/vimshell.vim', { 'on': 'VimShell' }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {
