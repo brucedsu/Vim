@@ -126,6 +126,11 @@ endif
 noremap <C-j> 15gj
 noremap <C-k> 15gk
 
+" scroll through the command history
+" don't forget the q: command which opens the command-line window
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+
 " }
 " ----------------------------------- File ----------------------------------- {
 
