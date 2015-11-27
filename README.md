@@ -24,7 +24,7 @@ the `--with-override-system-vim` flag on
 ## Useful Component(s)
 
 1. [Seil: map ESC to caps lock on OS X](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
-2. Note: I no longer map ESC to caps lock, because I switched to HHKB pro 2.
+2. Note: I no longer map ESC to caps lock, because I switched to HHKB pro 2. LOL
 
 ## Installation
 
@@ -49,8 +49,15 @@ the `--with-override-system-vim` flag on
 * iTerm 2: blinking box in both insert and normal mode.
 * Note: the code for switching cursor shape between vertical bar and box in iTerm 2 is in `deprecated.vimrc`.
 
-## To-dos:
+## Function Keys
 
-1. Code templates (✓ UltiSnips)
-2. iTerm cursor: NORMAL = block, INSERT = vertical bar (✓ not PERFECT)
-3. Reformat code (not only reindent)
+* __F1__: CtrlPBuffer
+* __F2__: NERDTreeToggle
+* __F3__: TagbarToggle
+* __F4__: PasteToggle
+* __F5__: indentLinesToggle
+* __F6__: RainbowParentheses
+* __F7__: Autoformat
+* __F8__: VimShell
+* __F12__: RunCode
+
