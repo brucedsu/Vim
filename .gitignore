@@ -6,3 +6,4 @@ view/
 tmp/
 autoload/plug.vim
 *.pyc
+autoload/plug.vim.old

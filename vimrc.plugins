@@ -61,6 +61,11 @@ endif
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] }
 Plug 'Valloric/ListToggle'
+if executable('ag') || executable('ack')
+    Plug 'dyng/ctrlsf.vim', { 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
+        \ '<Plug>CtrlSFVwordExec', '<Plug>CtrlSFCwordPath', '<Plug>CtrlSFPwordPath',
+        \ 'CtrlSFOpen', 'CtrlSFToggle' ] }
+endif
 
 " }
 " --------------------------------- Editing ---------------------------------- {
