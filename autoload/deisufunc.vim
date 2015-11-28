@@ -28,6 +28,11 @@ silent function! deisufunc#iTerm2()
     return $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
 endfunction
 
+" Apple Terminal
+silent function! deisufunc#AppleTerminal()
+    return $TERM_PROGRAM =~ "Apple_Terminal"
+endfunction
+
 " Linux
 silent function! deisufunc#Linux()
     return has('unix') && !has('macunix') && !has('win32unix')

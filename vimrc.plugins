@@ -76,7 +76,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
-Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways', { 'for': [
+    \ 'html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
 Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
@@ -124,9 +125,9 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer']}
 if executable('ctags')
-    Plug 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] }
 endif
-Plug 'scrooloose/syntastic', { 'for': ['python', 'javascript', 'html', 'css'] }
+Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'

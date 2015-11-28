@@ -44,6 +44,13 @@ set visualbell
 set ttyscroll=3
 set title                       " show file name in titlebar
 
+" the new regex engine is so slow, use the old one
+" consider removing this in the future when the new regex engine becomes faster
+if v:version >= 704
+    set regexpengine=1
+endif
+
+
 " let vim use system default clipboard
 if has('unnamedplus')
     set clipboard=unnamedplus,unnamed
@@ -191,7 +198,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " ------------------------------ User Interface ------------------------------ {
 
 set showcmd                     " show incomplete cmds down the bottom
-set showmode                    " show mode at the bottom
+set noshowmode                  " don't show mode at the bottom
 
 " status line
 set laststatus=2

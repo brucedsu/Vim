@@ -65,9 +65,15 @@ Plug 'chilicuil/conque'
 " }
 " ---------------------- deprecated vimrc.plugins.conf ----------------------- {
 
+" YouCompleteMe
+" don't really need preview window
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 " Syntastic
 " special characters cause ruler and colorcolumn twisted
-" just stick to default ones
+" just stick to default signs
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✠'
