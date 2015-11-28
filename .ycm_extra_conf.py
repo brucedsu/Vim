@@ -117,7 +117,7 @@ def FlagsForFile( filename, **kwargs ):
     final_flags += ['-x', 'c']
   elif filetype == 'cpp':
     final_flags += ['-x', 'c++']
-    final_flags += ['-std==c++11']
+    final_flags += ['-std=c++11']
   elif filetype == 'objc':
     final_flags += ['-ObjC']
 
