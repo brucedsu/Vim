@@ -82,11 +82,16 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " }
-" --------------------------------- Product ---------------------------------- {
+" ----------------------------------- Run ------------------------------------ {
 
 " save before make
 nnoremap <Leader>mm :w<CR>:make<CR>
 nnoremap <Leader>mc :make clean<CR>
+
+" run current file in VimShell
+" suppert interaction, e.g. user input
+nnoremap <F11> :call deisufunc#RunCurrentFile()<CR>
+inoremap <F11> <Esc>:call deisufunc#RunCurrentFile()<CR>
 
 " }
 " ------------------------------ User Interface ------------------------------ {

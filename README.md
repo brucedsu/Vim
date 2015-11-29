@@ -58,6 +58,7 @@ the `--with-override-system-vim` flag on
 * __F5__: indentLinesToggle
 * __F6__: RainbowParentheses
 * __F7__: Autoformat
-* __F8__: VimShell
-* __F12__: RunCode
+* __F8__: ToggleVimShell
+* __F11__: RunCode in VimShell, supports interaction, e.g. user input
+* __F12__: RunCode by vim-quickrun, no interaction, but fast
 

@@ -131,12 +131,13 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
+Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] }
 
 " }
 " -------------------------------- Utilities --------------------------------- {
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': 'VimShell' }
-            \| Plug 'Shougo/vimshell.vim', { 'on': 'VimShell' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': ['VimShell'] }
+Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {

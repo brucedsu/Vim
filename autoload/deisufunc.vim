@@ -101,6 +101,38 @@ function! deisufunc#DotVimsFoldText()
 endfunction
 
 " }
+" ----------------------------------- Run ------------------------------------ {
+
+function! deisufunc#RunCurrentFile()
+    let s:run_file_name = @%
+    let s:run_file_name_without_extension = expand('%:t:r')
+    let s:run_file_type = &filetype
+
+    " generate run command
+    let s:run_file_command = "clear && "
+    if s:run_file_type == 'cpp'
+        let s:run_file_command = s:run_file_command . "g++ " . s:run_file_name .
+            \ " -o " . s:run_file_name_without_extension .
+            \ " && ./" . s:run_file_name_without_extension
+    elseif s:run_file_type == 'c'
+        let s:run_file_command = s:run_file_command . "gcc " . s:run_file_name .
+            \ " -o " . s:run_file_name_without_extension .
+            \ " && ./" . s:run_file_name_without_extension
+    elseif s:run_file_type == 'python'
+        let s:run_file_command = s:run_file_command . "python3 " . s:run_file_name
+    endif
+
+    " open a new window and resize it
+    execute 'split'
+    call deisufunc#ResizeCurrentWindowHeight(0.5, 10)
+
+    " open VimShell
+    execute 'VimShell'
+    call feedkeys(s:run_file_command)
+    call feedkeys("\<CR>")
+endfunction
+
+" }
 " ------------------------------- Preservation ------------------------------- {
 
 " preserve cursor postion while excuting commands
@@ -137,6 +169,12 @@ function! deisufunc#ToggleBG()
     else
         set background=dark
     endif
+endfunction
+
+function! deisufunc#ResizeCurrentWindowHeight(ratio, min)
+    let s:expected_height = winheight(0) * a:ratio
+    let s:new_height =  s:expected_height < a:min ? a:min : s:expected_height
+    execute "resize".string(s:expected_height)
 endfunction
 
 " }
