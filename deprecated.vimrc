@@ -106,4 +106,9 @@ nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 nnoremap <Leader>0 :tablast<CR>
 
+" <Up> and <Down> are used for window navigation
+" almost never use tabs
+nnoremap <Up> :tabprev<CR>
+nnoremap <Down> :tabnext<CR>
+
 " }

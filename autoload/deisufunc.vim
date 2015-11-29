@@ -104,6 +104,9 @@ endfunction
 " ----------------------------------- Run ------------------------------------ {
 
 function! deisufunc#RunCurrentFile()
+    " save current file
+    execute 'update'
+
     let s:run_file_name = @%
     let s:run_file_name_without_extension = expand('%:t:r')
     let s:run_file_type = &filetype

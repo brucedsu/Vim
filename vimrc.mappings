@@ -135,6 +135,8 @@ noremap <C-k> 15gk
 " don't forget the q: command which opens the command-line window
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
 
 " }
 " ----------------------------------- File ----------------------------------- {
@@ -205,8 +207,5 @@ nnoremap <Leader>nt :tabnew<CR>
 
 " close tab
 nnoremap <Leader>ct :tabclose<CR>
-
-" nnoremap <Up> :tabprev<CR>
-" nnoremap <Down> :tabnext<CR>
 
 " }
