@@ -41,6 +41,12 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 " keep the cursor in place while joining lines
 nnoremap J mzJ`z
 
+" disable C-a on tmux or on screen
+if $TERM =~ 'screen'
+    nnoremap <C-a> <nop>
+    nnoremap <Leader><C-a> <C-a>
+endif
+
 " quick edit vim config files
 nnoremap <Leader>vv :vi $MYVIMRC<CR>
 nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
@@ -138,6 +144,12 @@ cnoremap <C-k> <Up>
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 
+" quickfix and location list
+nnoremap ]q :cnext<CR>zz
+nnoremap [q :cprev<CR>zz
+nnoremap ]l :lnext<CR>zz
+nnoremap [l :lprev<CR>zz
+
 " }
 " ----------------------------------- File ----------------------------------- {
 
@@ -177,8 +189,10 @@ nnoremap <Leader>dd :bd<CR>
 nnoremap <Leader>DD :ene<CR>:bw #<CR>
 
 " navigate
-nnoremap <Left> :bprev<CR>
-nnoremap <Right> :bnext<CR>
+" nnoremap <Left> :bprev<CR>
+" nnoremap <Right> :bnext<CR>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
 
 " switch to alternative buffer
 nnoremap <Leader>e :e#<CR>

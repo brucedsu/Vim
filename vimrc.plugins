@@ -73,8 +73,8 @@ endif
 Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
 Plug 'Yggdroot/indentLine', { 'on': ['IndentLinesEnable', 'IndentLinesToggle'] }
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'htmldjango', 'php', 'xml'] }
+" Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'Valloric/MatchTagAlways', { 'for': [
     \ 'html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
@@ -123,12 +123,15 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 " ----------------------------------- IDE ------------------------------------ {
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer']}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+    \ 'on': ['Files', 'Buffers'] }
+Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+" Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
 if executable('ctags')
     Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] }
 endif
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] }
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] }
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
 Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] }
@@ -137,7 +140,7 @@ Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] }
 " -------------------------------- Utilities --------------------------------- {
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': ['VimShell'] }
-Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] }
+    \| Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {

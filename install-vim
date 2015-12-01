@@ -15,7 +15,7 @@ tic xterm-256color-italic.terminfo
 # 3. Italic Font for tmux in iTerm2
 cd ~/.vim/tmux-italic
 tic screen-256color-italic.terminfo
-echo "set -g default-terminal \"screen-256color-italic\"" >> ~/.tmux.conf
+# echo "set -g default-terminal \"screen-256color-italic\"" >> ~/.tmux.conf
 
 # 4. Open vim, install plugins and quit
 vim +PlugInstall +qall

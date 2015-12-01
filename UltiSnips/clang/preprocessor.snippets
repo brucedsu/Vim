@@ -1,13 +1,14 @@
-#-------------------
-# Preprocessor
-#-------------------
-snippet inc "#include <> (inc)"
-#include <${0:/* header */}.h>
+snippet inc< "#include <...>" b
+#include <${0:/* header */}>
 endsnippet
 
-snippet Inc "#include local header (Inc)"
+snippet inc "#include ..." b
 #include "${0:/* header */}.h"
 endsnippet
+
+
+
+
 
 snippet stdio "#include <stdio.h> (stdio)"
 #include <stdio.h>
@@ -29,8 +30,10 @@ snippet def "#define ..."
 #define ${0:/* macro */}
 endsnippet
 
+
+
 snippet ifndef "#ifndef ... #define ... #endif"
-#ifndef ${1:`!v toupper(Filename())`_h}
+#ifndef ${1:`!p snip.rv = snip.basename.upper()`_H}
 #define $1
 $0
 #endif

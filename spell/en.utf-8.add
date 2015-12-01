@@ -104,3 +104,8 @@ NSEntityDescription
 NSFetchRequest
 NSFRC
 objectAtIndexPath
+iterable
+blog
+teamtreehouse
+Powerline
+tmux

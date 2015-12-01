@@ -212,10 +212,13 @@ runtime macros/matchit.vim
 set wildmenu
 set wildmode=list:longest,full
 set wildignorecase
-set wildignore=*.o,*.obj,*~
-set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store
+set wildignore=*.git/*,*tmp/*
+set wildignore+=*DS_Store*
+set wildignore+=*.pdf,*.zip
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.so,*.o,*.a,*.obj,*.swp,*.pyc,*.pyo,*.class
 
-" color scheme: use solarized dark as default
+" colors
 syntax on
 set background=dark
 
