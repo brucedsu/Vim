@@ -220,6 +220,10 @@ set wildignore+=*.so,*.o,*.a,*.obj,*.swp,*.pyc,*.pyo,*.class
 
 " colors
 syntax on
+
+if &term == 'xterm' || &term == 'screen'
+    set t_Co=256
+endif
 set background=dark
 
 if filereadable(expand("~/.vim/plugins/vim-colors-solarized/colors/solarized.vim"))
@@ -227,7 +231,7 @@ if filereadable(expand("~/.vim/plugins/vim-colors-solarized/colors/solarized.vim
 endif
 
 " italic comment in iTerm2
-if deisufunc#iTerm2()
+if deisufunc#IsiTerm2()
     highlight Comment cterm=italic
 endif
 

@@ -11,36 +11,44 @@
 " DeiSu's personal functions.
 " Copyright © 2014-2015 DeiSu. All Rights Reserved.
 " }
-" ------------------------------- Environment -------------------------------- {
+" ------------------------------- Identify OS -------------------------------- {
 
-" OS X
-silent function! deisufunc#OSX()
+" Mac OS X
+silent function! deisufunc#OnOSX()
     return has('macunix')
 endfunction
 
-" MacVim with gui_running
-silent function! deisufunc#MacVim()
-    return has('gui_macvim') && has('gui_running')
-endfunction
-
-" iTerm2
-silent function! deisufunc#iTerm2()
-    return $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
-endfunction
-
-" Apple Terminal
-silent function! deisufunc#AppleTerminal()
-    return $TERM_PROGRAM =~ "Apple_Terminal"
-endfunction
-
 " Linux
-silent function! deisufunc#Linux()
+silent function! deisufunc#OnLinux()
     return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 
 " Windows
-silent function! deisufunc#Windows()
+silent function! deisufunc#OnWindows()
     return (has('win16') || has('win32') || has('win64'))
+endfunction
+
+" }
+" ------------------------------- Identify App ------------------------------- {
+
+" MacVim app, not MacVim bin running in terminal
+silent function! deisufunc#IsMacVimApp()
+    return has('gui_macvim') && has('gui_running')
+endfunction
+
+" iTerm2
+silent function! deisufunc#IsiTerm2()
+    return $TERM_PROGRAM =~ "iTerm" || $TERM =~ "xterm-256color-italic"
+endfunction
+
+" Apple Terminal
+silent function! deisufunc#IsAppleTerminal()
+    return $TERM_PROGRAM =~ "Apple_Terminal"
+endfunction
+
+" tmux
+silent function! deisufunc#Istmux()
+    return $TERM =~ 'screen'
 endfunction
 
 " }

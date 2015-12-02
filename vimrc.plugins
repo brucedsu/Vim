@@ -123,10 +123,13 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 " ----------------------------------- IDE ------------------------------------ {
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
-    \ 'on': ['Files', 'Buffers'] }
-Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
-" Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+if deisufunc#Istmux()
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+        \ 'on': ['Files', 'Buffers'] }
+    Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+else
+    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+endif
 if executable('ctags')
     Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] }
 endif
