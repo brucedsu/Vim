@@ -1,9 +1,10 @@
 .*
 bundle/
 plugins/
-
 view/
 tmp/
+
 autoload/plug.vim
-*.pyc
 autoload/plug.vim.old
+*.pyc
+vim.log

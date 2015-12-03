@@ -20,17 +20,16 @@ set nocompatible
 set shell=/bin/zsh
 
 " }
-" ------------------------------ Before Config ------------------------------- {
+" ---------------------------------- Before ---------------------------------- {
 
+" preferences
+let g:deisu_preferences = {}
+let g:deisu_preferences.autocomplete_method = 'ycm'
+let g:deisu_preferences.color_scheme = 'solarized'
+
+" load additional preferences
 if filereadable(expand("~/.vimrc.before"))
     source ~/.vimrc.before
-endif
-
-" }
-" ------------------------------- Load Plugins ------------------------------- {
-
-if filereadable(expand("~/.vimrc.plugins"))
-    source ~/.vimrc.plugins
 endif
 
 " }
@@ -197,6 +196,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }
 " ------------------------------ User Interface ------------------------------ {
 
+syntax on
 set showcmd                     " show incomplete cmds down the bottom
 set noshowmode                  " don't show mode at the bottom
 
@@ -217,23 +217,6 @@ set wildignore+=*DS_Store*
 set wildignore+=*.pdf,*.zip
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.o,*.a,*.obj,*.swp,*.pyc,*.pyo,*.class
-
-" colors
-syntax on
-
-if &term == 'xterm' || &term == 'screen'
-    set t_Co=256
-endif
-set background=dark
-
-if filereadable(expand("~/.vim/plugins/vim-colors-solarized/colors/solarized.vim"))
-    colorscheme solarized
-endif
-
-" italic comment in iTerm2
-if deisufunc#IsiTerm2()
-    highlight Comment cterm=italic
-endif
 
 " number and ruler
 set number
@@ -279,17 +262,21 @@ if filereadable(expand("~/.vimrc.mappings"))
 endif
 
 " }
-" ------------------------------ Config Plugins ------------------------------ {
+" --------------------------------- Plugins ---------------------------------- {
 
-if filereadable(expand("~/.vimrc.plugins.conf"))
-  source ~/.vimrc.plugins.conf
+if filereadable(expand("~/.vimrc.plugins"))
+    source ~/.vimrc.plugins
 endif
 
-" }
-" ---------------------------------- Local ----------------------------------- {
+" color scheme
+set background=dark
+call deisufunc#SetColorScheme(g:deisu_preferences.color_scheme)
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+" }
+" ---------------------------------- After ----------------------------------- {
+
+if filereadable(expand("~/.vimrc.after"))
+  source ~/.vimrc.after
 endif
 
 " }

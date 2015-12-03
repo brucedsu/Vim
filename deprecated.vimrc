@@ -29,6 +29,11 @@ endif
 " too many snippets, blow up the completion menu, wtf
 Plug 'honza/vim-snippets'
 
+" Editing
+" bind tmux prefix to <C-a>
+" never used
+Plug 'tpope/vim-speeddating'
+
 " Refactor
 " good plugin, but never used
 Plug 'tommcdo/vim-exchange'
@@ -161,6 +166,11 @@ nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline -vertical outline<CR
 
 " }
 " ------------------------ deprecated vimrc.mappings ------------------------- {
+
+" Buffer
+" arrow keys are used for window navigation
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
 
 " Tab
 " use these maps for airline commands

@@ -17,10 +17,15 @@
 
 " automatically install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+" vim-plug mappings
+nnoremap <Leader>vi :PlugInstall<CR>
+nnoremap <Leader>vu :PlugUpdate<CR>
+nnoremap <Leader>vs :PlugStatus<CR>
 
 call plug#begin('~/.vim/plugins')
 
@@ -28,9 +33,64 @@ call plug#begin('~/.vim/plugins')
 " -------------------------------- Completion -------------------------------- {
 
 Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips', { 'on': [] }
-Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') }
-Plug 'Shougo/neocomplcache.vim', { 'on': [] }
+Plug 'SirVer/ultisnips', { 'on': [] } " {
+    let g:UltiSnipsExpandTrigger       = "<Tab>"
+    let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+" }
+Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') } " {
+    if g:deisu_preferences.autocomplete_method == 'ycm'
+        let g:ycm_min_num_of_chars_for_completion = 1
+        let g:ycm_always_populate_location_list = 1
+        let g:ycm_show_diagnostics_ui = 0
+
+        " cycle
+        let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+        " comment
+        let g:ycm_complete_in_comments                          = 1
+        let g:ycm_collect_identifiers_from_comments_and_strings = 1
+
+        " extra conf
+        let g:ycm_confirm_extra_conf = 0
+        let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+        let g:ycm_extra_conf_vim_data = ['&filetype']
+
+        " filetype black/white list
+        let g:ycm_filetype_blacklist = {
+            \ 'tagbar' : 1,
+            \ 'qf' : 1,
+            \ 'notes' : 1,
+            \ 'unite' : 1,
+            \ 'text' : 1,
+            \ 'vimwiki' : 1,
+            \ 'pandoc' : 1,
+            \ 'infolog' : 1,
+            \ 'mail' : 1
+        \}
+
+        " mappings
+        nnoremap <Leader>] :YcmCompleter GoTo<CR>
+    endif
+" }
+Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
+    if g:deisu_preferences.autocomplete_method == 'neocomplcache'
+        let g:acp_enableAtStartup = 0
+        let g:neocomplcache_enable_smart_case = 1
+        let g:neocomplcache_enable_underbar_completion = 1
+        let g:neocomplcache_min_syntax_length = 3
+
+        " enable omni completion.
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    endif
+" }
 
 " UltiSnips is the default snippets engine
 " ycm is the first choice for code completion,
@@ -38,9 +98,9 @@ Plug 'Shougo/neocomplcache.vim', { 'on': [] }
 augroup load_completer
     autocmd!
     autocmd! InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
-                        \| if exists('g:loaded_youcompleteme')
+                        \| if exists('g:loaded_youcompleteme') && g:deisu_preferences.autocomplete_method == 'ycm'
                         \|     call youcompleteme#Enable()
-                        \| else
+                        \| elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
                         \|     call plug#load('neocomplcache.vim')
                         \|     exec "NeoComplCacheEnable"
                         \| endif
@@ -50,44 +110,137 @@ augroup END
 " }
 " -------------------------------- Navigation -------------------------------- {
 
-Plug 'easymotion/vim-easymotion', { 'on': [
-    \ '<Plug>(easymotion-bd-w)',
-    \ '<Plug>(easymotion-bd-W)',
-    \ '<Plug>(easymotion-j)',
-    \ '<Plug>(easymotion-k)'] }
+Plug 'easymotion/vim-easymotion', {
+    \ 'on': ['<Plug>(easymotion-bd-w)', '<Plug>(easymotion-bd-W)',
+    \ '<Plug>(easymotion-j)', '<Plug>(easymotion-k)'] } " {
+    nmap \ <Plug>(easymotion-prefix)
+    nmap <Leader>w <Plug>(easymotion-bd-w)
+    nmap <Leader>W <Plug>(easymotion-bd-W)
+    nmap <Leader>j <Plug>(easymotion-j)
+    nmap <Leader>k <Plug>(easymotion-k)
+" }
 if v:version >= 703
     Plug 'myusuf3/numbers.vim'
 endif
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] }
+Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] } " {
+    nnoremap <Leader>aa :A<CR>
+    nnoremap <Leader>as :AS<CR>
+    nnoremap <Leader>av :AV<CR>
+" }
 Plug 'Valloric/ListToggle'
 if executable('ag') || executable('ack')
-    Plug 'dyng/ctrlsf.vim', { 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
-        \ '<Plug>CtrlSFVwordExec', '<Plug>CtrlSFCwordPath', '<Plug>CtrlSFPwordPath',
-        \ 'CtrlSFOpen', 'CtrlSFToggle' ] }
+    Plug 'dyng/ctrlsf.vim', {
+        \ 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
+        \ '<Plug>CtrlSFVwordExec', '<Plug>CtrlSFCwordPath',
+        \ '<Plug>CtrlSFPwordPath', 'CtrlSFOpen', 'CtrlSFToggle' ] } " {
+        nmap     <C-F>f <Plug>CtrlSFPrompt
+        vmap     <C-F>f <Plug>CtrlSFVwordPath
+        vmap     <C-F>F <Plug>CtrlSFVwordExec
+        nmap     <C-F>n <Plug>CtrlSFCwordPath
+        nmap     <C-F>p <Plug>CtrlSFPwordPath
+        nnoremap <C-F>o :CtrlSFOpen<CR>
+        nnoremap <C-F>t :CtrlSFToggle<CR>
+        inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+    " }
 endif
 
 " }
 " --------------------------------- Editing ---------------------------------- {
 
-Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-Plug 'Yggdroot/indentLine', { 'on': ['IndentLinesEnable', 'IndentLinesToggle'] }
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-ragtag', { 'for': ['html', 'htmldjango', 'php', 'xml'] }
-" Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
-Plug 'Valloric/MatchTagAlways', { 'for': [
-    \ 'html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
-Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " {
+    map  gc  <Plug>Commentary
+    nmap gcc <Plug>CommentaryLine
+    nmap <BS> gcc
+    vmap <BS> gc
+" }
+Plug 'Yggdroot/indentLine', { 'on': ['IndentLinesEnable', 'IndentLinesToggle'] } " {
+    let g:indentLine_enabled              = 0
+    let g:indentLine_showFirstIndentLevel = 0
+    let g:indentLine_faster               = 1
+    let g:indentLine_fileTypeExclude      = ['sql']
+
+    " indent line character
+    if deisufunc#IsMacVimApp()
+        " in MacVim use this super tall bar
+        let g:indentLine_char = '│'
+        let g:indentLine_first_char = '│'
+    else
+        let g:indentLine_char = '┆'
+        let g:indentLine_first_char = '┆'
+    endif
+
+    noremap <F5> :IndentLinesToggle<CR>
+" }
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'htmldjango', 'php', 'xml'] }
+Plug 'Valloric/MatchTagAlways', {
+    \ 'for': ['html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
+Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' } " {
+    nnoremap <F6> :RainbowParentheses!!<CR>
+" }
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
+    let g:undotree_WindowLayout = 2
+    nnoremap U :UndotreeToggle<CR>
+" }
+
+" text objects
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-entire'
+Plug 'glts/vim-textobj-comment'
 
 " }
 " --------------------------------- Refactor --------------------------------- {
 
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'tpope/vim-unimpaired'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " {
+    " Start interactive EasyAlign in visual mode
+    xmap ga <Plug>(EasyAlign)
+
+    " Start interactive EasyAlign with a Vim movement
+    nmap ga <Plug>(EasyAlign)
+    nmap gaa ga_
+" }
+Plug 'tpope/vim-unimpaired' " {
+    if deisufunc#Istmux()
+        " tmux will send xterm-style keys when its xterm-keys option is on
+        execute "set <xUp>=\e[1;*A"
+        execute "set <xDown>=\e[1;*B"
+        execute "set <xRight>=\e[1;*C"
+        execute "set <xLeft>=\e[1;*D"
+    endif
+
+    " text bubbling with unimpaired
+    nmap <C-Up> [e
+    nmap <C-Down> ]e
+    vmap <C-Up> [egv
+    vmap <C-Down> ]egv
+" }
+Plug 'terryma/vim-multiple-cursors' " {
+    " match against text instead of word, same behavior as CMD-D in ST3
+    " discussed at: https://github.com/terryma/vim-multiple-cursors/pull/105
+    let g:multi_cursor_start_key='<C-n>'
+    let g:multi_cursor_start_word_key='g<C-n>'
+
+    " integrate with YCM
+    " excerpt from https://gist.github.com/eapache/0c0abbdb2e810a3f1f4a
+    function! Multiple_cursors_before()
+        if exists('g:ycm_filetype_whitelist')
+            let s:old_ycm_whitelist = g:ycm_filetype_whitelist
+            let g:ycm_filetype_whitelist = {}
+        endif
+    endfunction
+
+    function! Multiple_cursors_after()
+        if exists('g:ycm_filetype_whitelist') && exists('s:old_ycm_whitelist')
+            let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+        endif
+    endfunction
+" }
+Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' } " {
+    noremap <F7> :Autoformat<CR>
+" }
 
 " }
 " -------------------------------- Languages --------------------------------- {
@@ -96,13 +249,45 @@ Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 Plug 'keith/swift.vim', { 'for': 'swift' }
 
 " Python
-Plug 'klen/python-mode', { 'for': 'python' }
+Plug 'klen/python-mode', { 'for': 'python' } " {
+    " common functionality
+    let g:pymode_trim_whitespaces = 0
+    let g:pymode_options = 0
+
+    " PEP8-compatible python ident
+    let g:pymode_indent = 1
+
+    " documentation
+    let g:pymode_doc = 1
+    let g:pymode_doc_bind = 'K'
+
+    " don't run code
+    let g:pymode_run = 0
+
+    " breakpoints
+    let g:pymode_breakpoint = 1
+    let g:pymode_breakpoint_bind = '<Leader>b'
+
+    " code checking: use Syntastic instead
+    let g:pymode_lint = 0
+    let g:pymode_lint_checkers = []
+
+    " rope support
+    let g:pymode_rope = 0
+    let g:pymode_rope_lookup_project = 0
+
+    " rope completion
+    let g:pymode_rope_completion = 0
+" }
 
 " Markdown
 Plug 'nelstrom/vim-markdown-folding', { 'for': ['markdown', 'md'] }
 Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md'] }
 if executable('redcarpet') && executable('instant-markdown-d')
-    Plug 'suan/vim-instant-markdown', { 'for': ['markdown', 'md'] }
+    Plug 'suan/vim-instant-markdown', { 'for': ['markdown', 'md'] } " {
+        let g:instant_markdown_autostart = 0
+        nnoremap <silent> <Leader>p :InstantMarkdownPreview<CR>
+    " }
 endif
 Plug 'jszakmeister/markdown2ctags', { 'for': ['markdown', 'md']}
 
@@ -122,42 +307,149 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 " }
 " ----------------------------------- IDE ------------------------------------ {
 
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-if deisufunc#Istmux()
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
-        \ 'on': ['Files', 'Buffers'] }
-    Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
-else
-    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
-endif
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
+    let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o', '.pyc']
+    let NERDTreeShowBookmarks   = 1
+    let NERDTreeShowHidden      = 1
+    let NERDTreeQuitOnOpen      = 1
+    let NERDTreeShowLineNumbers = 1
+    let g:NERDTreeWinSize       = 40
+    inoremap <F2> <Esc>:NERDTreeToggle<CR>
+    nnoremap <F2> :NERDTreeToggle<CR>
+    nnoremap <Leader>f :NERDTreeFind<CR>
+    nnoremap <Leader>x :NERDTreeCWD<CR>
+" }
+" ctrlp & fzf {
+    if deisufunc#Istmux()
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+            \ 'on': ['Files', 'Buffers'] }
+        Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+
+        nnoremap <C-p> :Files<CR>
+        nnoremap <F1> :Buffers<CR>
+    else
+        Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+
+        let g:ctrlp_clear_cache_on_exit = 1
+        let g:ctrlp_open_multiple_files = 'v'
+        let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$
+            \ \|\.jpeg$\|\.gif$\|\.pdf$' }
+
+        nnoremap <C-p> :CtrlP<CR>
+        nnoremap <F1> :CtrlPBuffer<CR>
+    endif
+" }
 if executable('ctags')
-    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] }
+    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] } " {
+        let g:tagbar_autofocus = 1
+        let g:tagbar_sort = 0
+        let g:tagbar_compact = 1
+        let g:tagbar_iconchars = ['▸', '▾']
+
+        " add support for markdown files in tagbar.
+        let g:tagbar_type_markdown = {
+            \ 'ctagstype': 'markdown',
+            \ 'ctagsbin' : '~/.vim/plugins/markdown2ctags/markdown2ctags.py',
+            \ 'ctagsargs' : '-f - --sort=yes',
+            \ 'kinds' : [
+                \ 's:sections',
+                \ 'i:images'
+            \ ],
+            \ 'sro' : '|',
+            \ 'kind2scope' : {
+                \ 's' : 'section',
+            \ },
+            \ 'sort': 0,
+        \ }
+
+        inoremap <silent> <F3> <Esc>:TagbarToggle<CR>
+        nnoremap <silent> <F3> :TagbarToggle<CR>
+    " }
 endif
-Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] }
-Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] }
-Plug 'tpope/vim-fugitive'
-Plug 'bling/vim-airline'
-Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] }
+Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
+    let g:syntastic_python_checkers = ['flake8']
+
+    nnoremap <Leader>sc :SyntasticCheck<CR>
+" }
+Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] } " {
+    let g:gitgutter_enabled = 0
+    nnoremap <Leader>gg :GitGutterToggle<CR>
+" }
+Plug 'tpope/vim-fugitive' " {
+    nnoremap <silent> <Leader>gs :Gstatus<CR>
+    nnoremap <silent> <Leader>gc :Gcommit<CR>
+    nnoremap <silent> <Leader>gd :Gdiff<CR>
+    nnoremap <silent> <Leader>gp :Gpush<CR>
+    nnoremap <silent> <Leader>gl :Glog<CR>
+    nnoremap <silent> <Leader>gw :Gwrite<CR>
+    nnoremap <silent> <Leader>gr :Gread<CR>
+    nnoremap <silent> <Leader>grm :Gremove<CR>
+    nnoremap <silent> <Leader>gm :Gmove<Space>
+    nnoremap <silent> <Leader>gb :Gblame<CR>
+    nnoremap <silent> <Leader>ga :Git add<Space>
+    nnoremap <silent> <Leader>ge :Gedit<CR>
+" }
+Plug 'bling/vim-airline' " {
+    let g:airline_extensions = ['quickfix', 'tabline']
+    let g:airline_theme = 'solarized'
+
+    " separators
+    " don't use power line font in Apple Terminal
+    if !deisufunc#IsAppleTerminal()
+        let g:airline_powerline_fonts = 1
+    else
+        let g:airline_left_sep = ''
+        let g:airline_right_sep = ''
+        let g:airline_section_y = ''
+    endif
+
+    " tabline
+    let g:airline#extensions#tabline#buffer_min_count = 2
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    nmap <leader>1 <Plug>AirlineSelectTab1
+    nmap <leader>2 <Plug>AirlineSelectTab2
+    nmap <leader>3 <Plug>AirlineSelectTab3
+    nmap <leader>4 <Plug>AirlineSelectTab4
+    nmap <leader>5 <Plug>AirlineSelectTab5
+    nmap <leader>6 <Plug>AirlineSelectTab6
+    nmap <leader>7 <Plug>AirlineSelectTab7
+    nmap <leader>8 <Plug>AirlineSelectTab8
+    nmap <leader>9 <Plug>AirlineSelectTab9
+" }
+Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] } " {
+    let g:quickrun_config = {}
+    let g:quickrun_config['*'] = {
+        \ 'outputter/buffer/split': winheight(0) / 4 < 10 ? 10 : winheight(0) / 4
+    \ }
+    nnoremap <F12> :QuickRun<CR>
+    inoremap <F12> <Esc>:QuickRun<CR>
+" }
 
 " }
 " -------------------------------- Utilities --------------------------------- {
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': ['VimShell'] }
-    \| Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] }
+    \| Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] } " {
+        let g:vimshell_prompt = '> '
+        inoremap <F8> <Esc>:split<CR>:VimShell<CR>
+        nnoremap <F8> :split<CR>:VimShell<CR>
+" }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {
 
-" only use solarized
-" favorite color
-Plug 'altercation/vim-colors-solarized'
-
+Plug 'altercation/vim-colors-solarized' " {
+    let g:solarized_termcolors=16
+    let g:solarized_termtrans=0
 " }
-" ---------------------------------- Local ----------------------------------- {
-
-if filereadable(expand("~/.vim.plugins.local"))
-    source ~/.vim.plugins.local
-endif
+Plug 'junegunn/seoul256.vim'
+Plug 'tomasr/molokai'
 
 " }
 " --------------------------------- Cleanup ---------------------------------- {

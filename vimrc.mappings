@@ -42,7 +42,7 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 nnoremap J mzJ`z
 
 " disable C-a on tmux or on screen
-if $TERM =~ 'screen'
+if deisufunc#Istmux()
     nnoremap <C-a> <nop>
     nnoremap <Leader><C-a> <C-a>
 endif
@@ -50,7 +50,6 @@ endif
 " quick edit vim config files
 nnoremap <Leader>vv :vi $MYVIMRC<CR>
 nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
-nnoremap <Leader>vc :vi ~/.vimrc.plugins.conf<CR>
 nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
 nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
 nnoremap <Leader>vg :vi ~/.gvimrc<CR>
@@ -189,8 +188,6 @@ nnoremap <Leader>dd :bd<CR>
 nnoremap <Leader>DD :ene<CR>:bw #<CR>
 
 " navigate
-" nnoremap <Left> :bprev<CR>
-" nnoremap <Right> :bnext<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
@@ -204,8 +201,8 @@ nnoremap <Leader>cw :echo deisufunc#CountWord() . " Words"<CR>
 " ---------------------------------- Window ---------------------------------- {
 
 " create
-nnoremap <Leader>nw :new<CR>
-nnoremap <Leader>nv :vnew<CR>
+nnoremap <Leader>nw :split<CR>
+nnoremap <Leader>nv :vsplit<CR>
 
 " navigate
 nnoremap <Left> <C-w>h

@@ -162,6 +162,12 @@ endfunction
 " }
 " -------------------------------- Interface --------------------------------- {
 
+" set color scheme
+function! deisufunc#SetColorScheme(color_scheme)
+    exec "colorscheme " . a:color_scheme
+    call deisufunc#EnableItalicComment()
+endfunction
+
 " use background light bewtween 7 am ~ 7pm, otherwise dark
 function! deisufunc#SetBackgroundBaseOnTime()
     if (strftime("%H") >= 7) && (strftime("%H") <= 18)
@@ -169,19 +175,31 @@ function! deisufunc#SetBackgroundBaseOnTime()
     else
         set background=dark
     endif
+    call deisufunc#EnableItalicComment()
+endfunction
+
+" enable italic comment in iTerm2 and MacVim app
+function! deisufunc#EnableItalicComment()
+    if deisufunc#IsiTerm2() || deisufunc#IsMacVimApp()
+        highlight Comment cterm=italic
+    endif
 endfunction
 
 " toggle background of the current color scheme
 function! deisufunc#ToggleBG()
-    let s:tbg = &background
-    " Inversion
-    if s:tbg == "dark"
+    let s:current_background = &background
+
+    if s:current_background == "dark"
         set background=light
     else
         set background=dark
     endif
+
+    " (re)enable italic comment
+    call deisufunc#EnableItalicComment()
 endfunction
 
+" resize current window height
 function! deisufunc#ResizeCurrentWindowHeight(ratio, min)
     let s:expected_height = winheight(0) * a:ratio
     let s:new_height =  s:expected_height < a:min ? a:min : s:expected_height
@@ -205,7 +223,7 @@ endfunction
 " }
 " ---------------------------------- Buffer ---------------------------------- {
 
-" Count Word
+" count word
 function! deisufunc#CountWord()
     let s:old_status = v:statusmsg
     let position = getpos(".")

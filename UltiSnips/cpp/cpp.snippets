@@ -1,6 +1,6 @@
 extends clang
 
-snippet tmpl "code template" b
+snippet tmpl "c++ code template" b
 #include <iostream>
 
 using namespace std;
@@ -23,25 +23,28 @@ snippet coute "cout << string << endl"
 cout << ${0:/* string */} << endl;
 endsnippet
 
+snippet endl "cout << endl" b
+cout << endl;
+endsnippet
+
 snippet coutf "cout << string << flush"
 cout << ${0:/* string */} << flush;
 endsnippet
 
 snippet cls "class ... {public: ... private: ...}" b
-class ${1:/* class name */} {
+class ${1:`!p snip.rv = snip.basename.capitalize()`} {
 public:
-	$1(${2:/* parameters */});
-	~$1();
+	$1(${2:/* parameters */}) {
+		${3:/* constructor */}
+	}
+
+	~$1() {
+		${4:/* destructor */}
+	}
 
 private:
-	${3:/* data */}
+	${0:/* data */}
 };
-
-$1::$1($2) {
-	${4:/* constructor */}
-}
-
-$1::~$1() {${0:/* destructor */ }}
 endsnippet
 
 snippet ios "#include <iostream>" b
