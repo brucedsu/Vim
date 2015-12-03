@@ -22,7 +22,7 @@ set shell=/bin/zsh
 " }
 " ---------------------------------- Before ---------------------------------- {
 
-" preferences
+" create preferences and load defaults
 let g:deisu_preferences = {}
 let g:deisu_preferences.autocomplete_method = 'ycm'
 let g:deisu_preferences.color_scheme = 'solarized'

@@ -38,8 +38,9 @@ Plug 'SirVer/ultisnips', { 'on': [] } " {
     let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 " }
-Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall') } " {
-    if g:deisu_preferences.autocomplete_method == 'ycm'
+if g:deisu_preferences.autocomplete_method == 'ycm'
+    Plug 'Valloric/YouCompleteMe', {
+        \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
         let g:ycm_min_num_of_chars_for_completion = 1
         let g:ycm_always_populate_location_list = 1
         let g:ycm_show_diagnostics_ui = 0
@@ -72,10 +73,9 @@ Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('deisufunc#YCMInstall'
 
         " mappings
         nnoremap <Leader>] :YcmCompleter GoTo<CR>
-    endif
-" }
-Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
-    if g:deisu_preferences.autocomplete_method == 'neocomplcache'
+    " }
+elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
+    Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
         let g:acp_enableAtStartup = 0
         let g:neocomplcache_enable_smart_case = 1
         let g:neocomplcache_enable_underbar_completion = 1
@@ -89,22 +89,13 @@ Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
         autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-    endif
-" }
+    " }
+endif
 
-" UltiSnips is the default snippets engine
-" ycm is the first choice for code completion,
-" use neocomplcache as a backup
-augroup load_completer
+augroup load_completers
     autocmd!
-    autocmd! InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
-                        \| if exists('g:loaded_youcompleteme') && g:deisu_preferences.autocomplete_method == 'ycm'
-                        \|     call youcompleteme#Enable()
-                        \| elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
-                        \|     call plug#load('neocomplcache.vim')
-                        \|     exec "NeoComplCacheEnable"
-                        \| endif
-                        \| autocmd! load_completer
+    autocmd! InsertEnter * call deisufunc#LoadCompleters()
+                        \| autocmd! load_completers
 augroup END
 
 " }
@@ -377,24 +368,6 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
 
     nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
-Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] } " {
-    let g:gitgutter_enabled = 0
-    nnoremap <Leader>gg :GitGutterToggle<CR>
-" }
-Plug 'tpope/vim-fugitive' " {
-    nnoremap <silent> <Leader>gs :Gstatus<CR>
-    nnoremap <silent> <Leader>gc :Gcommit<CR>
-    nnoremap <silent> <Leader>gd :Gdiff<CR>
-    nnoremap <silent> <Leader>gp :Gpush<CR>
-    nnoremap <silent> <Leader>gl :Glog<CR>
-    nnoremap <silent> <Leader>gw :Gwrite<CR>
-    nnoremap <silent> <Leader>gr :Gread<CR>
-    nnoremap <silent> <Leader>grm :Gremove<CR>
-    nnoremap <silent> <Leader>gm :Gmove<Space>
-    nnoremap <silent> <Leader>gb :Gblame<CR>
-    nnoremap <silent> <Leader>ga :Git add<Space>
-    nnoremap <silent> <Leader>ge :Gedit<CR>
-" }
 Plug 'bling/vim-airline' " {
     let g:airline_extensions = ['quickfix', 'tabline']
     let g:airline_theme = 'solarized'
@@ -429,6 +402,29 @@ Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] } " {
     \ }
     nnoremap <F12> :QuickRun<CR>
     inoremap <F12> <Esc>:QuickRun<CR>
+" }
+
+" git
+Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] } " {
+    let g:gitgutter_enabled = 0
+    nnoremap <Leader>gg :GitGutterToggle<CR>
+" }
+Plug 'tpope/vim-fugitive' " {
+    nnoremap <silent> <Leader>gs :Gstatus<CR>
+    nnoremap <silent> <Leader>gc :Gcommit<CR>
+    nnoremap <silent> <Leader>gd :Gdiff<CR>
+    nnoremap <silent> <Leader>gp :Gpush<CR>
+    nnoremap <silent> <Leader>gl :Glog<CR>
+    nnoremap <silent> <Leader>gw :Gwrite<CR>
+    nnoremap <silent> <Leader>gr :Gread<CR>
+    nnoremap <silent> <Leader>grm :Gremove<CR>
+    nnoremap <silent> <Leader>gm :Gmove<Space>
+    nnoremap <silent> <Leader>gb :Gblame<CR>
+    nnoremap <silent> <Leader>ga :Git add<Space>
+    nnoremap <silent> <Leader>ge :Gedit<CR>
+" }
+Plug 'gregsexton/gitv', { 'on': 'Gitv' } " {
+    nnoremap <silent> <Leader>gv :Gitv<CR>
 " }
 
 " }

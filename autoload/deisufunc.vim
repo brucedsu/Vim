@@ -241,4 +241,27 @@ endfunction
 " }
 " ---------------------------------- Plugin ---------------------------------- {
 
+function! deisufunc#LoadCompleters()
+    " completers contains two components
+    " one is a snippet completion engine,
+    " the other is an autocompleter, such as YCM and neocomplete
+
+    " load ultisnips
+    call plug#load('ultisnips')
+
+    " load autocompleter
+    let s:autocompleter = 'YouCompleteMe'
+    if g:deisu_preferences.autocomplete_method == 'neocomplcache'
+        let s:autocompleter = 'necomplcache.vim'
+    endif
+    call plug#load(s:autocompleter)
+
+    " enable autocompleter
+    if g:deisu_preferences.autocomplete_method == 'ycm'
+        call youcompleteme#Enable()
+    elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
+        exec "NeoComplCacheEnable"
+    endif
+endfunction
+
 " }
