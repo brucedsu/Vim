@@ -207,10 +207,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 syntax on
 set showcmd                     " show incomplete cmds down the bottom
 set noshowmode                  " don't show mode at the bottom
-
-" status line
 set laststatus=2
-set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
 
 " match
 set showmatch

@@ -13,6 +13,10 @@
 " }
 " ----------------------------- deprecated vimrc ----------------------------- {
 
+" status line
+" use airline instead
+set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
+
 " }
 " ------------------------- deprecated vimrc.plugins ------------------------- {
 
@@ -24,10 +28,6 @@ Plug 'honza/vim-snippets'
 " bind tmux prefix to <C-a>
 " never used
 Plug 'tpope/vim-speeddating'
-
-" Refactor
-" good plugin, but never used
-Plug 'tommcdo/vim-exchange'
 
 " Front End Web Development
 " CSS
@@ -45,8 +45,7 @@ Plug 'ap/vim-css-color', { 'for': 'css' }
 Plug 'xuhdev/SingleCompile'
 
 " Utilities
-" never used
-" not main stream
+" use VimShell instead
 Plug 'chilicuil/conque'
 
 " can do everything

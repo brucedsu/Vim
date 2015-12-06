@@ -78,12 +78,14 @@ function! deisufunc#MoveLineDown()
     call deisufunc#MoveLine('+', v:count1)
 endfunction
 
-function! deisufunc#MoveSelectionUp(count)
-    silent! execute "'<,'>move'<--".a:count
+function! deisufunc#MoveSelectionUp()
+    silent! execute "'<,'>move'<--".v:count1
+    call feedkeys("gv")
 endfunction
 
-function! deisufunc#MoveSelectionDown(count)
-    silent! exe "'<,'>move'>+".a:count
+function! deisufunc#MoveSelectionDown()
+    silent! exe "'<,'>move'>+".v:count1
+    call feedkeys("gv")
 endfunction
 
 " }

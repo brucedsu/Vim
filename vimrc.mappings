@@ -60,10 +60,10 @@ nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMR
 nnoremap Q <nop>
 
 " text bubbling
-nmap <C-Up> :call deisufunc#MoveLineUp()<CR>
-nmap <C-Down> :call deisufunc#MoveLineDown()<CR>
-vmap <C-Up> :call deisufunc#MoveSelectionUp()<CR>
-vmap <C-Down> :call deisufunc#MoveSelectionDown()<CR>
+nmap <C-Up> :<C-u>call deisufunc#MoveLineUp()<CR>
+nmap <C-Down> :<C-u>call deisufunc#MoveLineDown()<CR>
+vmap <C-Up> :<C-u>call deisufunc#MoveSelectionUp()<CR>
+vmap <C-Down> :<C-u>call deisufunc#MoveSelectionDown()<CR>
 
 " }
 " -------------------------------- Formatting -------------------------------- {

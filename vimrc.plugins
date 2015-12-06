@@ -139,7 +139,21 @@ endif
 " }
 " --------------------------------- Editing ---------------------------------- {
 
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround', {
+    \ 'on': ['<Plug>Dsurround', '<Plug>Csurround', '<Plug>CSurround',
+    \ '<Plug>Ysurround', '<Plug>YSurround', '<Plug>Yssurround',
+    \ '<Plug>YSsurround', '<Plug>VSurround', '<Plug>VgSurround'] } " {
+    nmap ds  <Plug>Dsurround
+    nmap cs  <Plug>Csurround
+    nmap cS  <Plug>CSurround
+    nmap ys  <Plug>Ysurround
+    nmap yS  <Plug>YSurround
+    nmap yss <Plug>Yssurround
+    nmap ySs <Plug>YSsurround
+    nmap ySS <Plug>YSsurround
+    xmap S   <Plug>VSurround
+    xmap gS  <Plug>VgSurround
+" }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " {
     map  gc  <Plug>Commentary
@@ -216,6 +230,12 @@ Plug 'terryma/vim-multiple-cursors' " {
 " }
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' } " {
     noremap <F7> :Autoformat<CR>
+" }
+Plug 'tommcdo/vim-exchange', {'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)']} " {
+    nmap cx <Plug>(Exchange)
+    xmap X <Plug>(Exchange)
+    nmap cxc <Plug>(ExchangeClear)
+    nmap cxx <Plug>(ExchangeLine)
 " }
 
 " }
@@ -299,14 +319,8 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
     nnoremap <Leader>x :NERDTreeCWD<CR>
 " }
 " ctrlp & fzf {
-    if deisufunc#Istmux()
-        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
-            \ 'on': ['Files', 'Buffers'] }
-        Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
-
-        nnoremap <C-p> :Files<CR>
-        nnoremap <F1> :Buffers<CR>
-    else
+    " use ctrlp in MacVimApp, otherwise fzf
+    if deisufunc#IsMacVimApp()
         Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
 
         let g:ctrlp_clear_cache_on_exit = 1
@@ -318,6 +332,13 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
 
         nnoremap <C-p> :CtrlP<CR>
         nnoremap <F1> :CtrlPBuffer<CR>
+    else
+        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+            \ 'on': ['Files', 'Buffers'] }
+        Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+
+        nnoremap <C-p> :Files<CR>
+        nnoremap <F1> :Buffers<CR>
     endif
 " }
 if executable('ctags')
