@@ -47,7 +47,7 @@ if deisufunc#Istmux()
     nnoremap <Leader><C-a> <C-a>
 endif
 
-" quick edit vim config files
+" quick edit and source vim config files
 nnoremap <Leader>vv :vi $MYVIMRC<CR>
 nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
 nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
@@ -55,6 +55,15 @@ nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
 nnoremap <Leader>vg :vi ~/.gvimrc<CR>
 nnoremap <Leader>vd :vi ~/.vim/deprecated.vimrc<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
+
+" don't want exit mode
+nnoremap Q <nop>
+
+" text bubbling
+nmap <C-Up> :call deisufunc#MoveLineUp()<CR>
+nmap <C-Down> :call deisufunc#MoveLineDown()<CR>
+vmap <C-Up> :call deisufunc#MoveSelectionUp()<CR>
+vmap <C-Down> :call deisufunc#MoveSelectionDown()<CR>
 
 " }
 " -------------------------------- Formatting -------------------------------- {
@@ -218,5 +227,9 @@ nnoremap <Leader>nt :tabnew<CR>
 
 " close tab
 nnoremap <Leader>ct :tabclose<CR>
+
+" table next and privous
+nnoremap [t :tabprevious<CR>
+nnoremap ]t :tabnext<CR>
 
 " }

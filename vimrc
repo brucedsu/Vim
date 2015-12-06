@@ -89,6 +89,14 @@ set timeoutlen=500
 set ttimeout
 set ttimeoutlen=10
 
+" tmux will send xterm-style keys when its xterm-keys option is on
+if deisufunc#Istmux()
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 " automatically save all buffers when losing focus
 autocmd FocusLost * :silent! wall
 
@@ -140,9 +148,9 @@ autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
 
 " return to last edit position when opening files
 autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal! g`\"" |
-          \ endif"`'")"'")
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif"`'")"'")
 
 " }
 " -------------------------------- Formatting -------------------------------- {
@@ -250,6 +258,17 @@ set hlsearch
 set splitright
 set splitbelow
 
+" box cursor in normal mode, vertical bar cursor in insert mode
+if deisufunc#IsiTerm2()
+    if deisufunc#Istmux()
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
+    endif
+endif
+
 " }
 " --------------------------------- Mappings --------------------------------- {
 
@@ -258,7 +277,7 @@ let mapleader      = ","
 let maplocalleader = "\\"
 
 if filereadable(expand("~/.vimrc.mappings"))
-  source ~/.vimrc.mappings
+    source ~/.vimrc.mappings
 endif
 
 " }
@@ -268,7 +287,7 @@ if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
 
-" color scheme
+" set color scheme after load plugins
 set background=dark
 call deisufunc#SetColorScheme(g:deisu_preferences.color_scheme)
 

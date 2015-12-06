@@ -48,7 +48,7 @@ endfunction
 
 " tmux
 silent function! deisufunc#Istmux()
-    return $TERM =~ 'screen'
+    return exists('$TMUX')
 endfunction
 
 " }
@@ -59,6 +59,31 @@ function! deisufunc#YCMInstall(info)
     if a:info.status == 'installed' || a:info.force
         !./install.py --clang-completer
     endif
+endfunction
+
+" }
+" --------------------------------- Editing ---------------------------------- {
+
+" inspired by tpope's vim-unimpaired
+" TODO: press . to repeat
+function! deisufunc#MoveLine(cmd, count)
+    silent! execute 'move'.a:cmd.a:count
+endfunction
+
+function! deisufunc#MoveLineUp()
+    call deisufunc#MoveLine('--', v:count1)
+endfunction
+
+function! deisufunc#MoveLineDown()
+    call deisufunc#MoveLine('+', v:count1)
+endfunction
+
+function! deisufunc#MoveSelectionUp(count)
+    silent! execute "'<,'>move'<--".a:count
+endfunction
+
+function! deisufunc#MoveSelectionDown(count)
+    silent! exe "'<,'>move'>+".a:count
 endfunction
 
 " }

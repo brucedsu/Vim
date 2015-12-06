@@ -61,4 +61,3 @@ the `--with-override-system-vim` flag on
 * __F8__: ToggleVimShell
 * __F11__: RunCode in VimShell, supports interaction, e.g. user input
 * __F12__: RunCode by vim-quickrun, no interaction, but fast
-

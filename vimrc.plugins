@@ -177,10 +177,10 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
 " }
 
 " text objects
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-line'
-Plug 'kana/vim-textobj-entire'
-Plug 'glts/vim-textobj-comment'
+" Plug 'kana/vim-textobj-user'
+" Plug 'kana/vim-textobj-line'
+" Plug 'kana/vim-textobj-entire'
+" Plug 'glts/vim-textobj-comment'
 
 " }
 " --------------------------------- Refactor --------------------------------- {
@@ -192,21 +192,6 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " {
     " Start interactive EasyAlign with a Vim movement
     nmap ga <Plug>(EasyAlign)
     nmap gaa ga_
-" }
-Plug 'tpope/vim-unimpaired' " {
-    if deisufunc#Istmux()
-        " tmux will send xterm-style keys when its xterm-keys option is on
-        execute "set <xUp>=\e[1;*A"
-        execute "set <xDown>=\e[1;*B"
-        execute "set <xRight>=\e[1;*C"
-        execute "set <xLeft>=\e[1;*D"
-    endif
-
-    " text bubbling with unimpaired
-    nmap <C-Up> [e
-    nmap <C-Down> ]e
-    vmap <C-Up> [egv
-    vmap <C-Down> ]egv
 " }
 Plug 'terryma/vim-multiple-cursors' " {
     " match against text instead of word, same behavior as CMD-D in ST3
@@ -234,7 +219,7 @@ Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' } " {
 " }
 
 " }
-" -------------------------------- Languages --------------------------------- {
+" --------------------------------- Language --------------------------------- {
 
 " Swift
 Plug 'keith/swift.vim', { 'for': 'swift' }
@@ -270,6 +255,9 @@ Plug 'klen/python-mode', { 'for': 'python' } " {
     " rope completion
     let g:pymode_rope_completion = 0
 " }
+
+" C/C++
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 
 " Markdown
 Plug 'nelstrom/vim-markdown-folding', { 'for': ['markdown', 'md'] }
@@ -369,8 +357,8 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
     nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
 Plug 'bling/vim-airline' " {
-    let g:airline_extensions = ['quickfix', 'tabline']
     let g:airline_theme = 'solarized'
+    let g:airline_extensions = ['quickfix', 'tabline', 'branch', 'whitespace']
 
     " separators
     " don't use power line font in Apple Terminal
@@ -383,7 +371,6 @@ Plug 'bling/vim-airline' " {
     endif
 
     " tabline
-    let g:airline#extensions#tabline#buffer_min_count = 2
     let g:airline#extensions#tabline#buffer_idx_mode = 1
     nmap <leader>1 <Plug>AirlineSelectTab1
     nmap <leader>2 <Plug>AirlineSelectTab2
@@ -441,11 +428,15 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': ['VimShell'] }
 " ---------------------------------- Colors ---------------------------------- {
 
 Plug 'altercation/vim-colors-solarized' " {
+    " use 16 colors in termnials
     let g:solarized_termcolors=16
-    let g:solarized_termtrans=0
+    if deisufunc#IsMacVimApp()
+        let g:solarized_termcolors=256
+    endif
+    let g:solarized_termtrans=1
 " }
-Plug 'junegunn/seoul256.vim'
-Plug 'tomasr/molokai'
+" Plug 'junegunn/seoul256.vim'
+" Plug 'tomasr/molokai'
 
 " }
 " --------------------------------- Cleanup ---------------------------------- {
