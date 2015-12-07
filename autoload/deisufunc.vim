@@ -273,20 +273,24 @@ function! deisufunc#LoadCompleters()
     " one is a snippet completion engine,
     " the other is an autocompleter, such as YCM and neocomplete
 
-    " load ultisnips
-    call plug#load('ultisnips')
+    " load snippet engine
+    let s:snippet_engine = 'ultisnips'
+    if g:deisu_preferences.complete_method == 'neocomplcache'
+        let s:snippet_engine = 'neosnippet.vim'
+    endif
+    call plug#load(s:snippet_engine)
 
     " load autocompleter
     let s:autocompleter = 'YouCompleteMe'
-    if g:deisu_preferences.autocomplete_method == 'neocomplcache'
-        let s:autocompleter = 'necomplcache.vim'
+    if g:deisu_preferences.complete_method == 'neocomplcache'
+        let s:autocompleter = 'neocomplcache.vim'
     endif
     call plug#load(s:autocompleter)
 
     " enable autocompleter
-    if g:deisu_preferences.autocomplete_method == 'ycm'
+    if g:deisu_preferences.complete_method == 'ycm'
         call youcompleteme#Enable()
-    elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
+    elseif g:deisu_preferences.complete_method == 'neocomplcache'
         exec "NeoComplCacheEnable"
     endif
 endfunction

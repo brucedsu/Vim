@@ -28,7 +28,7 @@ let g:deisu_preferences = {}
 " complete_method
 " 1: ycm (default and preferred): YouCompleteMe + UltiSnips
 " 2: neocomplcache: neocomplcache.vim + neosnippets
-let g:deisu_preferences.complete_method = 'ycm'
+let g:deisu_preferences.complete_method = 'neocomplcache'
 
 " color scheme
 let g:deisu_preferences.color_scheme = 'solarized'
@@ -151,6 +151,9 @@ set spelllang=en
 
 " filetype based spelling
 autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
+
+" filetype based comment string
+autocmd FileType c,cpp,h setlocal commentstring=//\ %s
 
 " return to last edit position when opening files
 autocmd BufReadPost *
