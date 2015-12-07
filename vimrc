@@ -22,9 +22,15 @@ set shell=/bin/zsh
 " }
 " ---------------------------------- Before ---------------------------------- {
 
-" create preferences and load defaults
+" preferences
 let g:deisu_preferences = {}
-let g:deisu_preferences.autocomplete_method = 'ycm'
+
+" complete_method
+" 1: ycm (default and preferred): YouCompleteMe + UltiSnips
+" 2: neocomplcache: neocomplcache.vim + neosnippets
+let g:deisu_preferences.complete_method = 'ycm'
+
+" color scheme
 let g:deisu_preferences.color_scheme = 'solarized'
 
 " load additional preferences
@@ -207,11 +213,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 syntax on
 set showcmd                     " show incomplete cmds down the bottom
 set noshowmode                  " don't show mode at the bottom
-set laststatus=2
-
-" match
 set showmatch
-runtime macros/matchit.vim
+set laststatus=2
 
 " wildmenu
 set wildmenu

@@ -48,11 +48,11 @@ if deisufunc#Istmux()
 endif
 
 " quick edit and source vim config files
-nnoremap <Leader>vv :vi $MYVIMRC<CR>
-nnoremap <Leader>vp :vi ~/.vimrc.plugins<CR>
-nnoremap <Leader>vm :vi ~/.vimrc.mappings<CR>
+nnoremap <Leader>vv :vi ~/.vim/vimrc<CR>
+nnoremap <Leader>vp :vi ~/.vim/vimrc.plugins<CR>
+nnoremap <Leader>vm :vi ~/.vim/vimrc.mappings<CR>
 nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
-nnoremap <Leader>vg :vi ~/.gvimrc<CR>
+nnoremap <Leader>vg :vi ~/.vim/gvimrc<CR>
 nnoremap <Leader>vd :vi ~/.vim/deprecated.vimrc<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
 

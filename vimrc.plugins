@@ -38,7 +38,7 @@ Plug 'SirVer/ultisnips', { 'on': [] } " {
     let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 " }
-if g:deisu_preferences.autocomplete_method == 'ycm'
+if g:deisu_preferences.complete_method == 'ycm'
     Plug 'Valloric/YouCompleteMe', {
         \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
         let g:ycm_min_num_of_chars_for_completion = 1
@@ -74,7 +74,7 @@ if g:deisu_preferences.autocomplete_method == 'ycm'
         " mappings
         nnoremap <Leader>] :YcmCompleter GoTo<CR>
     " }
-elseif g:deisu_preferences.autocomplete_method == 'neocomplcache'
+elseif g:deisu_preferences.complete_method == 'neocomplcache'
     Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
         let g:acp_enableAtStartup = 0
         let g:neocomplcache_enable_smart_case = 1
@@ -135,6 +135,8 @@ if executable('ag') || executable('ack')
         inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
     " }
 endif
+Plug 'kshenoy/vim-signature'
+Plug 'vim-scripts/matchit.zip'
 
 " }
 " --------------------------------- Editing ---------------------------------- {
@@ -379,7 +381,8 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
 " }
 Plug 'bling/vim-airline' " {
     let g:airline_theme = 'solarized'
-    let g:airline_extensions = ['quickfix', 'tabline', 'branch', 'whitespace']
+    let g:airline_extensions = [
+        \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks']
 
     " separators
     " don't use power line font in Apple Terminal
@@ -413,10 +416,7 @@ Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] } " {
 " }
 
 " git
-Plug 'airblade/vim-gitgutter', { 'on': ['GitGutterToggle'] } " {
-    let g:gitgutter_enabled = 0
-    nnoremap <Leader>gg :GitGutterToggle<CR>
-" }
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive' " {
     nnoremap <silent> <Leader>gs :Gstatus<CR>
     nnoremap <silent> <Leader>gc :Gcommit<CR>
