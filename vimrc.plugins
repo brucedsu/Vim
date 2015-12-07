@@ -26,6 +26,7 @@ endif
 nnoremap <Leader>vi :PlugInstall<CR>
 nnoremap <Leader>vu :PlugUpdate<CR>
 nnoremap <Leader>vs :PlugStatus<CR>
+nnoremap <Leader>vc :PlugClean<CR>
 
 call plug#begin('~/.vim/plugins')
 
@@ -33,13 +34,22 @@ call plug#begin('~/.vim/plugins')
 " -------------------------------- Completion -------------------------------- {
 
 Plug 'jiangmiao/auto-pairs'
-
-if g:deisu_preferences.complete_method == 'ycm'
+if g:deisu_preferences.snippet_engine == 'ultisnips'
     Plug 'SirVer/ultisnips', { 'on': [] } " {
         let g:UltiSnipsExpandTrigger       = "<Tab>"
         let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
         let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
     " }
+elseif g:deisu_preferences.snippet_engine == 'neosnippet.vim'
+    Plug 'Shougo/neosnippet.vim', { 'on': [] } " {
+        let g:neosnippet#enable_snipmate_compatibility = 1
+
+        imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+        smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " }
+    Plug 'Shougo/neosnippet-snippets', { 'on': [] }
+endif
+if g:deisu_preferences.autocompleter == 'YouCompleteMe'
     Plug 'Valloric/YouCompleteMe', {
         \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
         let g:ycm_min_num_of_chars_for_completion = 1
@@ -75,21 +85,24 @@ if g:deisu_preferences.complete_method == 'ycm'
         " mappings
         nnoremap <Leader>] :YcmCompleter GoTo<CR>
     " }
-elseif g:deisu_preferences.complete_method == 'neocomplcache'
-    Plug 'Shougo/neosnippet.vim', { 'on': [] } " {
-        let g:neosnippet#enable_snipmate_compatibility=1
+elseif g:deisu_preferences.autocompleter == 'neocomplete.vim'
+    Plug 'Shougo/neocomplete.vim', { 'on': [] } " {
+        let g:neocomplete#auto_completion_start_length = 1
+        let g:neocomplete#enable_smart_case = 1
+        let g:neocomplete#enable_fuzzy_completion = 1
 
-        imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-        smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-        imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-        smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+        " enable omni completion.
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     " }
-    Plug 'Shougo/neosnippet-snippets'
+elseif g:deisu_preferences.autocompleter == 'neocomplcache.vim'
     Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
         let g:neocomplcache_auto_completion_start_length = 1
         let g:neocomplcache_enable_smart_case = 1
         let g:neocomplcache_enable_fuzzy_completion = 1
-        let g:neocomplcache_enable_underbar_completion = 1
         let g:neocomplcache_min_syntax_length = 3
 
         " enable omni completion.
@@ -474,5 +487,11 @@ Plug 'altercation/vim-colors-solarized' " {
 " --------------------------------- Cleanup ---------------------------------- {
 
 call plug#end()
+
+" automatically install missing plugins on startup
+autocmd VimEnter *
+    \| if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+    \|   PlugInstall | q
+    \| endif
 
 " }

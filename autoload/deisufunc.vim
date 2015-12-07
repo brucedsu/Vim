@@ -268,30 +268,62 @@ endfunction
 " }
 " ---------------------------------- Plugin ---------------------------------- {
 
+function! deisufunc#PickSnippetEngine()
+    let g:deisu_preferences.snippet_engine = 'ultisnips'
+
+    " if doesn't have python or python3, use neosnippet
+    if g:deisu_preferences.complete_method == 'neocomplete' ||
+        \ g:deisu_preferences.complete_method == 'neocomplcache' ||
+        \ (!has('python') && !has('python3'))
+        let g:deisu_preferences.snippet_engine = 'neosnippet.vim'
+    endif
+endfunction
+
+function! deisufunc#PickAutocompleter()
+    let g:deisu_preferences.autocompleter = 'YouCompleteMe'
+
+    if g:deisu_preferences.complete_method == 'neocomplete'
+        let g:deisu_preferences.autocompleter = 'neocomplete.vim'
+
+        " use neocomplcache if doesn't have lua
+        if !has('lua')
+            let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
+        endif
+    elseif g:deisu_preferences.complete_method == 'neocomplcache'
+        let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
+    endif
+endfunction
+
 function! deisufunc#LoadCompleters()
     " completers contains two components
     " one is a snippet completion engine,
     " the other is an autocompleter, such as YCM and neocomplete
 
     " load snippet engine
-    let s:snippet_engine = 'ultisnips'
-    if g:deisu_preferences.complete_method == 'neocomplcache'
-        let s:snippet_engine = 'neosnippet.vim'
+    call plug#load(g:deisu_preferences.snippet_engine)
+
+    " load snippets repository
+    " consider remove this when create my own snippets repository
+    if g:deisu_preferences.snippet_engine == 'neosnippet.vim'
+        call plug#load('neosnippet-snippets')
     endif
-    call plug#load(s:snippet_engine)
 
     " load autocompleter
-    let s:autocompleter = 'YouCompleteMe'
-    if g:deisu_preferences.complete_method == 'neocomplcache'
-        let s:autocompleter = 'neocomplcache.vim'
-    endif
-    call plug#load(s:autocompleter)
+    call plug#load(g:deisu_preferences.autocompleter)
 
     " enable autocompleter
-    if g:deisu_preferences.complete_method == 'ycm'
-        call youcompleteme#Enable()
-    elseif g:deisu_preferences.complete_method == 'neocomplcache'
-        exec "NeoComplCacheEnable"
+    if g:deisu_preferences.autocompleter == 'YouCompleteMe'
+        if exists('g:loaded_youcompleteme')
+            call youcompleteme#Enable()
+        endif
+    elseif g:deisu_preferences.autocompleter == 'neocomplete.vim'
+        if exists('g:loaded_neocomplete')
+            exec "NeoCompleteEnable"
+        endif
+    elseif g:deisu_preferences.autocompleter == 'neocomplcache.vim'
+        if exists('g:loaded_neocomplcache')
+            exec "NeoComplCacheEnable"
+        endif
     endif
 endfunction
 

@@ -25,9 +25,10 @@ set shell=/bin/zsh
 " preferences
 let g:deisu_preferences = {}
 
-" complete_method
+" complete method
 " 1: ycm (default and preferred): YouCompleteMe + UltiSnips
-" 2: neocomplcache: neocomplcache.vim + neosnippets
+" 2: neocomplete: neocomplete.vim + neosnippets
+" 3: neocomplcache: neocomplcache.vim + neosnippets
 let g:deisu_preferences.complete_method = 'neocomplcache'
 
 " color scheme
@@ -37,6 +38,10 @@ let g:deisu_preferences.color_scheme = 'solarized'
 if filereadable(expand("~/.vimrc.before"))
     source ~/.vimrc.before
 endif
+
+" determine completers
+call deisufunc#PickSnippetEngine()
+call deisufunc#PickAutocompleter()
 
 " }
 " --------------------------------- General ---------------------------------- {
@@ -140,7 +145,7 @@ endif
 " filetype config
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
-autocmd BufNewFile,BufReadPost *vim.plugins* set filetype=vim
+autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
 
 " encoding
 set encoding=utf-8

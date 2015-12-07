@@ -175,8 +175,8 @@ nmap <Leader>ev :vsp %%
 nmap <Leader>et :tabe %%
 
 " save
-inoremap <C-s> <Esc>:write<CR>a
-nnoremap <C-s> :write<CR>
+inoremap <C-s> <C-o>:update<CR>
+nnoremap <C-s> :update<CR>
 
 " allow us to save a file we don't have permission to
 " *after* we have already opened it
