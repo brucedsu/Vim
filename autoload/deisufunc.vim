@@ -192,6 +192,12 @@ endfunction
 " set color scheme
 function! deisufunc#SetColorScheme(color_scheme)
     exec "colorscheme " . a:color_scheme
+
+    " set vim-airline theme
+    if exists('g:loaded_airline')
+        let g:airline_theme = a:color_scheme
+    endif
+
     call deisufunc#EnableItalicComment()
 endfunction
 
@@ -284,12 +290,12 @@ function! deisufunc#PickAutocompleter()
 
     if g:deisu_preferences.complete_method == 'neocomplete'
         let g:deisu_preferences.autocompleter = 'neocomplete.vim'
-
-        " use neocomplcache if doesn't have lua
-        if !has('lua')
-            let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
-        endif
     elseif g:deisu_preferences.complete_method == 'neocomplcache'
+        let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
+    endif
+
+    " use neocomplcache if doesn't have lua
+    if !has('lua')
         let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
     endif
 endfunction

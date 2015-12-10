@@ -17,6 +17,17 @@
 " use airline instead
 set statusline=%<[%n]\ %F\ %m%r%y\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %=%-14.(%l,%c%V%)\ %P
 
+" box cursor in normal mode, vertical bar cursor in insert mode
+if deisufunc#IsiTerm2()
+    if deisufunc#Istmux()
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
+    endif
+endif
+
 " }
 " ------------------------- deprecated vimrc.plugins ------------------------- {
 
@@ -58,11 +69,13 @@ Plug 'Shougo/unite.vim'
 " Colors
 " only use solarized
 " sorry to these awesome color schemes
- Plug 'sickill/vim-monokai'
- Plug 'tomasr/molokai'
- Plug 'nelstrom/vim-mac-classic-theme'
- Plug 'noahfrederick/vim-hemisu'
- Plug 'rickharris/vim-blackboard'
+Plug 'sickill/vim-monokai'
+Plug 'tomasr/molokai'
+Plug 'nelstrom/vim-mac-classic-theme'
+Plug 'noahfrederick/vim-hemisu'
+Plug 'rickharris/vim-blackboard'
+Plug 'junegunn/seoul256.vim'
+Plug 'tomasr/molokai'
 
 " }
 " ---------------------- deprecated vimrc.plugins.conf ----------------------- {
@@ -76,10 +89,6 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " Syntastic
 " special characters cause ruler and colorcolumn twisted
 " just stick to default signs
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_style_warning_symbol = '≈'
 
 " SingleCompile
 nnoremap <F3> :SCCompileRun<CR>

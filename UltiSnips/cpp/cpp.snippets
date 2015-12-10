@@ -1,4 +1,12 @@
+global !p
+from snippet_helpers import get_class_name
+endglobal
+
 extends clang
+
+##############################
+# Code Template
+##############################
 
 snippet tmpl "c++ code template" b
 #include <iostream>
@@ -11,43 +19,46 @@ int main() {
 }
 endsnippet
 
-snippet nsstd "using namespace std" b
+######################
+# Namespace
+######################
+snippet uns "using namespace ..." b
+using namespace ${0:/* namespace name */};
+endsnippet
+
+snippet unsstd "using namespace std" b
 using namespace std;
 endsnippet
 
-snippet cout "cout << string << endl|flush"
-cout << ${1:/* string */} << ${0:/* endl|flush */};
+snippet ns "namspace ... {...}" b
+namespace ${1:/* namespace name */} {
+	${0:/* declarations */}
+}
 endsnippet
 
-snippet coute "cout << string << endl"
-cout << ${0:/* string */} << endl;
-endsnippet
-
-snippet endl "cout << endl" b
-cout << endl;
-endsnippet
-
-snippet coutf "cout << string << flush"
-cout << ${0:/* string */} << flush;
-endsnippet
-
-snippet cls "class ... {public: ... private: ...}" b
-class ${1:`!p snip.rv = snip.basename.capitalize()`} {
+##############
+# Class
+##############
+# class declaration and implemetion together
+snippet cls "class definition" b
+class ${1:`!p snip.rv = get_class_name(snip.basename)`} {
 public:
-	$1(${2:/* parameters */}) {
-		${3:/* constructor */}
-	}
+	`!p snip.rv = get_class_name(t[1])`(${2:/* parameters */}) {${3:/* constructor */}}
 
-	~$1() {
-		${4:/* destructor */}
-	}
+	~`!p snip.rv = get_class_name(t[1])`() {${4:/* destructor */}}
 
 private:
-	${0:/* data */}
+	${0:/* instance variables */}
 };
 endsnippet
 
-snippet ios "#include <iostream>" b
-#include <iostream>
-$0
+snippet clsd "class declaration" b
+class ${1:`!p snip.rv = get_class_name(snip.basename)`} {
+public:
+	$1(${2:/* parameters */});
+	~$1();
+
+private:
+	${0:/* instance variables */}
+};
 endsnippet

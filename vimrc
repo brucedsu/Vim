@@ -26,10 +26,10 @@ set shell=/bin/zsh
 let g:deisu_preferences = {}
 
 " complete method
-" 1: ycm (default and preferred): YouCompleteMe + UltiSnips
+" 1: ycm: YouCompleteMe + UltiSnips
 " 2: neocomplete: neocomplete.vim + neosnippets
-" 3: neocomplcache: neocomplcache.vim + neosnippets
-let g:deisu_preferences.complete_method = 'neocomplcache'
+" 3: neocomplcache (if doesn't have lua): neocomplcache.vim + neosnippets
+let g:deisu_preferences.complete_method = 'ycm'
 
 " color scheme
 let g:deisu_preferences.color_scheme = 'solarized'
@@ -39,7 +39,7 @@ if filereadable(expand("~/.vimrc.before"))
     source ~/.vimrc.before
 endif
 
-" determine completers
+" pick completers
 call deisufunc#PickSnippetEngine()
 call deisufunc#PickAutocompleter()
 
@@ -149,6 +149,7 @@ autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
 
 " encoding
 set encoding=utf-8
+set termencoding=utf-8
 
 " spelling: default is off
 set nospell
@@ -265,17 +266,6 @@ set hlsearch
 " window
 set splitright
 set splitbelow
-
-" box cursor in normal mode, vertical bar cursor in insert mode
-if deisufunc#IsiTerm2()
-    if deisufunc#Istmux()
-        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7" " vertical bar in insert mode
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7" " block in normal mode
-    endif
-endif
 
 " }
 " --------------------------------- Mappings --------------------------------- {

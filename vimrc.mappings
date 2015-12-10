@@ -193,7 +193,7 @@ command! Q q
 " delete buffer
 nnoremap <Leader>dd :bd<CR>
 
-" delete buffer but preserve window
+" delete buffer but preserve layout
 nnoremap <Leader>DD :ene<CR>:bw #<CR>
 
 " navigate

@@ -54,7 +54,6 @@ if g:deisu_preferences.autocompleter == 'YouCompleteMe'
         \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
         let g:ycm_min_num_of_chars_for_completion = 1
         let g:ycm_always_populate_location_list = 1
-        let g:ycm_show_diagnostics_ui = 0
 
         " cycle
         let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
@@ -90,32 +89,16 @@ elseif g:deisu_preferences.autocompleter == 'neocomplete.vim'
         let g:neocomplete#auto_completion_start_length = 1
         let g:neocomplete#enable_smart_case = 1
         let g:neocomplete#enable_fuzzy_completion = 1
-
-        " enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     " }
 elseif g:deisu_preferences.autocompleter == 'neocomplcache.vim'
     Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
         let g:neocomplcache_auto_completion_start_length = 1
         let g:neocomplcache_enable_smart_case = 1
         let g:neocomplcache_enable_fuzzy_completion = 1
-        let g:neocomplcache_min_syntax_length = 3
-
-        " enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
     " }
 endif
 
+" load completers when first enter insert mode
 augroup load_completers
     autocmd!
     autocmd! InsertEnter * call deisufunc#LoadCompleters()
@@ -217,10 +200,11 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
 " }
 
 " text objects
-" Plug 'kana/vim-textobj-user'
-" Plug 'kana/vim-textobj-line'
-" Plug 'kana/vim-textobj-entire'
-" Plug 'glts/vim-textobj-comment'
+" TODO: on-demand load vim-textobj-*
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-entire'
+Plug 'glts/vim-textobj-comment'
 
 " }
 " --------------------------------- Refactor --------------------------------- {
@@ -333,7 +317,7 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 " ----------------------------------- IDE ------------------------------------ {
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
-    let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o', '.pyc']
+    let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o', '.pyc', '.pdf']
     let NERDTreeShowBookmarks   = 1
     let NERDTreeShowHidden      = 1
     let NERDTreeQuitOnOpen      = 1
@@ -401,10 +385,18 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
     let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
     let g:syntastic_python_checkers = ['flake8']
 
+    " these awesome symbols take two units space in iTerm2 & Apple Termianl
+    if !deisufunc#IsiTerm2() && !deisufunc#IsAppleTerminal()
+        let g:syntastic_error_symbol = '✗'
+        let g:syntastic_warning_symbol = '⚠'
+        let g:syntastic_style_error_symbol = '✠'
+        let g:syntastic_style_warning_symbol = '≈'
+    endif
+
     nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
 Plug 'bling/vim-airline' " {
-    let g:airline_theme = 'solarized'
+    " let g:airline_theme = 'solarized'
     let g:airline_extensions = [
         \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks']
 
@@ -467,21 +459,19 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make', 'on': ['VimShell'] }
         let g:vimshell_prompt = '> '
         inoremap <F8> <Esc>:split<CR>:VimShell<CR>
         nnoremap <F8> :split<CR>:VimShell<CR>
-" }
+    " }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {
 
 Plug 'altercation/vim-colors-solarized' " {
     " use 16 colors in termnials
-    let g:solarized_termcolors=16
+    let g:solarized_termcolors = 16
     if deisufunc#IsMacVimApp()
-        let g:solarized_termcolors=256
+        let g:solarized_termcolors = 256
     endif
-    let g:solarized_termtrans=1
+    let g:solarized_termtrans = 1
 " }
-" Plug 'junegunn/seoul256.vim'
-" Plug 'tomasr/molokai'
 
 " }
 " --------------------------------- Cleanup ---------------------------------- {
