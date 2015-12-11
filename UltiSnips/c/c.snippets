@@ -1,12 +1,29 @@
 extends clang
 
-snippet struct "struct ... {}"
-struct ${1: /* struct name */} {
-	${0: /* members */}
-};
-endsnippet
-
-snippet string "#include <string.h>"
+#--------------------
+# Libraries
+#--------------------
+snippet string "#include <string.h>" b
 #include <string.h>
 endsnippet
 
+snippet stdlib "#include <stdlib.h>" b
+#include <stdlib.h>
+endsnippet
+
+snippet assert "#include <assert.h>" b
+#include <assert.h>
+endsnippet
+
+#------------------
+# Template
+#------------------
+snippet tmpl "c code template"
+#include <stdio.h>
+
+int main() {
+	${0:printf("Hello World!\n");}
+
+	return 0;
+}
+endsnippet

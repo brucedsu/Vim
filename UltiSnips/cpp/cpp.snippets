@@ -4,9 +4,9 @@ endglobal
 
 extends clang
 
-##############################
+#-----------------------------
 # Code Template
-##############################
+#-----------------------------
 
 snippet tmpl "c++ code template" b
 #include <iostream>
@@ -19,9 +19,9 @@ int main() {
 }
 endsnippet
 
-######################
+#---------------------
 # Namespace
-######################
+#---------------------
 snippet uns "using namespace ..." b
 using namespace ${0:/* namespace name */};
 endsnippet
@@ -36,9 +36,9 @@ namespace ${1:/* namespace name */} {
 }
 endsnippet
 
-##############
+#-------------
 # Class
-##############
+#-------------
 # class declaration and implemetion together
 snippet cls "class definition" b
 class ${1:`!p snip.rv = get_class_name(snip.basename)`} {

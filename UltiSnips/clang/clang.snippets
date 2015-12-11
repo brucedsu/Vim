@@ -1,3 +1,179 @@
 snippet so "sizeof(...)" b
 sizeof(${0:/* expression-or-type */})
 endsnippet
+
+#----------------
+# Comment
+#----------------
+snippet /* "clang comment" i
+/* ${0:<##>} */
+endsnippet
+
+#---------------------------
+# Preprocessor
+#---------------------------
+snippet inc< "#include <...>" b
+#include <${0:/* header */}>
+endsnippet
+
+snippet inc "#include ..." b
+#include "${0:/* header */}.h"
+endsnippet
+
+snippet def "#define ..." b
+#define ${0:/* macro */}
+endsnippet
+
+snippet ifndef "#ifndef ... #define ... #endif" b
+#ifndef ${1:`!p snip.rv = snip.basename.upper()`_H_}
+#define $1
+$0
+#endif
+endsnippet
+
+#-----------------
+# Control
+#-----------------
+snippet if "if (...) {...}" b
+if (${1:/* condition */}) {
+	${0:/* statement */}
+}
+endsnippet
+
+snippet ifi "if (...) ..." b
+if (${1:/* condition */}) ${0:/* statement */}
+endsnippet
+
+snippet el "else {...}"
+else {
+	${0:/* statement */}
+}
+endsnippet
+
+snippet eli "else ..."
+else ${0:/* statement */}
+endsnippet
+
+snippet ifel "if (...) {...} else {...}" b
+if (${1:/* condition */}) {
+	${2:/* statement */}
+} else {
+	${0:/* statement */}
+}
+endsnippet
+
+snippet ifelif "if (...) {...} else if (...) {...} else {...}" b
+if (${1:/* condition */}) {
+	${2:/* statement */}
+} else if (${3:/* condition */}) {
+	${4:/* statement */}
+} else {
+	${0:/* statement */}
+}
+endsnippet
+
+snippet elif "else if (...) {...}"
+else if (${1:/* condition */}) {
+	${0:/* statement */}
+}
+endsnippet
+
+# ternary if
+snippet t "condition ? state1 : state2"
+${1:/* condition */} ? ${2:/* statement1 */} : ${0:/* statement2 */}
+endsnippet
+
+snippet sw "switch statement"
+switch (${1:/* expression */}) {
+	case ${2:/* constant */}:
+		${3:/* statements */}
+		break;${4}
+	default:
+		${0:/* default */}
+		break;
+}
+endsnippet
+
+snippet swndef "switch without default"
+switch (${1:/* expression */}) {
+	case ${2:/* constant */}:
+		${0:/* statement */}
+		break;
+}
+endsnippet
+
+snippet case "case ...: ... "
+case ${1:/* constant */}:
+	${0:/* statement */}
+	break;
+endsnippet
+
+#------------------
+# Loop
+#------------------
+snippet for "for ( ; ; ) {...}"
+for (${1:/* initialization */}; ${2:/* condition */}; ${3:/* increment */}) {
+	${0:/* statements */}
+}
+endsnippet
+
+snippet fori "for ( ; ;  ) ..."
+for (${1:/* initialization */}; ${2:/* condition */}; ${3:/* increment */})
+	${0:/* statements */}
+endsnippet
+
+snippet wh "while (...) {...}"
+while (${1:/* condition */}) {
+	${0:/* statement */}
+}
+endsnippet
+
+snippet whi "while (...) ..."
+while (${1:/* condition */})
+	${0:/* statement */}
+endsnippet
+
+snippet dowh "do {...} while (...)"
+do {
+	${1:/* statement */}
+} while (${0:/* condition */});
+endsnippet
+
+#------------------
+# Terminate
+#------------------
+snippet br "break" b
+break;
+endsnippet
+
+snippet re "return ..." b
+return ${0:/* expression */};
+endsnippet
+
+#--------------
+# Struct
+#--------------
+snippet struct "struct ... {...}"
+struct ${1: /* struct name */} {
+	${0: /* members */}
+};
+endsnippet
+
+#----------
+# Main
+#----------
+snippet main "int main(int argc, char *argv[]) {...}"
+int main(int argc, char* argv[]) {
+	${0:/* insert code here... */}
+
+	return 0;
+}
+endsnippet
+
+snippet mainv "int main(void) {...}"
+int main(void) {
+	${0:/* insert code here... */}
+
+	return 0;
+}
+endsnippet

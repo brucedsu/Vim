@@ -4,7 +4,7 @@ import os
 # cat.c -> Cat
 # animal_manager.cpp -> AnimalManager
 def get_class_name(source):
-    class_name = str(source)
+    class_name = str(source).capitalize()
 
     # remove unnecessary path
     # e.g. abc/cba/cat.cpp -> cat.cpp
@@ -26,4 +26,4 @@ def get_class_name(source):
     if class_name.count(':'):
         class_name = class_name.split(':')[0]
 
-    return class_name.capitalize()
+    return class_name

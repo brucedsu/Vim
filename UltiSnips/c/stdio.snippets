@@ -1,10 +1,14 @@
-#-------------------
+#------------
 # stdio
-#-------------------
-snippet pr "printf(...) (pr)"
+#------------
+snippet stdio "#include <stdio.h>" b
+#include <stdio.h>
+endsnippet
+
+snippet pr "printf(...)"
 printf(${0:/* const char* restrict, ... */});
 endsnippet
 
-snippet sc "scanf(...) (sc)"
+snippet sc "scanf(...)"
 scanf(${0:/* const char* restrict, ... */});
 endsnippet

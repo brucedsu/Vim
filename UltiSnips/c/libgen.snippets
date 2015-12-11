@@ -1,6 +1,10 @@
-#-------------------
+#--------------
 # libgen
-#-------------------
-snippet base
+#--------------
+snippet libgen "#include <libgen.h>" b
+#include <libgen.h>
+endsnippet
+
+snippet base "basename(char *)"
 basename(${0:/* char* */})
 endsnippet
