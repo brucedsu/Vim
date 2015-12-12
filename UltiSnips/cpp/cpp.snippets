@@ -4,6 +4,21 @@ endglobal
 
 extends clang
 
+#----------
+# Loop
+#----------
+# range for, c++11
+snippet rfor "for (... : ...) {...}" b
+for (${1:/* declaration */} : ${2:/* expression */}) {
+	${0:/* statements */}
+}
+endsnippet
+
+snippet rfori "for (... : ...) ..." b
+for (${1:/* declaration */} : ${2:/* expression */})
+	${0:/* statements */}
+endsnippet
+
 #-----------------------------
 # Code Template
 #-----------------------------
