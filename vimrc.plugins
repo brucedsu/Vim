@@ -81,8 +81,14 @@ if g:deisu_preferences.autocompleter == 'YouCompleteMe'
             \ 'mail' : 1
         \}
 
-        " mappings
-        nnoremap <Leader>] :YcmCompleter GoTo<CR>
+        " mappings:
+        nnoremap <Leader>yi :YcmComplete GoToInclude<CR>
+        nnoremap <Leader>yc :YcmComplete GoToDeclaration<CR>
+        nnoremap <Leader>yf :YcmComplete GoToDefinition<CR>
+        nnoremap <Leader>yy :YcmCompleter GoTo<CR>
+        nnoremap <Leader>yt :YcmCompleter GetType<CR>
+        nnoremap <Leader>yp :YcmCompleter GetParent<CR>
+        nnoremap <Leader>yd :YcmCompleter GetDoc<CR>
     " }
 elseif g:deisu_preferences.autocompleter == 'neocomplete.vim'
     Plug 'Shougo/neocomplete.vim', { 'on': [] } " {
@@ -352,7 +358,7 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
     endif
 " }
 if executable('ctags')
-    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle'] } " {
+    Plug 'majutsushi/tagbar', { 'on' : ['TagbarToggle'] } " {
         let g:tagbar_autofocus = 1
         let g:tagbar_sort = 0
         let g:tagbar_compact = 1
@@ -398,7 +404,8 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
 Plug 'bling/vim-airline' " {
     " let g:airline_theme = 'solarized'
     let g:airline_extensions = [
-        \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks']
+        \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks'
+    \ ]
 
     " separators
     " don't use power line font in Apple Terminal
@@ -445,18 +452,19 @@ Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] } " {
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive' " {
-    nnoremap <silent> <Leader>gs :Gstatus<CR>
-    nnoremap <silent> <Leader>gc :Gcommit<CR>
-    nnoremap <silent> <Leader>gd :Gdiff<CR>
-    nnoremap <silent> <Leader>gp :Gpush<CR>
-    nnoremap <silent> <Leader>gl :Glog<CR>
-    nnoremap <silent> <Leader>gw :Gwrite<CR>
-    nnoremap <silent> <Leader>gr :Gread<CR>
-    nnoremap <silent> <Leader>grm :Gremove<CR>
-    nnoremap <silent> <Leader>gm :Gmove<Space>
-    nnoremap <silent> <Leader>gb :Gblame<CR>
-    nnoremap <silent> <Leader>ga :Git add<Space>
-    nnoremap <silent> <Leader>ge :Gedit<CR>
+    nnoremap <Leader>gs :Gstatus<CR>
+    nnoremap <Leader>ga :Git add<Space>
+    nnoremap <Leader>gc :Gcommit<CR>
+    nnoremap <Leader>gd :Gdiff<CR>
+    nnoremap <Leader>gp :Gpush<Space>
+    nnoremap <Leader>gpp :Gpush origin master<CR>
+    nnoremap <Leader>gl :Glog<CR>
+    nnoremap <Leader>gw :Gwrite<CR>
+    nnoremap <Leader>gr :Gread<CR>
+    nnoremap <Leader>grm :Gremove<CR>
+    nnoremap <Leader>gm :Gmove<Space>
+    nnoremap <Leader>gb :Gblame<CR>
+    nnoremap <Leader>ge :Gedit<CR>
 " }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' } " {
     nnoremap <silent> <Leader>gv :Gitv<CR>
