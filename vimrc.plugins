@@ -252,16 +252,37 @@ Plug 'terryma/vim-multiple-cursors' " {
 
     " integrate with YCM
     " excerpt from https://gist.github.com/eapache/0c0abbdb2e810a3f1f4a
+    " integrate with neocomplete
+    " excerpt from https://github.com/terryma/vim-multiple-cursors/issues/51
+    " integrate with neocomplcache
     function! Multiple_cursors_before()
         if exists('g:ycm_filetype_whitelist')
             let s:old_ycm_whitelist = g:ycm_filetype_whitelist
             let g:ycm_filetype_whitelist = {}
+            echo "Disabled YouCompleteMe"
+        endif
+        if exists('g:loaded_neocomplete')
+            exe 'NeoCompleteLock'
+            echo "Disabled neocomplete"
+        endif
+        if exists('g:loaded_neocomplcache')
+            exe 'NeoComplCacheLock'
+            echo "Disabled neocomplcache"
         endif
     endfunction
 
     function! Multiple_cursors_after()
         if exists('g:ycm_filetype_whitelist') && exists('s:old_ycm_whitelist')
             let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+            echo "Enabled YouCompleteme"
+        endif
+        if exists('g:loaded_neocomplete')
+            exe 'NeoCompleteUnlock'
+            echo "Enabled neocomplete"
+        endif
+        if exists('g:loaded_neocomplcache')
+            exe 'NeoComplCacheUnlock'
+            echo "Enabled neocomplcache"
         endif
     endfunction
 " }
