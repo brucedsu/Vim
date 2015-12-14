@@ -433,14 +433,6 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
     let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
     let g:syntastic_python_checkers = ['flake8']
 
-    " these awesome symbols take two units space in iTerm2 & Apple Termianl
-    if !deisufunc#IsiTerm2() && !deisufunc#IsAppleTerminal()
-        let g:syntastic_error_symbol = '✗'
-        let g:syntastic_warning_symbol = '⚠'
-        let g:syntastic_style_error_symbol = '✠'
-        let g:syntastic_style_warning_symbol = '≈'
-    endif
-
     nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
 Plug 'bling/vim-airline' " {

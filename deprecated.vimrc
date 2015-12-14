@@ -89,6 +89,10 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " Syntastic
 " special characters cause ruler and colorcolumn twisted
 " just stick to default signs
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_style_warning_symbol = '≈'
 
 " SingleCompile
 nnoremap <F3> :SCCompileRun<CR>
