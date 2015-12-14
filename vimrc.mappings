@@ -65,6 +65,9 @@ nmap <C-Down> :<C-u>call deisufunc#MoveLineDown()<CR>
 vmap <C-Up> :<C-u>call deisufunc#MoveSelectionUp()<CR>
 vmap <C-Down> :<C-u>call deisufunc#MoveSelectionDown()<CR>
 
+" yank everything with Y
+nnoremap Y :call deisufunc#Preserve("normal ggVGy")<CR>
+
 " }
 " -------------------------------- Formatting -------------------------------- {
 

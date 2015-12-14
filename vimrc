@@ -170,7 +170,11 @@ autocmd BufReadPost *
 " }
 " -------------------------------- Formatting -------------------------------- {
 
+" wrap
 set nowrap                      " don't wrap long lines
+
+" filetype base wrap
+autocmd FileType markdown,md setlocal wrap linebreak
 
 " indentation
 set expandtab                   " use spaces instead of tabs
