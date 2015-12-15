@@ -54,7 +54,7 @@ nnoremap <Leader>vm :vi ~/.vim/vimrc.mappings<CR>
 nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
 nnoremap <Leader>vg :vi ~/.vim/gvimrc<CR>
 nnoremap <Leader>vd :vi ~/.vim/deprecated.vimrc<CR>
-nnoremap <Leader>so :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '$MYVIMRC reloaded >^.^<'"<CR>
+nnoremap <Leader>so :source $MYVIMRC<CR>:echo "Reloaded $MYVIMRC :)"<CR>
 
 " don't want exit mode
 nnoremap Q <nop>
@@ -67,6 +67,9 @@ vmap <C-Down> :<C-u>call deisufunc#MoveSelectionDown()<CR>
 
 " yank everything with Y
 nnoremap Y :call deisufunc#Preserve("normal ggVGy")<CR>
+
+" jk to <Esc>
+inoremap jk <Esc>
 
 " }
 " -------------------------------- Formatting -------------------------------- {
@@ -204,7 +207,7 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
 " switch to alternative buffer
-nnoremap <Leader>e :e#<CR>
+nnoremap <Leader>ee :e#<CR>
 
 " count word
 nnoremap <Leader>cw :echo deisufunc#CountWord() . " Words"<CR>

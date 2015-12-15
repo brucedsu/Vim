@@ -109,7 +109,10 @@ if deisufunc#Istmux()
 endif
 
 " automatically save all buffers when losing focus
-autocmd FocusLost * :silent! wall
+augroup auto_save
+    autocmd!
+    autocmd FocusLost * :silent! wall
+augroup END
 
 " }
 " --------------------------------- Backups ---------------------------------- {
@@ -142,30 +145,45 @@ endif
 " }
 " --------------------------------- Editing ---------------------------------- {
 
-" filetype config
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
-autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
+" set filetype
+augroup set_filetype
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
+    autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
+augroup END
 
 " encoding
 set encoding=utf-8
 set termencoding=utf-8
 
-" spelling: default is off
+" spelling
 set nospell
 set spelllang=en
 
-" filetype based spelling
-autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
+" set spell base on filetype
+augroup set_spell_base_on_filetype
+    autocmd!
+    autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
+augroup END
 
-" filetype based comment string
-autocmd FileType c,cpp,h setlocal commentstring=//\ %s
+" set comment string base on filetype
+augroup set_comment_string_base_on_filetype
+    autocmd!
+    autocmd FileType c,cpp,h setlocal commentstring=//\ %s
+augroup END
 
-" return to last edit position when opening files
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif"`'")"'")
+" return to last edit position when open files
+augroup return_to_last_edit_position
+    autocmd!
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif"`'")"'")
+augroup END
+
+" abbreviations
+iabbrev @@ brucedsu@gmail.com
 
 " }
 " -------------------------------- Formatting -------------------------------- {
@@ -173,8 +191,11 @@ autocmd BufReadPost *
 " wrap
 set nowrap                      " don't wrap long lines
 
-" filetype base wrap
-autocmd FileType markdown,md setlocal wrap linebreak
+" set wrap base on filetype
+augroup set_wrap_base_on_filetype
+    autocmd!
+    autocmd FileType markdown,md setlocal wrap linebreak
+augroup END
 
 " indentation
 set expandtab                   " use spaces instead of tabs
@@ -185,10 +206,13 @@ set autoindent                  " auto indent new lines
 set smartindent
 set smarttab
 
-" filetype based indentation
-autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
-au! FileType python setl nosmartindent
+" set indentation base on filetype
+augroup set_indentation_base_on_filetype
+    autocmd!
+    autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
+    autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType python setl nosmartindent
+augroup END
 
 " toggle paste
 set pastetoggle=<F4>
@@ -198,27 +222,37 @@ set foldmethod=syntax
 set foldlevelstart=99
 set foldtext=deisufunc#BaseFoldText()
 
-" ft based folding
-autocmd FileType html,php setlocal foldmethod=indent
+" set folding base on filetype
+augroup set_folding_base_on_filetype
+    autocmd!
+    autocmd FileType html,php setlocal foldmethod=indent
+augroup END
 
 " preserve folding state
 set viewoptions-=options
-augroup folding
+augroup preserve_folding_state
+    autocmd!
     autocmd BufWritePost *
-        \if expand('%') != '' && &buftype !~ 'nofile' |
-        \mkview |
-        \endif
+        \ if expand('%') != '' && &buftype !~ 'nofile' |
+        \ mkview |
+        \ endif
     autocmd BufRead *
-        \if expand('%') != '' && &buftype !~ 'nofile' |
-        \silent loadview |
-        \endif
+        \ if expand('%') != '' && &buftype !~ 'nofile' |
+        \ silent loadview |
+        \ endif
 augroup END
 
-" remove trailing spaces before saving
-autocmd BufWritePre * :call deisufunc#Preserve("%s/\\s\\+$//e")
+" remove all trailing spaces before saving
+augroup remove_trailing_spaces
+    autocmd!
+    autocmd BufWritePre * :call deisufunc#Preserve("%s/\\s\\+$//e")
+augroup END
 
 " don't insert comment prefix when I hit enter at the end of a commented line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup remove_comment_prefix_when_hit_enter
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
 
 " }
 " ------------------------------ User Interface ------------------------------ {
@@ -249,7 +283,10 @@ if exists('&colorcolumn')
     set colorcolumn=80
 
     " filetype based color column
-    autocmd Filetype python setlocal colorcolumn=79
+    augroup set_colorcolumn_base_on_filetype
+        autocmd!
+        autocmd Filetype python setlocal colorcolumn=79
+    augroup END
 endif
 
 " list
@@ -257,8 +294,11 @@ set nolist
 set listchars=tab:▸\ ,trail:▫,eol:¬,extends:❯,precedes:❮
 
 " highlight current cursor position
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
+augroup highlight_cursor_position
+    autocmd!
+    autocmd WinLeave * set nocursorline nocursorcolumn
+    autocmd WinEnter * set cursorline cursorcolumn
+augroup END
 set cursorline cursorcolumn
 
 " search
