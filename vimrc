@@ -1,5 +1,4 @@
 " ---------------------------- Modeline and Notes ---------------------------- {
-" vim: tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
 " vim: foldlevel=0 foldmarker={,} foldmethod=marker
 " vim: foldtext=deisufunc#DotVimsFoldText()
 "    ____       _ ____                   _
@@ -36,7 +35,7 @@ let g:deisu_preferences.color_scheme = 'solarized'
 
 " load additional preferences
 if filereadable(expand("~/.vimrc.before"))
-    source ~/.vimrc.before
+  source ~/.vimrc.before
 endif
 
 " pick completers
@@ -57,19 +56,22 @@ set title                       " show file name in titlebar
 " the new regex engine is so slow, use the old one
 " consider removing this in the future when the new regex engine becomes faster
 if v:version >= 704
-    set regexpengine=1
+  set regexpengine=1
 endif
-
 
 " let vim use system default clipboard
 if has('unnamedplus')
-    set clipboard=unnamedplus,unnamed
+  set clipboard=unnamedplus,unnamed
 else
-    set clipboard=unnamed
+  set clipboard=unnamed
 endif
 
-" mouse
-set mouse=a                     " enables the mouse in all modes
+" mouse: only enable mouse in MacVimApp
+if deisufunc#IsMacVimApp()
+  set mouse=a
+else
+  set mouse=
+endif
 set mousehide                   " hide mouse when typing
 
 " buffer
@@ -102,16 +104,16 @@ set ttimeoutlen=10
 
 " tmux will send xterm-style keys when its xterm-keys option is on
 if deisufunc#Istmux()
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
 endif
 
 " automatically save all buffers when losing focus
-augroup auto_save
-    autocmd!
-    autocmd FocusLost * :silent! wall
+augroup autosave
+  autocmd!
+  autocmd FocusLost * :silent! wall
 augroup END
 
 " }
@@ -133,13 +135,13 @@ set directory=~/.vim/tmp/swap//
 
 " make backup folders automatically if they don't exist
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 
 " }
@@ -147,10 +149,10 @@ endif
 
 " set filetype
 augroup set_filetype
-    autocmd!
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
-    autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
+  autocmd!
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
+  autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
 augroup END
 
 " encoding
@@ -163,23 +165,23 @@ set spelllang=en
 
 " set spell base on filetype
 augroup set_spell_base_on_filetype
-    autocmd!
-    autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
+  autocmd!
+  autocmd BufRead,BufNewFile *.markdown,*.md,*.txt setlocal spell
 augroup END
 
 " set comment string base on filetype
 augroup set_comment_string_base_on_filetype
-    autocmd!
-    autocmd FileType c,cpp,h setlocal commentstring=//\ %s
+  autocmd!
+  autocmd FileType c,cpp,h setlocal commentstring=//\ %s
 augroup END
 
-" return to last edit position when open files
-augroup return_to_last_edit_position
-    autocmd!
-    autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif"`'")"'")
+" jump to the last known cursor position
+augroup jump_to_the_last_known_cursor_position
+  autocmd!
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 augroup END
 
 " abbreviations
@@ -193,8 +195,8 @@ set nowrap                      " don't wrap long lines
 
 " set wrap base on filetype
 augroup set_wrap_base_on_filetype
-    autocmd!
-    autocmd FileType markdown,md setlocal wrap linebreak
+  autocmd!
+  autocmd FileType markdown,md setlocal wrap linebreak
 augroup END
 
 " indentation
@@ -208,10 +210,10 @@ set smarttab
 
 " set indentation base on filetype
 augroup set_indentation_base_on_filetype
-    autocmd!
-    autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
-    autocmd FileType python setl nosmartindent
+  autocmd!
+  autocmd FileType make,asm setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
+  autocmd FileType css,ruby,vim setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd FileType python setl nosmartindent
 augroup END
 
 " toggle paste
@@ -224,34 +226,34 @@ set foldtext=deisufunc#BaseFoldText()
 
 " set folding base on filetype
 augroup set_folding_base_on_filetype
-    autocmd!
-    autocmd FileType html,php setlocal foldmethod=indent
+  autocmd!
+  autocmd FileType html,php setlocal foldmethod=indent
 augroup END
 
 " preserve folding state
 set viewoptions-=options
 augroup preserve_folding_state
-    autocmd!
-    autocmd BufWritePost *
-        \ if expand('%') != '' && &buftype !~ 'nofile' |
-        \ mkview |
-        \ endif
-    autocmd BufRead *
-        \ if expand('%') != '' && &buftype !~ 'nofile' |
-        \ silent loadview |
-        \ endif
+  autocmd!
+  autocmd BufWritePost *
+    \| if expand('%') != '' && &buftype !~ 'nofile'
+    \|  mkview
+    \| endif
+  autocmd BufRead *
+    \| if expand('%') != '' && &buftype !~ 'nofile'
+    \|  silent loadview
+    \| endif
 augroup END
 
 " remove all trailing spaces before saving
 augroup remove_trailing_spaces
-    autocmd!
-    autocmd BufWritePre * :call deisufunc#Preserve("%s/\\s\\+$//e")
+  autocmd!
+  autocmd BufWritePre * :call deisufunc#Preserve("%s/\\s\\+$//e")
 augroup END
 
 " don't insert comment prefix when I hit enter at the end of a commented line
 augroup remove_comment_prefix_when_hit_enter
-    autocmd!
-    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  autocmd!
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 augroup END
 
 " }
@@ -280,13 +282,13 @@ set ruler
 
 " colorcolumn
 if exists('&colorcolumn')
-    set colorcolumn=80
+  set colorcolumn=80
 
-    " filetype based color column
-    augroup set_colorcolumn_base_on_filetype
-        autocmd!
-        autocmd Filetype python setlocal colorcolumn=79
-    augroup END
+  " filetype based color column
+  augroup set_colorcolumn_base_on_filetype
+    autocmd!
+    autocmd Filetype python setlocal colorcolumn=79
+  augroup END
 endif
 
 " list
@@ -295,9 +297,9 @@ set listchars=tab:▸\ ,trail:▫,eol:¬,extends:❯,precedes:❮
 
 " highlight current cursor position
 augroup highlight_cursor_position
-    autocmd!
-    autocmd WinLeave * set nocursorline nocursorcolumn
-    autocmd WinEnter * set cursorline cursorcolumn
+  autocmd!
+  autocmd WinLeave * set nocursorline nocursorcolumn
+  autocmd WinEnter * set cursorline cursorcolumn
 augroup END
 set cursorline cursorcolumn
 
@@ -319,14 +321,14 @@ let mapleader      = ","
 let maplocalleader = "\\"
 
 if filereadable(expand("~/.vimrc.mappings"))
-    source ~/.vimrc.mappings
+  source ~/.vimrc.mappings
 endif
 
 " }
 " --------------------------------- Plugins ---------------------------------- {
 
 if filereadable(expand("~/.vimrc.plugins"))
-    source ~/.vimrc.plugins
+  source ~/.vimrc.plugins
 endif
 
 " set color scheme after load plugins

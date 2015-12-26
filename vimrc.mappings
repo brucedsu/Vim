@@ -1,5 +1,4 @@
 " ---------------------------- Modeline and Notes ---------------------------- {
-" vim: tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
 " vim: foldlevel=0 foldmarker={,} foldmethod=marker
 " vim: foldtext=deisufunc#DotVimsFoldText()
 "    ____       _ ____                                          _
@@ -35,16 +34,10 @@ nnoremap <Leader>su z=
 xnoremap p pgvy
 xnoremap P Pgvy
 
-" split: S is covered by cc
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
-
-" keep the cursor in place while joining lines
-nnoremap J mzJ`z
-
 " disable C-a on tmux or on screen
 if deisufunc#Istmux()
-    nnoremap <C-a> <nop>
-    nnoremap <Leader><C-a> <C-a>
+  nnoremap <C-a> <nop>
+  nnoremap <Leader><C-a> <C-a>
 endif
 
 " quick edit and source vim config files
@@ -71,6 +64,12 @@ nnoremap Y :call deisufunc#Preserve("normal ggVGy")<CR>
 " jk to <Esc>
 inoremap jk <Esc>
 
+" split: S is covered by cc
+nnoremap S i<CR><Esc>l
+
+" keep the cursor in place while joining lines
+nnoremap J mzJ`zmz
+
 " }
 " -------------------------------- Formatting -------------------------------- {
 
@@ -85,10 +84,10 @@ nnoremap _= :call deisufunc#Preserve("normal gg=G")<CR>
 
 " indent/unindent line(s) Mac OS X way
 if deisufunc#IsMacVimApp()
-    nnoremap <D-[> <<
-    nnoremap <D-]> >>
-    vnoremap <D-[> <gv
-    vnoremap <D-]> >gv
+  nnoremap <D-[> <<
+  nnoremap <D-]> >>
+  vnoremap <D-[> <gv
+  vnoremap <D-]> >gv
 endif
 
 " general indent/unindent line(s)
@@ -144,12 +143,12 @@ vnoremap L g_
 
 " power scroll
 if deisufunc#IsMacVimApp()
-  nnoremap <D-k> 15gk
-  nnoremap <D-j> 15gj
+  nnoremap <D-k> 16gk
+  nnoremap <D-j> 16gj
 endif
 
-noremap <C-j> 15gj
-noremap <C-k> 15gk
+noremap <C-j> 16gj
+noremap <C-k> 16gk
 
 " scroll through the command history
 " don't forget the q: command which opens the command-line window
@@ -181,8 +180,8 @@ nmap <Leader>ev :vsp %%
 nmap <Leader>et :tabe %%
 
 " save
-inoremap <C-s> <C-o>:update<CR>
-nnoremap <C-s> :update<CR>
+inoremap <C-s> <C-o>:write<CR>
+nnoremap <C-s> :write<CR>
 
 " allow us to save a file we don't have permission to
 " *after* we have already opened it

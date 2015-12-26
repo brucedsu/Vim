@@ -4,6 +4,21 @@ endglobal
 
 extends clang
 
+#------------------------------
+# Error Handling
+#------------------------------
+snippet th "throw ..." b
+throw ${0:/* expression */};
+endsnippet
+
+snippet try "try {...} catch (...) {...}" b
+try {
+	${1:/* statements */}
+} catch (${2:/* catch parameter */}) {
+	${0:/* statements */}
+}
+endsnippet
+
 #--------------------
 # Libraries
 #--------------------
@@ -31,8 +46,24 @@ snippet umap "#include <unordered_map>" b
 #include <unordered_map>
 endsnippet
 
+snippet set "#include <set>" b
+#include <set>
+endsnippet
+
 snippet uset "#include <unordered_set>" b
 #include <unordered_set>
+endsnippet
+
+snippet utility "#include <utility>" b
+#include <utility>
+endsnippet
+
+snippet queue "#include <queue>" b
+#include <queue>
+endsnippet
+
+snippet cmath "#include <cmath>" b
+#include <cmath>
 endsnippet
 
 #----------

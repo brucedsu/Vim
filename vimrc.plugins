@@ -1,5 +1,4 @@
 " ---------------------------- Modeline and Notes ---------------------------- {
-" vim: tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
 " vim: foldlevel=0 foldmarker={,} foldmethod=marker
 " vim: foldtext=deisufunc#DotVimsFoldText()
 "    ____       _ ____                    _             _
@@ -10,19 +9,19 @@
 "                                  |_|            |___/
 "
 " DeiSu's personal vim plugins.
-" I use vim-plug as my plugin manager.
+" Use vim-plug as plugin manager.
 " Copyright © 2014-2015 DeiSu. All Rights Reserved.
 " }
 " --------------------------------- vim-plug --------------------------------- {
 
 " automatically install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    augroup install_vim_plug
-        autocmd!
-        autocmd VimEnter * PlugInstall | source $MYVIMRC
-    augroup END
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  augroup install_vim_plug
+    autocmd!
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+  augroup END
 endif
 
 " vim-plug mappings
@@ -37,119 +36,125 @@ call plug#begin('~/.vim/plugins')
 " -------------------------------- Completion -------------------------------- {
 
 Plug 'jiangmiao/auto-pairs'
+
+" snippet engine
 if g:deisu_preferences.snippet_engine == 'ultisnips'
-    Plug 'SirVer/ultisnips', { 'on': [] } " {
-        let g:UltiSnipsExpandTrigger       = "<Tab>"
-        let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
-        let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-    " }
+  Plug 'SirVer/ultisnips', { 'on': [] } " {
+    let g:UltiSnipsExpandTrigger       = "<Tab>"
+    let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+  " }
 elseif g:deisu_preferences.snippet_engine == 'neosnippet.vim'
-    Plug 'Shougo/neosnippet.vim', { 'on': [] } " {
-        let g:neosnippet#enable_snipmate_compatibility = 1
+  Plug 'Shougo/neosnippet.vim', { 'on': [] } " {
+    let g:neosnippet#enable_snipmate_compatibility = 1
 
-        imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-        smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    " }
-    Plug 'Shougo/neosnippet-snippets', { 'on': [] }
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  " }
+  Plug 'Shougo/neosnippet-snippets', { 'on': [] }
 endif
+
+" autocompleter
 if g:deisu_preferences.autocompleter == 'YouCompleteMe'
-    Plug 'Valloric/YouCompleteMe', {
-        \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
-        let g:ycm_min_num_of_chars_for_completion = 1
-        let g:ycm_always_populate_location_list = 1
+  Plug 'Valloric/YouCompleteMe', {
+    \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
+    let g:ycm_min_num_of_chars_for_completion = 1
+    let g:ycm_always_populate_location_list = 1
 
-        " cycle
-        let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
-        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    " cycle
+    let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
-        " comment
-        let g:ycm_complete_in_comments                          = 1
-        let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    " comment
+    let g:ycm_complete_in_comments                          = 1
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-        " extra conf
-        let g:ycm_confirm_extra_conf = 0
-        let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-        let g:ycm_extra_conf_vim_data = ['&filetype']
+    " extra conf
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    let g:ycm_extra_conf_vim_data = ['&filetype']
 
-        " filetype black/white list
-        let g:ycm_filetype_blacklist = {
-            \ 'tagbar' : 1,
-            \ 'qf' : 1,
-            \ 'notes' : 1,
-            \ 'unite' : 1,
-            \ 'text' : 1,
-            \ 'vimwiki' : 1,
-            \ 'pandoc' : 1,
-            \ 'infolog' : 1,
-            \ 'mail' : 1
-        \}
+    " filetype black/white list
+    let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1
+    \}
 
-        " mappings:
-        nnoremap <Leader>yi :YcmComplete GoToInclude<CR>
-        nnoremap <Leader>yc :YcmComplete GoToDeclaration<CR>
-        nnoremap <Leader>yf :YcmComplete GoToDefinition<CR>
-        nnoremap <Leader>yg :YcmCompleter GoTo<CR>
-        nnoremap <Leader>yt :YcmCompleter GetType<CR>
-        nnoremap <Leader>yp :YcmCompleter GetParent<CR>
-        nnoremap <Leader>yd :YcmCompleter GetDoc<CR>
-    " }
+    " mappings:
+    nnoremap <Leader>yi :YcmComplete GoToInclude<CR>
+    nnoremap <Leader>yc :YcmComplete GoToDeclaration<CR>
+    nnoremap <Leader>yf :YcmComplete GoToDefinition<CR>
+    nnoremap <Leader>yg :YcmCompleter GoTo<CR>
+    nnoremap <Leader>yt :YcmCompleter GetType<CR>
+    nnoremap <Leader>yp :YcmCompleter GetParent<CR>
+    nnoremap <Leader>yd :YcmCompleter GetDoc<CR>
+  " }
 elseif g:deisu_preferences.autocompleter == 'neocomplete.vim'
-    Plug 'Shougo/neocomplete.vim', { 'on': [] } " {
-        let g:neocomplete#auto_completion_start_length = 1
-        let g:neocomplete#enable_smart_case = 1
-        let g:neocomplete#enable_fuzzy_completion = 1
-    " }
+  Plug 'Shougo/neocomplete.vim', { 'on': [] } " {
+    let g:neocomplete#auto_completion_start_length = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_fuzzy_completion = 1
+  " }
 elseif g:deisu_preferences.autocompleter == 'neocomplcache.vim'
-    Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
-        let g:neocomplcache_auto_completion_start_length = 1
-        let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_enable_fuzzy_completion = 1
-    " }
+  Plug 'Shougo/neocomplcache.vim', { 'on': [] } " {
+    let g:neocomplcache_auto_completion_start_length = 1
+    let g:neocomplcache_enable_smart_case = 1
+    let g:neocomplcache_enable_fuzzy_completion = 1
+  " }
 endif
 
 " load completers when first enter insert mode
 augroup load_completers
-    autocmd!
-    autocmd! InsertEnter * call deisufunc#LoadCompleters()
-                        \| autocmd! load_completers
+  autocmd!
+  autocmd! InsertEnter * call deisufunc#LoadCompleters()
+    \| autocmd! load_completers
 augroup END
 
 " }
 " -------------------------------- Navigation -------------------------------- {
 
 Plug 'easymotion/vim-easymotion', {
-    \ 'on': ['<Plug>(easymotion-bd-w)', '<Plug>(easymotion-bd-W)',
-    \ '<Plug>(easymotion-j)', '<Plug>(easymotion-k)'] } " {
-    nmap \ <Plug>(easymotion-prefix)
-    nmap <Leader>w <Plug>(easymotion-bd-w)
-    nmap <Leader>W <Plug>(easymotion-bd-W)
-    nmap <Leader>j <Plug>(easymotion-j)
-    nmap <Leader>k <Plug>(easymotion-k)
+  \ 'on': ['<Plug>(easymotion-bd-w)', '<Plug>(easymotion-bd-W)',
+  \ '<Plug>(easymotion-j)', '<Plug>(easymotion-k)'] } " {
+  nmap \ <Plug>(easymotion-prefix)
+  nmap <Leader>w <Plug>(easymotion-bd-w)
+  nmap <Leader>W <Plug>(easymotion-bd-W)
+  nmap <Leader>j <Plug>(easymotion-j)
+  nmap <Leader>k <Plug>(easymotion-k)
 " }
 if v:version >= 703
-    Plug 'myusuf3/numbers.vim'
+  Plug 'myusuf3/numbers.vim'
 endif
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] } " {
-    nnoremap <Leader>aa :A<CR>
-    nnoremap <Leader>as :AS<CR>
-    nnoremap <Leader>av :AV<CR>
+  nnoremap <Leader>aa :A<CR>
+  nnoremap <Leader>as :AS<CR>
+  nnoremap <Leader>av :AV<CR>
 " }
 Plug 'Valloric/ListToggle'
 if executable('ag') || executable('ack')
-    Plug 'dyng/ctrlsf.vim', {
-        \ 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
-        \ '<Plug>CtrlSFVwordExec', '<Plug>CtrlSFCwordPath',
-        \ '<Plug>CtrlSFPwordPath', 'CtrlSFOpen', 'CtrlSFToggle' ] } " {
-        nmap     <C-F>f <Plug>CtrlSFPrompt
-        vmap     <C-F>f <Plug>CtrlSFVwordPath
-        vmap     <C-F>F <Plug>CtrlSFVwordExec
-        nmap     <C-F>n <Plug>CtrlSFCwordPath
-        nmap     <C-F>p <Plug>CtrlSFPwordPath
-        nnoremap <C-F>o :CtrlSFOpen<CR>
-        nnoremap <C-F>t :CtrlSFToggle<CR>
-        inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-    " }
+  Plug 'dyng/ctrlsf.vim', {
+    \ 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
+    \ '<Plug>CtrlSFVwordExec', '<Plug>CtrlSFCwordPath',
+    \ '<Plug>CtrlSFPwordPath', 'CtrlSFOpen', 'CtrlSFToggle' ] } " {
+    nmap     <C-F>f <Plug>CtrlSFPrompt
+    vmap     <C-F>f <Plug>CtrlSFVwordPath
+    vmap     <C-F>F <Plug>CtrlSFVwordExec
+    nmap     <C-F>n <Plug>CtrlSFCwordPath
+    nmap     <C-F>p <Plug>CtrlSFPwordPath
+    nnoremap <C-F>o :CtrlSFOpen<CR>
+    nnoremap <C-F>t :CtrlSFToggle<CR>
+    inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+  " }
 endif
 Plug 'kshenoy/vim-signature'
 Plug 'vim-scripts/matchit.zip'
@@ -158,76 +163,76 @@ Plug 'vim-scripts/matchit.zip'
 " --------------------------------- Editing ---------------------------------- {
 
 Plug 'tpope/vim-surround', {
-    \ 'on': ['<Plug>Dsurround', '<Plug>Csurround', '<Plug>CSurround',
-    \ '<Plug>Ysurround', '<Plug>YSurround', '<Plug>Yssurround',
-    \ '<Plug>YSsurround', '<Plug>VSurround', '<Plug>VgSurround'] } " {
-    nmap ds  <Plug>Dsurround
-    nmap cs  <Plug>Csurround
-    nmap cS  <Plug>CSurround
-    nmap ys  <Plug>Ysurround
-    nmap yS  <Plug>YSurround
-    nmap yss <Plug>Yssurround
-    nmap ySs <Plug>YSsurround
-    nmap ySS <Plug>YSsurround
-    xmap S   <Plug>VSurround
-    xmap gS  <Plug>VgSurround
+  \ 'on': ['<Plug>Dsurround', '<Plug>Csurround', '<Plug>CSurround',
+  \ '<Plug>Ysurround', '<Plug>YSurround', '<Plug>Yssurround',
+  \ '<Plug>YSsurround', '<Plug>VSurround', '<Plug>VgSurround'] } " {
+  nmap ds  <Plug>Dsurround
+  nmap cs  <Plug>Csurround
+  nmap cS  <Plug>CSurround
+  nmap ys  <Plug>Ysurround
+  nmap yS  <Plug>YSurround
+  nmap yss <Plug>Yssurround
+  nmap ySs <Plug>YSsurround
+  nmap ySS <Plug>YSsurround
+  xmap S   <Plug>VSurround
+  xmap gS  <Plug>VgSurround
 " }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " {
-    map  gc  <Plug>Commentary
-    nmap gcc <Plug>CommentaryLine
-    nmap <BS> gcc
-    vmap <BS> gc
+  map  gc  <Plug>Commentary
+  nmap gcc <Plug>CommentaryLine
+  nmap <BS> gcc
+  vmap <BS> gc
 " }
 Plug 'Yggdroot/indentLine', { 'on': ['IndentLinesEnable', 'IndentLinesToggle'] } " {
-    let g:indentLine_enabled              = 0
-    let g:indentLine_showFirstIndentLevel = 0
-    let g:indentLine_faster               = 1
-    let g:indentLine_fileTypeExclude      = ['sql']
+  let g:indentLine_enabled              = 0
+  let g:indentLine_showFirstIndentLevel = 0
+  let g:indentLine_faster               = 1
+  let g:indentLine_fileTypeExclude      = ['sql']
 
-    " indent line character
-    if deisufunc#IsMacVimApp()
-        " in MacVim use this super tall bar
-        let g:indentLine_char = '│'
-        let g:indentLine_first_char = '│'
-    else
-        let g:indentLine_char = '┆'
-        let g:indentLine_first_char = '┆'
-    endif
+  " indent line character
+  if deisufunc#IsMacVimApp()
+    " in MacVim use this super tall bar
+    let g:indentLine_char = '│'
+    let g:indentLine_first_char = '│'
+  else
+    let g:indentLine_char = '┆'
+    let g:indentLine_first_char = '┆'
+  endif
 
-    noremap <F5> :IndentLinesToggle<CR>
+  noremap <F5> :IndentLinesToggle<CR>
 " }
 Plug 'tpope/vim-ragtag', { 'for': ['html', 'htmldjango', 'php', 'xml'] }
 Plug 'Valloric/MatchTagAlways', {
-    \ 'for': ['html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
+  \ 'for': ['html', 'xhtml', 'xml', 'jinjia', 'eruby', 'htmldjango', 'django'] }
 Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' } " {
-    nnoremap <F6> :RainbowParentheses!!<CR>
+  nnoremap <F6> :RainbowParentheses!!<CR>
 " }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
-    let g:undotree_WindowLayout = 2
-    nnoremap U :UndotreeToggle<CR>
+  let g:undotree_WindowLayout = 2
+  nnoremap U :UndotreeToggle<CR>
 " }
 
 " text objects
 " TODO: on-demand load vim-textobj-user
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line', {
-    \ 'on': ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)'] } " {
-    xmap al <Plug>(textobj-line-a)
-    omap al <Plug>(textobj-line-a)
-    xmap il <Plug>(textobj-line-i)
-    omap il <Plug>(textobj-line-i)
+  \ 'on': ['<Plug>(textobj-line-a)', '<Plug>(textobj-line-i)'] } " {
+  xmap al <Plug>(textobj-line-a)
+  omap al <Plug>(textobj-line-a)
+  xmap il <Plug>(textobj-line-i)
+  omap il <Plug>(textobj-line-i)
 " }
 Plug 'kana/vim-textobj-entire', {
-    \ 'on': ['<Plug>(textobj-entire-a)', '<Plug>(textobj-entire-i)'] } " {
-    xmap ae <Plug>(textobj-entire-a)
-    omap ae <Plug>(textobj-entire-a)
-    xmap ie <Plug>(textobj-entire-i)
-    omap ie <Plug>(textobj-entire-i)
+  \ 'on': ['<Plug>(textobj-entire-a)', '<Plug>(textobj-entire-i)'] } " {
+  xmap ae <Plug>(textobj-entire-a)
+  omap ae <Plug>(textobj-entire-a)
+  xmap ie <Plug>(textobj-entire-i)
+  omap ie <Plug>(textobj-entire-i)
 " }
 Plug 'glts/vim-textobj-comment', {
-    \ 'on': ['<Plug>(textobj-comment-a)', '<Plug>(textobj-comment-i)',
-    \ '<Plug>(textobj-comment-big-a)'] } " {
+  \ 'on': ['<Plug>(textobj-comment-a)', '<Plug>(textobj-comment-i)',
+  \ '<Plug>(textobj-comment-big-a)'] } " {
 	xmap ac <Plug>(textobj-comment-a)
 	omap ac <Plug>(textobj-comment-a)
 	xmap ic <Plug>(textobj-comment-i)
@@ -240,63 +245,63 @@ Plug 'glts/vim-textobj-comment', {
 " --------------------------------- Refactor --------------------------------- {
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " {
-    " Start interactive EasyAlign in visual mode
-    xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign in visual mode
+  xmap ga <Plug>(EasyAlign)
 
-    " Start interactive EasyAlign with a Vim movement
-    nmap ga <Plug>(EasyAlign)
-    nmap gaa ga_
+  " Start interactive EasyAlign with a Vim movement
+  nmap ga <Plug>(EasyAlign)
+  nmap gaa ga_
 " }
 Plug 'terryma/vim-multiple-cursors' " {
-    " match against text instead of word, same behavior as CMD-D in ST3
-    " discussed at: https://github.com/terryma/vim-multiple-cursors/pull/105
-    let g:multi_cursor_start_key='<C-n>'
-    let g:multi_cursor_start_word_key='g<C-n>'
+  " match against text instead of word, same behavior as CMD-D in ST3
+  " discussed at: https://github.com/terryma/vim-multiple-cursors/pull/105
+  let g:multi_cursor_start_key='<C-n>'
+  let g:multi_cursor_start_word_key='g<C-n>'
 
-    " integrate with YCM
-    " excerpt from https://gist.github.com/eapache/0c0abbdb2e810a3f1f4a
-    " integrate with neocomplete
-    " excerpt from https://github.com/terryma/vim-multiple-cursors/issues/51
-    " integrate with neocomplcache
-    function! Multiple_cursors_before()
-        if exists('g:ycm_filetype_whitelist')
-            let s:old_ycm_whitelist = g:ycm_filetype_whitelist
-            let g:ycm_filetype_whitelist = {}
-            echo "Disabled YouCompleteMe"
-        endif
-        if exists('g:loaded_neocomplete')
-            exe 'NeoCompleteLock'
-            echo "Disabled neocomplete"
-        endif
-        if exists('g:loaded_neocomplcache')
-            exe 'NeoComplCacheLock'
-            echo "Disabled neocomplcache"
-        endif
-    endfunction
+  " integrate with YCM
+  " excerpt from https://gist.github.com/eapache/0c0abbdb2e810a3f1f4a
+  " integrate with neocomplete
+  " excerpt from https://github.com/terryma/vim-multiple-cursors/issues/51
+  " integrate with neocomplcache
+  function! Multiple_cursors_before()
+    if exists('g:ycm_filetype_whitelist')
+      let s:old_ycm_whitelist = g:ycm_filetype_whitelist
+      let g:ycm_filetype_whitelist = {}
+      echo "Disabled YouCompleteMe"
+    endif
+    if exists('g:loaded_neocomplete')
+      exe 'NeoCompleteLock'
+      echo "Disabled neocomplete"
+    endif
+    if exists('g:loaded_neocomplcache')
+      exe 'NeoComplCacheLock'
+      echo "Disabled neocomplcache"
+    endif
+  endfunction
 
-    function! Multiple_cursors_after()
-        if exists('g:ycm_filetype_whitelist') && exists('s:old_ycm_whitelist')
-            let g:ycm_filetype_whitelist = s:old_ycm_whitelist
-            echo "Enabled YouCompleteme"
-        endif
-        if exists('g:loaded_neocomplete')
-            exe 'NeoCompleteUnlock'
-            echo "Enabled neocomplete"
-        endif
-        if exists('g:loaded_neocomplcache')
-            exe 'NeoComplCacheUnlock'
-            echo "Enabled neocomplcache"
-        endif
-    endfunction
+  function! Multiple_cursors_after()
+    if exists('g:ycm_filetype_whitelist') && exists('s:old_ycm_whitelist')
+      let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+      echo "Enabled YouCompleteme"
+    endif
+    if exists('g:loaded_neocomplete')
+      exe 'NeoCompleteUnlock'
+      echo "Enabled neocomplete"
+    endif
+    if exists('g:loaded_neocomplcache')
+      exe 'NeoComplCacheUnlock'
+      echo "Enabled neocomplcache"
+    endif
+  endfunction
 " }
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' } " {
-    noremap <F7> :Autoformat<CR>
+  noremap <F7> :Autoformat<CR>
 " }
 Plug 'tommcdo/vim-exchange', {'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)']} " {
-    nmap cx <Plug>(Exchange)
-    xmap X <Plug>(Exchange)
-    nmap cxc <Plug>(ExchangeClear)
-    nmap cxx <Plug>(ExchangeLine)
+  nmap cx <Plug>(Exchange)
+  xmap X <Plug>(Exchange)
+  nmap cxc <Plug>(ExchangeClear)
+  nmap cxx <Plug>(ExchangeLine)
 " }
 
 " }
@@ -307,34 +312,34 @@ Plug 'keith/swift.vim', { 'for': 'swift' }
 
 " Python
 Plug 'klen/python-mode', { 'for': 'python' } " {
-    " common functionality
-    let g:pymode_trim_whitespaces = 0
-    let g:pymode_options = 0
+  " common functionality
+  let g:pymode_trim_whitespaces = 0
+  let g:pymode_options = 0
 
-    " PEP8-compatible python ident
-    let g:pymode_indent = 1
+  " PEP8-compatible python ident
+  let g:pymode_indent = 1
 
-    " documentation
-    let g:pymode_doc = 1
-    let g:pymode_doc_bind = 'K'
+  " documentation
+  let g:pymode_doc = 1
+  let g:pymode_doc_bind = 'K'
 
-    " don't run code
-    let g:pymode_run = 0
+  " don't run code
+  let g:pymode_run = 0
 
-    " breakpoints
-    let g:pymode_breakpoint = 1
-    let g:pymode_breakpoint_bind = '<Leader>b'
+  " breakpoints
+  let g:pymode_breakpoint = 1
+  let g:pymode_breakpoint_bind = '<Leader>b'
 
-    " code checking: use Syntastic instead
-    let g:pymode_lint = 0
-    let g:pymode_lint_checkers = []
+  " code checking: use Syntastic instead
+  let g:pymode_lint = 0
+  let g:pymode_lint_checkers = []
 
-    " rope support
-    let g:pymode_rope = 0
-    let g:pymode_rope_lookup_project = 0
+  " rope support
+  let g:pymode_rope = 0
+  let g:pymode_rope_lookup_project = 0
 
-    " rope completion
-    let g:pymode_rope_completion = 0
+  " rope completion
+  let g:pymode_rope_completion = 0
 " }
 
 " C/C++
@@ -344,10 +349,10 @@ Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 Plug 'nelstrom/vim-markdown-folding', { 'for': ['markdown', 'md'] }
 Plug 'tpope/vim-markdown', { 'for': ['markdown', 'md'] }
 if executable('redcarpet') && executable('instant-markdown-d')
-    Plug 'suan/vim-instant-markdown', { 'for': ['markdown', 'md'] } " {
-        let g:instant_markdown_autostart = 0
-        nnoremap <silent> <Leader>p :InstantMarkdownPreview<CR>
-    " }
+  Plug 'suan/vim-instant-markdown', { 'for': ['markdown', 'md'] } " {
+    let g:instant_markdown_autostart = 0
+    nnoremap <silent> <Leader>p :InstantMarkdownPreview<CR>
+  " }
 endif
 Plug 'jszakmeister/markdown2ctags', { 'for': ['markdown', 'md']}
 
@@ -368,143 +373,144 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
 " ----------------------------------- IDE ------------------------------------ {
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
-    let NERDTreeIgnore = ['\.class$', '\.git', '\.svn', '\.DS_Store', '\.o', '.pyc', '.pdf']
-    let NERDTreeShowBookmarks   = 1
-    let NERDTreeShowHidden      = 1
-    let NERDTreeQuitOnOpen      = 1
-    let NERDTreeShowLineNumbers = 1
-    let g:NERDTreeWinSize       = 40
-    inoremap <F2> <Esc>:NERDTreeToggle<CR>
-    nnoremap <F2> :NERDTreeToggle<CR>
-    nnoremap <Leader>f :NERDTreeFind<CR>
-    nnoremap <Leader>x :NERDTreeCWD<CR>
+  let NERDTreeIgnore = [
+    \ '\.class$', '\.git', '\.svn', '\.DS_Store', '\.o', '.pyc', '.pdf']
+  let NERDTreeShowBookmarks   = 1
+  let NERDTreeShowHidden      = 1
+  let NERDTreeQuitOnOpen      = 1
+  let NERDTreeShowLineNumbers = 1
+  let g:NERDTreeWinSize       = 40
+  inoremap <F2> <Esc>:NERDTreeToggle<CR>
+  nnoremap <F2> :NERDTreeToggle<CR>
+  nnoremap <Leader>f :NERDTreeFind<CR>
+  nnoremap <Leader>x :NERDTreeCWD<CR>
 " }
 " ctrlp & fzf {
-    " use ctrlp in MacVimApp, otherwise fzf
-    if deisufunc#IsMacVimApp()
-        Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+  " use ctrlp in MacVimApp, otherwise fzf
+  if deisufunc#IsMacVimApp()
+    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
 
-        let g:ctrlp_clear_cache_on_exit = 1
-        let g:ctrlp_open_multiple_files = 'v'
-        let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$
-            \ \|\.jpeg$\|\.gif$\|\.pdf$' }
+    let g:ctrlp_clear_cache_on_exit = 1
+    let g:ctrlp_open_multiple_files = 'v'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$
+      \ \|\.jpeg$\|\.gif$\|\.pdf$' }
 
-        nnoremap <C-p> :CtrlP<CR>
-        nnoremap <F1> :CtrlPBuffer<CR>
-    else
-        Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
-            \ 'on': ['Files', 'Buffers'] }
-        Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+    nnoremap <C-p> :CtrlP<CR>
+    nnoremap <F1> :CtrlPBuffer<CR>
+  else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+      \ 'on': ['Files', 'Buffers'] }
+    Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
 
-        nnoremap <C-p> :Files<CR>
-        nnoremap <F1> :Buffers<CR>
-    endif
+    nnoremap <C-p> :Files<CR>
+    nnoremap <F1> :Buffers<CR>
+  endif
 " }
 if executable('ctags')
-    Plug 'majutsushi/tagbar', { 'on' : ['TagbarToggle'] } " {
-        let g:tagbar_autofocus = 1
-        let g:tagbar_sort = 0
-        let g:tagbar_compact = 1
-        let g:tagbar_iconchars = ['▸', '▾']
+  Plug 'majutsushi/tagbar', { 'on' : ['TagbarToggle'] } " {
+    let g:tagbar_autofocus = 1
+    let g:tagbar_sort = 0
+    let g:tagbar_compact = 1
+    let g:tagbar_iconchars = ['▸', '▾']
 
-        " add support for markdown files in tagbar.
-        let g:tagbar_type_markdown = {
-            \ 'ctagstype': 'markdown',
-            \ 'ctagsbin' : '~/.vim/plugins/markdown2ctags/markdown2ctags.py',
-            \ 'ctagsargs' : '-f - --sort=yes',
-            \ 'kinds' : [
-                \ 's:sections',
-                \ 'i:images'
-            \ ],
-            \ 'sro' : '|',
-            \ 'kind2scope' : {
-                \ 's' : 'section',
-            \ },
-            \ 'sort': 0,
-        \ }
+    " add support for markdown files in tagbar.
+    let g:tagbar_type_markdown = {
+      \ 'ctagstype': 'markdown',
+      \ 'ctagsbin' : '~/.vim/plugins/markdown2ctags/markdown2ctags.py',
+      \ 'ctagsargs' : '-f - --sort=yes',
+      \ 'kinds' : [
+          \ 's:sections',
+          \ 'i:images'
+      \ ],
+      \ 'sro' : '|',
+      \ 'kind2scope' : {
+          \ 's' : 'section',
+      \ },
+      \ 'sort': 0,
+    \ }
 
-        inoremap <silent> <F3> <Esc>:TagbarToggle<CR>
-        nnoremap <silent> <F3> :TagbarToggle<CR>
-    " }
+    inoremap <silent> <F3> <Esc>:TagbarToggle<CR>
+    nnoremap <silent> <F3> :TagbarToggle<CR>
+  " }
 endif
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
-    let g:syntastic_python_checkers = ['flake8']
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_check_on_open = 0
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_python_python_exec = '/usr/local/bin/python3.5'
+  let g:syntastic_python_checkers = ['flake8']
 
-    nnoremap <Leader>sc :SyntasticCheck<CR>
+  nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
 Plug 'bling/vim-airline' " {
-    " let g:airline_theme = 'solarized'
-    let g:airline_extensions = [
-        \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks'
-    \ ]
+  " let g:airline_theme = 'solarized'
+  let g:airline_extensions = [
+    \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks'
+  \ ]
 
-    " separators
-    " don't use power line font in Apple Terminal
-    if !deisufunc#IsAppleTerminal()
-        let g:airline_powerline_fonts = 1
-    else
-        let g:airline_left_sep = ''
-        let g:airline_right_sep = ''
-        let g:airline_section_y = ''
-    endif
+  " separators
+  " don't use power line font in Apple Terminal
+  if !deisufunc#IsAppleTerminal()
+    let g:airline_powerline_fonts = 1
+  else
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_section_y = ''
+  endif
 
-    " tabline
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
-    nmap <leader>1 <Plug>AirlineSelectTab1
-    nmap <leader>2 <Plug>AirlineSelectTab2
-    nmap <leader>3 <Plug>AirlineSelectTab3
-    nmap <leader>4 <Plug>AirlineSelectTab4
-    nmap <leader>5 <Plug>AirlineSelectTab5
-    nmap <leader>6 <Plug>AirlineSelectTab6
-    nmap <leader>7 <Plug>AirlineSelectTab7
-    nmap <leader>8 <Plug>AirlineSelectTab8
-    nmap <leader>9 <Plug>AirlineSelectTab9
+  " tabline
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  nmap <leader>1 <Plug>AirlineSelectTab1
+  nmap <leader>2 <Plug>AirlineSelectTab2
+  nmap <leader>3 <Plug>AirlineSelectTab3
+  nmap <leader>4 <Plug>AirlineSelectTab4
+  nmap <leader>5 <Plug>AirlineSelectTab5
+  nmap <leader>6 <Plug>AirlineSelectTab6
+  nmap <leader>7 <Plug>AirlineSelectTab7
+  nmap <leader>8 <Plug>AirlineSelectTab8
+  nmap <leader>9 <Plug>AirlineSelectTab9
 " }
 Plug 'thinca/vim-quickrun', { 'on': ['QuickRun'] } " {
 " sample config 1: https://github.com/tk0miya/dotfiles/blob/master/_vimrc#L63-L71
 " sample config 2: https://github.com/TKNGUE/dotfiles/blob/master/.vimrc#L1887-L1937
-    let g:quickrun_config = {}
-    let g:quickrun_config._ = {
-        \ 'runner' : 'vimproc',
-        \ 'runner/vimproc/read_timeout': 10,
-        \ 'runner/vimproc/sleep': 50,
-        \ 'runner/vimproc/updatetime': 20,
-        \ 'split': 'below',
-        \ 'outputter/buffer/split': winheight(0) / 4 < 10 ? 10 : winheight(0) / 4
-    \ }
-    let g:quickrun_config.cpp = {
-        \ 'type': 'cpp/clang++',
-        \ 'cmdopt': '-Wall -Wextra -std=c++11'
-    \ }
-    nnoremap <F12> :QuickRun<CR>
-    inoremap <F12> <Esc>:QuickRun<CR>
+  let g:quickrun_config = {}
+  let g:quickrun_config._ = {
+    \ 'runner' : 'vimproc',
+    \ 'runner/vimproc/read_timeout': 10,
+    \ 'runner/vimproc/sleep': 50,
+    \ 'runner/vimproc/updatetime': 20,
+    \ 'split': 'below',
+    \ 'outputter/buffer/split': winheight(0) / 4 < 10 ? 10 : winheight(0) / 4
+  \ }
+  let g:quickrun_config.cpp = {
+    \ 'type': 'cpp/clang++',
+    \ 'cmdopt': '-Wall -Wextra -std=c++11'
+  \ }
+  nnoremap <F12> :QuickRun<CR>
+  inoremap <F12> <Esc>:QuickRun<CR>
 " }
 
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive' " {
-    nnoremap <Leader>gs :Gstatus<CR>
-    nnoremap <Leader>ga :Git add<Space>
-    nnoremap <Leader>gc :Gcommit<CR>
-    nnoremap <Leader>gd :Gdiff<CR>
-    nnoremap <Leader>gp :Gpush<Space>
-    nnoremap <Leader>gpp :Gpush origin master<CR>
-    nnoremap <Leader>gl :Glog<CR>
-    nnoremap <Leader>gw :Gwrite<CR>
-    nnoremap <Leader>gr :Gread<CR>
-    nnoremap <Leader>grm :Gremove<CR>
-    nnoremap <Leader>gm :Gmove<Space>
-    nnoremap <Leader>gb :Gblame<CR>
-    nnoremap <Leader>ge :Gedit<CR>
+  nnoremap <Leader>gs :Gstatus<CR>
+  nnoremap <Leader>ga :Git add<Space>
+  nnoremap <Leader>gc :Gcommit<CR>
+  nnoremap <Leader>gd :Gdiff<CR>
+  nnoremap <Leader>gp :Gpush<Space>
+  nnoremap <Leader>gpp :Gpush origin master<CR>
+  nnoremap <Leader>gl :Glog<CR>
+  nnoremap <Leader>gw :Gwrite<CR>
+  nnoremap <Leader>gr :Gread<CR>
+  nnoremap <Leader>grm :Gremove<CR>
+  nnoremap <Leader>gm :Gmove<Space>
+  nnoremap <Leader>gb :Gblame<CR>
+  nnoremap <Leader>ge :Gedit<CR>
 " }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' } " {
-    nnoremap <silent> <Leader>gv :Gitv<CR>
+  nnoremap <silent> <Leader>gv :Gitv<CR>
 " }
 
 " }
@@ -512,21 +518,26 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' } " {
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim', { 'on': ['VimShell'] } " {
-    let g:vimshell_prompt = '> '
-    inoremap <F8> <Esc>:split<CR>:VimShell<CR>
-    nnoremap <F8> :split<CR>:VimShell<CR>
+  let g:vimshell_prompt = '> '
+  inoremap <F8> <Esc>:split<CR>:VimShell<CR>
+  nnoremap <F8> :split<CR>:VimShell<CR>
 " }
 
 " }
 " ---------------------------------- Colors ---------------------------------- {
 
 Plug 'altercation/vim-colors-solarized' " {
-    " use 16 colors in termnials
-    let g:solarized_termcolors = 16
-    if deisufunc#IsMacVimApp()
-        let g:solarized_termcolors = 256
-    endif
-    let g:solarized_termtrans = 1
+  " use 16 colors in termnials
+  let g:solarized_termcolors = 16
+  if deisufunc#IsMacVimApp()
+    let g:solarized_termcolors = 256
+  endif
+  let g:solarized_termtrans = 1
+" }
+Plug 'tomasr/molokai' " {
+  if !deisufunc#IsMacVimApp()
+    let g:molokai_original = 1
+  endif
 " }
 
 " }
@@ -536,11 +547,11 @@ call plug#end()
 
 " automatically install missing plugins on startup
 augroup install_missing_plugins
-    autocmd!
-    autocmd VimEnter *
-        \| if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-        \|   PlugInstall | q
-        \| endif
+  autocmd!
+  autocmd VimEnter *
+    \| if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+    \|   PlugInstall | q
+    \| endif
 augroup END
 
 " }
