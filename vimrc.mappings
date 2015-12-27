@@ -46,7 +46,7 @@ nnoremap <Leader>vp :vi ~/.vim/vimrc.plugins<CR>
 nnoremap <Leader>vm :vi ~/.vim/vimrc.mappings<CR>
 nnoremap <Leader>vf :vi ~/.vim/autoload/deisufunc.vim<CR>
 nnoremap <Leader>vg :vi ~/.vim/gvimrc<CR>
-nnoremap <Leader>vd :vi ~/.vim/deprecated.vimrc<CR>
+nnoremap <Leader>vd :vi ~/.vim/vimrc.deprecated<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>:echo "Reloaded $MYVIMRC :)"<CR>
 
 " don't want exit mode

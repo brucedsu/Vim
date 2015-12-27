@@ -162,6 +162,7 @@ Plug 'vim-scripts/matchit.zip'
 " }
 " --------------------------------- Editing ---------------------------------- {
 
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround', {
   \ 'on': ['<Plug>Dsurround', '<Plug>Csurround', '<Plug>CSurround',
   \ '<Plug>Ysurround', '<Plug>YSurround', '<Plug>Yssurround',
@@ -177,7 +178,7 @@ Plug 'tpope/vim-surround', {
   xmap S   <Plug>VSurround
   xmap gS  <Plug>VgSurround
 " }
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' } " {
   map  gc  <Plug>Commentary
   nmap gcc <Plug>CommentaryLine
@@ -211,6 +212,10 @@ Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' } " {
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
   let g:undotree_WindowLayout = 2
   nnoremap U :UndotreeToggle<CR>
+" }
+Plug 'AndrewRadev/splitjoin.vim', {'on': ['SplitjoinJoin', 'SplitjoinSplit']} " {
+  nmap gJ :SplitjoinJoin<CR>
+  nmap gS :SplitjoinSplit<CR>
 " }
 
 " text objects
