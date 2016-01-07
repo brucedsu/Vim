@@ -38,6 +38,10 @@ snippet string "#include <string>" b
 #include <string>
 endsnippet
 
+snippet sstream "#include <sstream>" b
+#include <sstream>
+endsnippet
+
 snippet map "#include <map>" b
 #include <map>
 endsnippet
@@ -138,4 +142,34 @@ public:
 private:
 	${0:/* instance variables */}
 };
+endsnippet
+
+#------------------
+# Function
+#------------------
+snippet split "vector<string> split(string str, char delimeter)" b
+vector<string> split(string str, char delimiter) {
+	vector<string> internal;
+	stringstream ss(str);
+	string token;
+
+	while (getline(ss, token, delimiter)) {
+		internal.push_back(token);
+	}
+
+	return internal;
+}
+endsnippet
+
+#------------------
+# LeetCode
+#------------------
+snippet solution "LeetCode solution" b
+int main() {
+	Solution solution;
+
+	${0:/* tests */}
+
+	return 0;
+}
 endsnippet
