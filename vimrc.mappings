@@ -68,7 +68,7 @@ inoremap jk <Esc>
 nnoremap S i<CR><Esc>l
 
 " keep the cursor in place while joining lines
-nnoremap J mzJ`zmz
+nnoremap J :call deisufunc#Preserve("join")<CR>
 
 " }
 " -------------------------------- Formatting -------------------------------- {

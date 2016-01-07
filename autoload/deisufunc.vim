@@ -174,13 +174,15 @@ endfunction
 
 " preserve cursor postion while excuting commands
 function! deisufunc#Preserve(command)
-  " Preparation: save the last search, and cursor position
+  " save the last search, and cursor position
   let _s=@/
   let l = line(".")
   let c = col(".")
-  " Do the business:
+
+  " execute command
   execute a:command
-  " Clean up: restore previous search history, and cursor position
+
+  " restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
 endfunction
