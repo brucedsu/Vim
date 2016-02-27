@@ -450,7 +450,9 @@ Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck'] } " {
   nnoremap <Leader>sc :SyntasticCheck<CR>
 " }
 Plug 'bling/vim-airline' " {
-  " let g:airline_theme = 'solarized'
+  Plug 'vim-airline/vim-airline-themes'
+
+  let g:airline_theme = 'solarized'
   let g:airline_extensions = [
     \ 'quickfix', 'tabline', 'branch', 'whitespace', 'hunks'
   \ ]
