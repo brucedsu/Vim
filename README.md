@@ -1,3 +1,5 @@
+# My Awesome Vim Configurations
+
 ## Homebrew & Vim & MacVim
 
 1. Install homebrew package manager
@@ -24,11 +26,11 @@ the `--with-override-system-vim` flag on
 ## Useful Component(s)
 
 1. [Seil: map ESC to caps lock on OS X](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
-2. Note: I no longer map ESC to caps lock, because I switched to HHKB pro 2. LOL
+2. Note: no longer map ESC to caps lock, since switched to HHKB.
 
 ## Installation
 
-    $ git clone https://github.com/brucedsu/dotvim.git ~/.vim
+    $ git clone https://brucedsu@bitbucket.org/brucedsu/dotvim.git ~/.vim
     $ cd ~/.vim && ./install-vim
 
 ## Italic Font in iTerm 2:
