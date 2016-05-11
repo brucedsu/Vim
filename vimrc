@@ -151,7 +151,7 @@ endif
 augroup set_filetype
   autocmd!
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-  autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
+  " autocmd BufNewFile,BufReadPost *.snippets set filetype=snippets
   autocmd BufNewFile,BufReadPost *vimrc* set filetype=vim
 augroup END
 
