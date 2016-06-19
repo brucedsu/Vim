@@ -61,9 +61,6 @@ vmap <C-Down> :<C-u>call deisufunc#MoveSelectionDown()<CR>
 " yank everything with Y
 nnoremap Y :call deisufunc#Preserve("normal ggVGy")<CR>
 
-" jk to <Esc>
-inoremap jk <Esc>
-
 " split: S is covered by cc
 nnoremap S i<CR><Esc>l
 
@@ -214,8 +211,8 @@ nnoremap <Leader>cw :echo deisufunc#CountWord() . " Words"<CR>
 " }
 " ---------------------------------- Window ---------------------------------- {
 
-" create
-nnoremap <Leader>nw :split<CR>
+" new split horizontally/vertically
+nnoremap <Leader>nh :split<CR>
 nnoremap <Leader>nv :vsplit<CR>
 
 " navigate

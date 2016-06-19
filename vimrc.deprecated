@@ -192,4 +192,7 @@ nnoremap <Leader>0 :tablast<CR>
 nnoremap <Up> :tabprev<CR>
 nnoremap <Down> :tabnext<CR>
 
+" jk to <Esc>
+inoremap jk <Esc>
+
 " }
