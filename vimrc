@@ -172,7 +172,7 @@ augroup END
 " set comment string base on filetype
 augroup set_comment_string_base_on_filetype
   autocmd!
-  autocmd FileType c,cpp,h setlocal commentstring=//\ %s
+  autocmd FileType c,cpp,h,mql4 setlocal commentstring=//\ %s
 augroup END
 
 " jump to the last known cursor position

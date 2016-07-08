@@ -1,11 +1,11 @@
 global !p
-from snippet_helpers import get_class_name
+from snippet_helpers import get_cpp_class_name
 endglobal
 
 extends clang
 
 #------------------------------
-# Error Handling
+# Exceptions
 #------------------------------
 snippet th "throw ..." b
 throw ${0:/* expression */};
@@ -15,6 +15,12 @@ snippet try "try {...} catch (...) {...}" b
 try {
 	${1:/* statements */}
 } catch (${2:/* catch parameter */}) {
+	${0:/* statements */}
+}
+endsnippet
+
+snippet catch "catch (...) {...}"
+catch (${1:/* catch parameter */}) {
 	${0:/* statements */}
 }
 endsnippet
@@ -62,12 +68,28 @@ snippet utility "#include <utility>" b
 #include <utility>
 endsnippet
 
-snippet queue "#include <queue>" b
-#include <queue>
-endsnippet
-
 snippet cmath "#include <cmath>" b
 #include <cmath>
+endsnippet
+
+snippet excep "#include <exception>" b
+#include <exception>
+endsnippet
+
+snippet fstream "#include <fstream>" b
+#include <fstream>
+endsnippet
+
+snippet list "#include <list>" b
+#include <list>
+endsnippet
+
+snippet stack "#include <stack>" b
+#include <stack>
+endsnippet
+
+snippet queue "#include <queue>" b
+#include <queue>
 endsnippet
 
 #----------
@@ -98,6 +120,7 @@ int main() {
 	${0:cout << "Hello, world!" << endl;}
 	return 0;
 }
+
 endsnippet
 
 #---------------------
@@ -120,27 +143,13 @@ endsnippet
 #-------------
 # Class
 #-------------
-# class declaration and implemetion together
-snippet cls "class definition" b
-class ${1:`!p snip.rv = get_class_name(snip.basename)`} {
-public:
-	`!p snip.rv = get_class_name(t[1])`(${2:/* parameters */}) {${3:/* constructor */}}
-
-	~`!p snip.rv = get_class_name(t[1])`() {${4:/* destructor */}}
-
+snippet cls "C++ Class" b
+class ${1:`!p snip.rv = get_cpp_class_name(snip.basename)`} {
 private:
-	${0:/* instance variables */}
-};
-endsnippet
+	${2:/* instance variables */}
 
-snippet clsd "class declaration" b
-class ${1:`!p snip.rv = get_class_name(snip.basename)`} {
 public:
-	$1(${2:/* parameters */});
-	~$1();
-
-private:
-	${0:/* instance variables */}
+	${0:/* public methods */}
 };
 endsnippet
 
