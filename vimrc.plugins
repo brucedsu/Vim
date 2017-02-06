@@ -44,6 +44,7 @@ if g:deisu_preferences.snippet_engine == 'ultisnips'
     let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
     let g:UltiSnipsEditSplit           = "vertical"
+    nnoremap <Leader>se :UltiSnipsEdit<CR>
   " }
 elseif g:deisu_preferences.snippet_engine == 'neosnippet.vim'
   Plug 'Shougo/neosnippet.vim', { 'on': [] } " {
