@@ -1,8 +1,8 @@
 extends clang
 
-#--------------------
+#-------------------------------------------------------------------------------
 # Libraries
-#--------------------
+#-------------------------------------------------------------------------------
 snippet string "#include <string.h>" b
 #include <string.h>
 endsnippet
@@ -15,9 +15,13 @@ snippet assert "#include <assert.h>" b
 #include <assert.h>
 endsnippet
 
-#------------------
+snippet stdint "#include <stdint.h>" b
+#include <stdint.h>
+endsnippet
+
+#-------------------------------------------------------------------------------
 # Template
-#------------------
+#-------------------------------------------------------------------------------
 snippet tmpl "c code template"
 #include <stdio.h>
 
@@ -27,3 +31,30 @@ int main() {
 	return 0;
 }
 endsnippet
+
+#-------------------------------------------------------------------------------
+# libgen
+#-------------------------------------------------------------------------------
+snippet libgen "#include <libgen.h>" b
+#include <libgen.h>
+endsnippet
+
+snippet base "basename(char *)"
+basename(${0:/* char* */})
+endsnippet
+
+#-------------------------------------------------------------------------------
+# stdio
+#-------------------------------------------------------------------------------
+snippet stdio "#include <stdio.h>" b
+#include <stdio.h>
+endsnippet
+
+snippet pr "printf(...)"
+printf(${0:/* const char* restrict, ... */});
+endsnippet
+
+snippet sc "scanf(...)"
+scanf(${0:/* const char* restrict, ... */});
+endsnippet
+

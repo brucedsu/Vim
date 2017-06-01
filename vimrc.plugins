@@ -362,6 +362,10 @@ if executable('redcarpet') && executable('instant-markdown-d')
 endif
 Plug 'jszakmeister/markdown2ctags', { 'for': ['markdown', 'md']}
 
+" mql4 & mql5
+Plug 'sobh/vim-mql4', { 'for': 'mql4' }
+Plug 'rupurt/vim-mql5', { 'for': 'mql5' }
+
 " }
 " ------------------------------  Web Development -----------------------------{
 
@@ -374,9 +378,6 @@ Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'html'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'html'] }
-
-" mql4
-Plug 'vobornik/vim-mql4', { 'for': 'mql4' }
 
 " }
 " ----------------------------------- IDE ------------------------------------ {
