@@ -145,7 +145,7 @@ Plug 'brucedsu/a.vim', { 'for': ['cpp', 'c'] } " {
   nnoremap <Leader>as :AS<CR>
   nnoremap <Leader>av :AV<CR>
 " }
-Plug 'Valloric/ListToggle'
+" Plug 'Valloric/ListToggle'
 if executable('ag') || executable('ack')
   Plug 'dyng/ctrlsf.vim', {
     \ 'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath',
