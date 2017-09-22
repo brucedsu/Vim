@@ -110,10 +110,11 @@ if deisufunc#Istmux()
   execute "set <xLeft>=\e[1;*D"
 endif
 
-" automatically save all buffers when losing focus
-augroup autosave
+" write all buffers when losing focus and read new changes automatically
+augroup auto_write_and_read
   autocmd!
-  autocmd FocusLost * :silent! wall
+  autocmd FocusLost * silent! wall
+  autocmd CursorHold,CursorHoldI,FocusGained,BufEnter * checktime
 augroup END
 
 " }

@@ -218,6 +218,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " {
   let g:undotree_WindowLayout = 2
   nnoremap U :UndotreeToggle<CR>
 " }
+Plug 'sjl/vitality.vim'
 
 " text objects
 " TODO: on-demand load vim-textobj-user
