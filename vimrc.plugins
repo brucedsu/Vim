@@ -397,26 +397,25 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " {
   nnoremap <Leader>x :NERDTreeCWD<CR>
 " }
 " file & buffer finder: ctrlp & fzf {
-  " something wrong with fzf, switch back to ctrlp
   " if deisufunc#IsMacVimApp()
-    Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+  "   Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
 
-    let g:ctrlp_clear_cache_on_exit = 1
-    let g:ctrlp_open_multiple_files = 'v'
-    let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$
-      \ \|\.jpeg$\|\.gif$\|\.pdf$' }
+  "   let g:ctrlp_clear_cache_on_exit = 1
+  "   let g:ctrlp_open_multiple_files = 'v'
+  "   let g:ctrlp_custom_ignore = {
+  "     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  "     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|\.png$\|\.dmg$\|\.jpg$
+  "     \ \|\.jpeg$\|\.gif$\|\.pdf$' }
 
-    nnoremap <C-p> :CtrlP<CR>
-    nnoremap <F1> :CtrlPBuffer<CR>
+  "   nnoremap <C-p> :CtrlP<CR>
+  "   nnoremap <F1> :CtrlPBuffer<CR>
   " else
-  "   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
-  "     \ 'on': ['Files', 'Buffers'] }
-  "   Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all',
+      \ 'on': ['Files', 'Buffers'] }
+    Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Buffers'] }
 
-  "   nnoremap <C-p> :Files<CR>
-  "   nnoremap <F1> :Buffers<CR>
+    nnoremap <C-p> :Files<CR>
+    nnoremap <F1> :Buffers<CR>
   " endif
 " }
 if executable('ctags')
