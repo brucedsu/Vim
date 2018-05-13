@@ -59,6 +59,10 @@ elseif g:deisu_preferences.snippet_engine == 'neosnippet.vim'
 endif
 
 " autocompleter
+" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' } " {
+
+" }
 if g:deisu_preferences.autocompleter == 'YouCompleteMe'
   Plug 'Valloric/YouCompleteMe', {
     \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
@@ -584,10 +588,10 @@ Plug 'altercation/vim-colors-solarized' " {
   endif
   let g:solarized_termtrans = 1
 " }
-Plug 'tomasr/molokai' " {
-  if !deisufunc#IsMacVimApp()
-    let g:molokai_original = 1
-  endif
+" Plug 'tomasr/molokai' " {
+"   if !deisufunc#IsMacVimApp()
+"     let g:molokai_original = 1
+"   endif
 " }
 
 " }

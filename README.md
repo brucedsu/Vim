@@ -1,6 +1,8 @@
 # My Awesome Vim Configurations
 
-## Homebrew & Vim & MacVim
+## Installation
+
+### Install homebrew and vim
 
 1. Install homebrew package manager
 
@@ -18,20 +20,19 @@ the `--with-override-system-vim` flag on
         $ brew install vim --with-python --with-ruby --with-perl --with-lua
         $ brew install macvim --env-std --with-override-system-vim --with-cscope --with-python --with-ruby --with-perl --with-lua --HEAD
 
-4. Note:
-
-    * YouCompleteMe only supports python 2.7, NOT python 3 and above
-    * For better YouCompleteMe experience, just use macvim (overriding system vim)
-
-## Useful Component(s)
-
-1. [Seil: map ESC to caps lock on OS X](https://pqrs.org/macosx/keyremap4macbook/seil.html "Seil")
-2. Note: no longer map ESC to caps lock, since switched to HHKB.
-
-## Installation
+### Configure vim
 
     $ git clone https://brucedsu@bitbucket.org/brucedsu/dotvim.git ~/.vim
     $ cd ~/.vim && ./install-vim
+
+### Compile YouCompleteMe
+
+* YouCompleteMe only supports python 2.7, NOT python 3 and above
+* For better YouCompleteMe experience, just use macvim (overriding system vim)
+
+        $ cd ~/.vim/plugins/YouCompleteMe
+        $ ./install.py --clang-completer --js-completer --java-completer
+        $ ./install.py --all
 
 ## Italic Font in iTerm 2:
 
@@ -43,7 +44,7 @@ the `--with-override-system-vim` flag on
 1. Add all menlo for powerline fonts in the font folder
 2. Also add monaco for powerline font
 2. In iTerm2 preferences, set "Regular Font" to "14pt Menlo Regular"
-3. Set "Non-ASCII Font" to "13pt Moncao for Powerline"
+3. Set "Non-ASCII Font" to "14.4pt Inconsolata-dz for Powerline"
 
 ## Function Keys
 

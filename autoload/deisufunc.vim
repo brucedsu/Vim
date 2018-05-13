@@ -296,7 +296,7 @@ function! deisufunc#PickAutocompleter()
   endif
 
   " use neocomplcache if doesn't have lua
-  if !has('lua')
+  if !has('lua') && g:deisu_preferences.autocompleter == 'neocomplete'
     let g:deisu_preferences.autocompleter = 'neocomplcache.vim'
   endif
 endfunction
