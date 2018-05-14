@@ -31,8 +31,11 @@ endif
 " ------------------------- deprecated vimrc.plugins ------------------------- {
 
 " Completion
-" too many snippets, blow up the completion menu, wtf
-Plug 'honza/vim-snippets'
+" slow, worse performance than YCM
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' } " {
+
+" }
 
 " Editing
 " bind tmux prefix to <C-a>

@@ -40,6 +40,7 @@ Plug 'jiangmiao/auto-pairs'
 " snippet engine
 if g:deisu_preferences.snippet_engine == 'ultisnips'
   Plug 'SirVer/ultisnips', { 'on': [] } " {
+    let g:UltiSnipsEnableSnipMate      = 0
     let g:UltiSnipsExpandTrigger       = "<Tab>"
     let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
@@ -60,10 +61,6 @@ endif
 Plug 'honza/vim-snippets'
 
 " autocompleter
-" autocmd FileType java setlocal omnifunc=javacomplete#Complete
-" Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' } " {
-
-" }
 if g:deisu_preferences.autocompleter == 'YouCompleteMe'
   Plug 'Valloric/YouCompleteMe', {
     \ 'on': [], 'do': function('deisufunc#YCMInstall') } " {
