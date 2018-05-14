@@ -1,0 +1,57 @@
+#-------------------------------------------------------------------------------
+# Main
+#-------------------------------------------------------------------------------
+snippet main "main method" b
+public static void main(String[] args) {
+	$0
+}
+endsnippet
+
+#-------------------------------------------------------------------------------
+# Print
+#-------------------------------------------------------------------------------
+snippet pl "println" b
+System.out.println($0);
+endsnippet
+
+snippet p "print" b
+System.out.print($0);
+endsnippet
+
+snippet pf "printf" b
+System.out.printf($0)
+endsnippet
+
+#-------------------------------------------------------------------------------
+# Loop
+#-------------------------------------------------------------------------------
+snippet fore "foreach" b
+for ($1 : $2) {
+	$0
+}
+endsnippet
+
+#-------------------------------------------------------------------------------
+# Class
+#-------------------------------------------------------------------------------
+snippet cl "class ... {...} (cl)" b
+class ${1:`!p snip.rv = snip.basename or "untitled"`} {
+	${2:/* insert code here... */}
+}
+endsnippet
+
+snippet clm "class ... {main ...} (clm)" b
+class ${1:`!p snip.rv = snip.basename or "untitled"`} {
+	public static void main(String[] args) {
+		${2:/* insert code here... */}
+	}
+}
+endsnippet
+
+snippet cle "class extends" b
+public class ${1:`!p
+snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+	$0
+}
+endsnippet
+

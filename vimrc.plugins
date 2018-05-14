@@ -57,6 +57,7 @@ elseif g:deisu_preferences.snippet_engine == 'neosnippet.vim'
   " }
   Plug 'Shougo/neosnippet-snippets', { 'on': [] }
 endif
+Plug 'honza/vim-snippets'
 
 " autocompleter
 " autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -77,7 +78,7 @@ if g:deisu_preferences.autocompleter == 'YouCompleteMe'
     let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
     " comment
-    let g:ycm_complete_in_comments                          = 1
+    let g:ycm_complete_in_comments = 1
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
     " extra conf
